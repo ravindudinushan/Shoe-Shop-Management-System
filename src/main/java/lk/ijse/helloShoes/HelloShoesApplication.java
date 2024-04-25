@@ -17,9 +17,9 @@ public class HelloShoesApplication {
 		return new ModelMapper();
 	}
 
-	@Bean
-	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-		registration.setMultipartConfig(new MultipartConfigElement
-				("C:/Windows/Temp",1024*1024*10,1024*1024*20,1024*1024));
-	}
+//	@Bean
+//	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+//		registration.setMultipartConfig(new MultipartConfigElement
+//				("C:/Windows/Temp",1024*1024*10,1024*1024*20,1024*1024));
+//	}
 }
