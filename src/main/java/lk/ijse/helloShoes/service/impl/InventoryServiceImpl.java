@@ -10,6 +10,7 @@ import lk.ijse.helloShoes.util.UtilMatter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryServiceImpl implements InventoryService {
 
@@ -28,21 +29,21 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public void updateInventory(InventoryDTO dto) {
         if(!repo.existsById(dto.getItemCode())){
-            throw new NotFoundException("Update Failed; customer id: " + dto.getItemCode() + " does not exist");
+            throw new NotFoundException("Update Failed; item code: " + dto.getItemCode() + " does not exist");
         }
         repo.save(transformer.toInventoryEntity(dto));
     }
 
     @Override
     public void deleteInventory(String itemCode) {
-        if(!repo.existsById(itemCode)){ throw new NotFoundException("Delete Failed; customer id: " + itemCode + " does not exist");
+        if(!repo.existsById(itemCode)){ throw new NotFoundException("Delete Failed; item code: " + itemCode + " does not exist");
         }
         repo.deleteById(itemCode);
     }
 
     @Override
-    public ArrayList<InventoryDTO> getAllInventory() {
-        return null;
+    public List<InventoryDTO> getAllInventory() {
+        return repo.findAll().stream().map(inventory -> transformer.fromInventoryEntity(inventory)).toList();
     }
 
     @Override
