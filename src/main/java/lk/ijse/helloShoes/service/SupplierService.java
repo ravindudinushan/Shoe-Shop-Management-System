@@ -4,7 +4,6 @@ import lk.ijse.helloShoes.dto.CustomDTO;
 import lk.ijse.helloShoes.dto.SupplierDTO;
 import lk.ijse.helloShoes.entity.Supplier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface SupplierService {

@@ -16,7 +16,11 @@ import java.util.List;
 @CrossOrigin
 public class SupplierController {
 
-    SupplierService supplierService;
+    private final SupplierService supplierService;
+
+    public SupplierController(SupplierService supplierService){
+        this.supplierService = supplierService;
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SupplierDTO> getAllCustomers(){
@@ -25,8 +29,7 @@ public class SupplierController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @GetMapping(path = "/supplierIdGenerate")
-    public @ResponseBody
-    CustomDTO supplierIdGenerate() {
+    public @ResponseBody CustomDTO supplierIdGenerate() {
         return supplierService.supplierIdGenerate();
     }
 
