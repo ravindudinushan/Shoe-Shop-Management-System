@@ -49,18 +49,18 @@ public class SupplierController {
         supplierService.deleteSupplier(supplierCode);
     }
 
-//    @PutMapping
-//    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public void updateSupplier(@RequestBody SupplierDTO dto) {
-//        supplierService.updateSupplier(dto);
-//    }
-
-    @PatchMapping(value = "/{supplierCode}",consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
-    public void updateSupplier(@PathVariable("supplierCode") String supplierCode, @Valid @RequestBody SupplierDTO supplierDTO){
-        supplierDTO.setSupplierCode(supplierCode);
-        supplierService.updateSupplier(supplierDTO);
+    @PutMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateSupplier(@RequestBody SupplierDTO dto) {
+        supplierService.updateSupplier(dto);
     }
+
+//    @PatchMapping(value = "/{supplierCode}",consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public void updateSupplier(@PathVariable("supplierCode") String supplierCode, @Valid @RequestBody SupplierDTO supplierDTO){
+//        supplierDTO.setSupplierCode(supplierCode);
+//        supplierService.updateSupplier(supplierDTO);
+//    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @GetMapping(path = "/searchSupplier", params = {"supplierCode"})
