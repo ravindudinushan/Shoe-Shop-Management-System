@@ -8,10 +8,13 @@ import lk.ijse.helloShoes.service.exception.NotFoundException;
 import lk.ijse.helloShoes.util.Transformer;
 import lk.ijse.helloShoes.util.UtilMatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@Transactional
 public class InventoryServiceImpl implements InventoryService {
 
     @Autowired

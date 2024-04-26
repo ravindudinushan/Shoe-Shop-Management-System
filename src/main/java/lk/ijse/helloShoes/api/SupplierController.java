@@ -5,6 +5,7 @@ import lk.ijse.helloShoes.dto.CustomDTO;
 import lk.ijse.helloShoes.dto.SupplierDTO;
 import lk.ijse.helloShoes.entity.Supplier;
 import lk.ijse.helloShoes.service.SupplierService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +17,8 @@ import java.util.List;
 @CrossOrigin
 public class SupplierController {
 
-    private final SupplierService supplierService;
-
-    public SupplierController(SupplierService supplierService){
-        this.supplierService = supplierService;
-    }
+    @Autowired
+    SupplierService supplierService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SupplierDTO> getAllCustomers(){

@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lk.ijse.helloShoes.dto.InventoryDTO;
 import lk.ijse.helloShoes.enums.Status;
 import lk.ijse.helloShoes.service.InventoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @CrossOrigin
 public class InventoryController {
 
+    @Autowired
     InventoryService inventoryService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
