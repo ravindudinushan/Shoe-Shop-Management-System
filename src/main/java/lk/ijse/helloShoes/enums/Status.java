@@ -1,5 +1,5 @@
 package lk.ijse.helloShoes.enums;
 
 public enum Status {
-    LOW,AVAILABLE,NOTAVAILABLE
+    LOW,AVAILABLE,NOT_AVAILABLE
 }

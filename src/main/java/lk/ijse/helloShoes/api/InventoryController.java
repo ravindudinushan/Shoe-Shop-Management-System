@@ -2,6 +2,7 @@ package lk.ijse.helloShoes.api;
 
 import jakarta.validation.Valid;
 import lk.ijse.helloShoes.dto.InventoryDTO;
+import lk.ijse.helloShoes.dto.SupplierDTO;
 import lk.ijse.helloShoes.enums.Status;
 import lk.ijse.helloShoes.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,16 @@ public class InventoryController {
         InventoryDTO inventory = new InventoryDTO(itemCode,itemDesc,base64Pic,category,size,unitPrice,status);
         inventoryService.saveInventory(inventory);
     }
-    @DeleteMapping("/{itemCode}")
+//    @DeleteMapping("/{itemCode}")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void deleteInventory(@PathVariable("itemCode") String itemCode){
+//        inventoryService.deleteInventory(itemCode);
+//    }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteInventory(@PathVariable("itemCode") String itemCode){
-        inventoryService.deleteInventory(itemCode);
+    @DeleteMapping(params = {"inventoryCode"})
+    public void deleteSupplier(@RequestParam String inventoryCode) {
+        inventoryService.deleteInventory(inventoryCode);
     }
 
     @PatchMapping(value = "/{itemCode}",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -51,4 +58,10 @@ public class InventoryController {
         inventoryDTO.setItemCode(itemCode);
         inventoryService.updateInventory(inventoryDTO);
     }
+
+//    @PutMapping
+//    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+//    public void updateInventory(@RequestBody InventoryDTO dto) {
+//        inventoryService.updateInventory(dto);
+//    }
 }

@@ -1,6 +1,5 @@
 package lk.ijse.helloShoes.api;
 
-import jakarta.validation.Valid;
 import lk.ijse.helloShoes.dto.CustomDTO;
 import lk.ijse.helloShoes.dto.SupplierDTO;
 import lk.ijse.helloShoes.entity.Supplier;
@@ -31,29 +30,40 @@ public class SupplierController {
         return supplierService.supplierIdGenerate();
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public void saveCustomer(@RequestBody SupplierDTO supplierDTO) {
         supplierService.saveSupplier(supplierDTO);
     }
 
-    @DeleteMapping("/{supplierCode}")
+//    @DeleteMapping("/{supplierCode}")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void deleteSupplier(@PathVariable("supplierCode") String supplierCode){
+//        supplierService.deleteSupplier(supplierCode);
+//    }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteSupplier(@PathVariable("supplierCode") String supplierCode){
+    @DeleteMapping(params = {"supplierCode"})
+    public void deleteSupplier(@RequestParam String supplierCode) {
         supplierService.deleteSupplier(supplierCode);
     }
 
-    @PatchMapping(value = "/{supplierCode}",consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateInventory(@PathVariable("supplierCode") String supplierCode, @Valid @RequestBody SupplierDTO supplierDTO){
-        supplierDTO.setSupplierCode(supplierCode);
-        supplierService.updateSupplier(supplierDTO);
+    @PutMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateSupplier(@RequestBody SupplierDTO dto) {
+        supplierService.updateSupplier(dto);
     }
+
+//    @PatchMapping(value = "/{supplierCode}",consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public void updateSupplier(@PathVariable("supplierCode") String supplierCode, @Valid @RequestBody SupplierDTO supplierDTO){
+//        supplierDTO.setSupplierCode(supplierCode);
+//        supplierService.updateSupplier(supplierDTO);
+//    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @GetMapping(path = "/searchSupplier", params = {"supplierCode"})
-    public Supplier searchCusId(String supplierCode) {
+    public Supplier searchSupplierCode(String supplierCode) {
         return supplierService.searchSupplierCode(supplierCode);
     }
 }
