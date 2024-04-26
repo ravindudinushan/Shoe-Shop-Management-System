@@ -52,16 +52,16 @@ public class InventoryController {
         inventoryService.deleteInventory(inventoryCode);
     }
 
-    @PatchMapping(value = "/{itemCode}",consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateInventory(@PathVariable("itemCode") String itemCode, @Valid @RequestBody InventoryDTO inventoryDTO){
-        inventoryDTO.setItemCode(itemCode);
-        inventoryService.updateInventory(inventoryDTO);
-    }
-
-//    @PutMapping
-//    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public void updateInventory(@RequestBody InventoryDTO dto) {
-//        inventoryService.updateInventory(dto);
+//    @PatchMapping(value = "/{itemCode}",consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void updateInventory(@PathVariable("itemCode") String itemCode, @Valid @RequestBody InventoryDTO inventoryDTO){
+//        inventoryDTO.setItemCode(itemCode);
+//        inventoryService.updateInventory(inventoryDTO);
 //    }
+
+    @PutMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateInventory(@RequestBody InventoryDTO dto) {
+        inventoryService.updateInventory(dto);
+    }
 }
