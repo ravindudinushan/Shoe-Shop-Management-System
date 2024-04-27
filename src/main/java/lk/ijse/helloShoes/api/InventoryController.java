@@ -1,6 +1,7 @@
 package lk.ijse.helloShoes.api;
 
 import lk.ijse.helloShoes.dto.InventoryDTO;
+import lk.ijse.helloShoes.entity.Inventory;
 import lk.ijse.helloShoes.enums.Status;
 import lk.ijse.helloShoes.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,11 @@ public class InventoryController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateInventory(@RequestBody InventoryDTO dto) {
         inventoryService.updateInventory(dto);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/searchInventory", params = {"inventoryCode"})
+    public Inventory searchInventoryCode(String inventoryCode) {
+        return inventoryService.searchInventoryCode(inventoryCode);
     }
 }

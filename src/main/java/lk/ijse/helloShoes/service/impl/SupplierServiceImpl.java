@@ -6,13 +6,11 @@ import lk.ijse.helloShoes.entity.Supplier;
 import lk.ijse.helloShoes.repo.SupplierRepo;
 import lk.ijse.helloShoes.service.SupplierService;
 import lk.ijse.helloShoes.service.exception.NotFoundException;
-import lk.ijse.helloShoes.util.Transformer;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Driver;
 import java.util.List;
 
 @Service
@@ -21,9 +19,6 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Autowired
     SupplierRepo repo;
-
-    @Autowired
-    Transformer transformer;
 
     @Autowired
     private ModelMapper mapper;

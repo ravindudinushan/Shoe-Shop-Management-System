@@ -5,8 +5,7 @@ import lk.ijse.helloShoes.entity.Inventory;
 import lk.ijse.helloShoes.repo.InventoryRepo;
 import lk.ijse.helloShoes.service.InventoryService;
 import lk.ijse.helloShoes.service.exception.NotFoundException;
-import lk.ijse.helloShoes.util.Transformer;
-import lk.ijse.helloShoes.util.UtilMatter;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,12 +20,14 @@ public class InventoryServiceImpl implements InventoryService {
     InventoryRepo repo;
 
     @Autowired
-    Transformer transformer;
+    private ModelMapper mapper;
 
     @Override
-    public InventoryDTO saveInventory(InventoryDTO inventoryDTO) {
-        inventoryDTO.setItemCode(UtilMatter.generateId());
-        return transformer.fromInventoryEntity(repo.save(transformer.toInventoryEntity(inventoryDTO)));
+    public void saveInventory(InventoryDTO dto) {
+        if (repo.existsById(dto.getItemCode())) {
+            throw new RuntimeException("Item Already Exist. Please enter another id..!");
+        }
+        repo.save(mapper.map(dto, Inventory.class));
     }
 
     @Override
@@ -34,7 +35,7 @@ public class InventoryServiceImpl implements InventoryService {
         if(!repo.existsById(dto.getItemCode())){
             throw new NotFoundException("Update Failed; item code: " + dto.getItemCode() + " does not exist");
         }
-        repo.save(transformer.toInventoryEntity(dto));
+        repo.save(mapper.map(dto, Inventory.class));
     }
 
     @Override
@@ -46,7 +47,7 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public List<InventoryDTO> getAllInventory() {
-        return repo.findAll().stream().map(inventory -> transformer.fromInventoryEntity(inventory)).toList();
+        return repo.findAll().stream().map(inventory -> mapper.map(inventory, InventoryDTO.class)).toList();
     }
 
     @Override
@@ -56,7 +57,10 @@ public class InventoryServiceImpl implements InventoryService {
 
 
     @Override
-    public Inventory searchInventoryCode(String inventoryCode) {
-        return null;
+    public Inventory searchInventoryCode(String itemCode) {
+        if (!repo.existsById(itemCode)) {
+            throw new RuntimeException("Wrong ID. Please enter Valid id..!");
+        }
+        return mapper.map(repo.findById(itemCode).get(), Inventory.class);
     }
 }
