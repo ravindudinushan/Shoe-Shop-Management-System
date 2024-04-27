@@ -2,6 +2,8 @@ package lk.ijse.helloShoes.api;
 
 import lk.ijse.helloShoes.dto.CustomDTO;
 import lk.ijse.helloShoes.dto.SupplierDTO;
+import lk.ijse.helloShoes.embeded.Address;
+import lk.ijse.helloShoes.embeded.Contact;
 import lk.ijse.helloShoes.entity.Supplier;
 import lk.ijse.helloShoes.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,9 @@ public class SupplierController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public void saveSupplier(@RequestBody SupplierDTO supplierDTO) {
+    public void saveSupplier(@RequestBody SupplierDTO supplierDTO, @ModelAttribute Address address, @ModelAttribute Contact contact) {
+        supplierDTO.setAddress(address);
+        supplierDTO.setContact(contact);
         supplierService.saveSupplier(supplierDTO);
         System.out.println(supplierDTO);
     }

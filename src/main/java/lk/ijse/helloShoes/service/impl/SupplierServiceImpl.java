@@ -29,11 +29,12 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public void saveSupplier(SupplierDTO dto) {
-//        return transformer.fromSupplierEntity(repo.save(transformer.toSupplierEntity(dto)));
+        Supplier supplier = new Supplier(dto.getSupplierCode(), dto.getSupplierName(), dto.getCategory(), dto.getAddress(), dto.getContact(), dto.getEmail());
         if (repo.existsById(dto.getSupplierCode())) {
             throw new RuntimeException("Supplier Already Exist. Please enter another id..!");
         }
-        repo.save(mapper.map(dto, Supplier.class));
+//        repo.save(mapper.map(dto, Supplier.class));
+        repo.save(supplier);
     }
 
     @Override
