@@ -36,10 +36,11 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public void updateSupplier(SupplierDTO dto) {
-        if(!repo.existsById(dto.getSupplierCode())){
-            throw new NotFoundException("Update Failed; supplier code: " + dto.getSupplierCode() + " does not exist");
+        Supplier supplier = new Supplier(dto.getSupplierCode(), dto.getSupplierName(), dto.getCategory(), dto.getAddress(), dto.getContact(), dto.getEmail());
+        if (!repo.existsById(dto.getSupplierCode())) {
+            throw new RuntimeException("Supplier Not Exist. Please enter Valid id..!");
         }
-        repo.save(mapper.map(dto, Supplier.class));
+        repo.save(supplier);
     }
 
     @Override
