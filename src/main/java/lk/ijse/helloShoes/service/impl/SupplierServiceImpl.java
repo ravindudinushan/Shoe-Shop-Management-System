@@ -7,6 +7,7 @@ import lk.ijse.helloShoes.repo.SupplierRepo;
 import lk.ijse.helloShoes.service.SupplierService;
 import lk.ijse.helloShoes.service.exception.NotFoundException;
 import lk.ijse.helloShoes.util.Transformer;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +24,16 @@ public class SupplierServiceImpl implements SupplierService {
     @Autowired
     Transformer transformer;
 
+    @Autowired
+    private ModelMapper mapper;
+
     @Override
-    public SupplierDTO saveSupplier(SupplierDTO dto) {
-        return transformer.fromSupplierEntity(repo.save(transformer.toSupplierEntity(dto)));
+    public void saveSupplier(SupplierDTO dto) {
+//        return transformer.fromSupplierEntity(repo.save(transformer.toSupplierEntity(dto)));
+        if (repo.existsById(dto.getSupplierCode())) {
+            throw new RuntimeException("Supplier Already Exist. Please enter another id..!");
+        }
+        repo.save(mapper.map(dto, Supplier.class));
     }
 
     @Override
@@ -33,12 +41,13 @@ public class SupplierServiceImpl implements SupplierService {
         if(!repo.existsById(dto.getSupplierCode())){
             throw new NotFoundException("Update Failed; supplier code: " + dto.getSupplierCode() + " does not exist");
         }
-        repo.save(transformer.toSupplierEntity(dto));
+        repo.save(mapper.map(dto, Supplier.class));
     }
 
     @Override
     public void deleteSupplier(String supplierCode) {
-        if(!repo.existsById(supplierCode)){ throw new NotFoundException("Delete Failed; supplier code: " + supplierCode + " does not exist");
+        if(!repo.existsById(supplierCode)){
+            throw new NotFoundException("Delete Failed; supplier code: " + supplierCode + " does not exist");
         }
         repo.deleteById(supplierCode);
     }
