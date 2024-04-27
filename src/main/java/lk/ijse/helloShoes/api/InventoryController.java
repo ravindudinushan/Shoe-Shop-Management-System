@@ -1,8 +1,6 @@
 package lk.ijse.helloShoes.api;
 
-import jakarta.validation.Valid;
 import lk.ijse.helloShoes.dto.InventoryDTO;
-import lk.ijse.helloShoes.dto.SupplierDTO;
 import lk.ijse.helloShoes.enums.Status;
 import lk.ijse.helloShoes.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
