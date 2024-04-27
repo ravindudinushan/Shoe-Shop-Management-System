@@ -34,7 +34,7 @@ public class SupplierController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public void saveSupplier(@RequestBody SupplierDTO supplierDTO, @ModelAttribute Address address, @ModelAttribute Contact contact) {
+    public void saveSupplier(@ModelAttribute SupplierDTO supplierDTO, @ModelAttribute Address address, @ModelAttribute Contact contact) {
         supplierDTO.setAddress(address);
         supplierDTO.setContact(contact);
         supplierService.saveSupplier(supplierDTO);

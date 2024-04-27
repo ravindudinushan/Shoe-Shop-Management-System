@@ -34,6 +34,7 @@ public class SupplierServiceImpl implements SupplierService {
             throw new RuntimeException("Supplier Already Exist. Please enter another id..!");
         }
 //        repo.save(mapper.map(dto, Supplier.class));
+        System.out.println(supplier);
         repo.save(supplier);
     }
 
