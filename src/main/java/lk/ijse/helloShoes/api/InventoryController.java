@@ -40,24 +40,12 @@ public class InventoryController {
         InventoryDTO inventory = new InventoryDTO(itemCode,itemDesc,base64Pic,category,size,unitPrice,status);
         inventoryService.saveInventory(inventory);
     }
-//    @DeleteMapping("/{itemCode}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void deleteInventory(@PathVariable("itemCode") String itemCode){
-//        inventoryService.deleteInventory(itemCode);
-//    }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(params = {"inventoryCode"})
     public void deleteSupplier(@RequestParam String inventoryCode) {
         inventoryService.deleteInventory(inventoryCode);
     }
-
-//    @PatchMapping(value = "/{itemCode}",consumes = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void updateInventory(@PathVariable("itemCode") String itemCode, @Valid @RequestBody InventoryDTO inventoryDTO){
-//        inventoryDTO.setItemCode(itemCode);
-//        inventoryService.updateInventory(inventoryDTO);
-//    }
 
     @PutMapping
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
