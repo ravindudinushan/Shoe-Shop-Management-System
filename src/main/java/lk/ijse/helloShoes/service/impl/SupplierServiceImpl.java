@@ -54,8 +54,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public List<SupplierDTO> getAllSupplier() {
-        return repo.findAll().stream().map(supplier -> transformer.fromSupplierEntity(supplier)).toList();
-
+        return repo.findAll().stream().map(supplier -> mapper.map(supplier, SupplierDTO.class)).toList();
     }
 
     @Override

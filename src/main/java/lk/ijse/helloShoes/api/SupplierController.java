@@ -1,11 +1,9 @@
 package lk.ijse.helloShoes.api;
 
-import jakarta.validation.Valid;
 import lk.ijse.helloShoes.dto.CustomDTO;
 import lk.ijse.helloShoes.dto.SupplierDTO;
 import lk.ijse.helloShoes.entity.Supplier;
 import lk.ijse.helloShoes.service.SupplierService;
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,18 +36,6 @@ public class SupplierController {
         supplierService.saveSupplier(supplierDTO);
         System.out.println(supplierDTO);
     }
-
-//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public void saveCustomer(@RequestBody SupplierDTO supplierDTO) {
-//        supplierService.saveSupplier(supplierDTO);
-//    }
-
-//    @DeleteMapping("/{supplierCode}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void deleteSupplier(@PathVariable("supplierCode") String supplierCode){
-//        supplierService.deleteSupplier(supplierCode);
-//    }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(params = {"supplierCode"})
