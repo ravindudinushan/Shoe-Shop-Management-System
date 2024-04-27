@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Driver;
 import java.util.List;
 
 @Service
@@ -66,6 +67,9 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Supplier searchSupplierCode(String supplierCode) {
-        return null;
+        if (!repo.existsById(supplierCode)) {
+            throw new RuntimeException("Wrong ID. Please enter Valid id..!");
+        }
+        return mapper.map(repo.findById(supplierCode).get(), Supplier.class);
     }
 }
