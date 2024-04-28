@@ -1,7 +1,6 @@
 package lk.ijse.helloShoes.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lk.ijse.helloShoes.embeded.Address;
 import lk.ijse.helloShoes.enums.Gender;
 import lk.ijse.helloShoes.enums.Level;
@@ -20,11 +19,14 @@ public class Customer {
     @Id
     private String customerCode;
     private String customerName;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     private LocalDate date;
+    @Enumerated(EnumType.STRING)
     private Level level;
     private int points;
     private Date dob;
+    @Embedded
     private Address address;
     private String contact;
     private String email;
