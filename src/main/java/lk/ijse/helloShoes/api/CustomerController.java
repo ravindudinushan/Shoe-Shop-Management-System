@@ -1,13 +1,14 @@
 package lk.ijse.helloShoes.api;
 
-import lk.ijse.helloShoes.dto.SupplierDTO;
+import lk.ijse.helloShoes.dto.CustomDTO;
+import lk.ijse.helloShoes.dto.CustomerDTO;
+import lk.ijse.helloShoes.embeded.Address;
+import lk.ijse.helloShoes.entity.Customer;
 import lk.ijse.helloShoes.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,8 +21,40 @@ public class CustomerController {
     CustomerService customerService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<SupplierDTO> getAllCustomers(){
+    public List<CustomerDTO> getAllCustomers(){
         return customerService.getAllCustomer();
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/customerIdGenerate")
+    public @ResponseBody
+    CustomDTO customerIdGenerate() {
+        return customerService.customerIdGenerate();
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public void saveCustomer(@ModelAttribute CustomerDTO customerDTO, @ModelAttribute Address address) {
+        customerDTO.setAddress(address);
+        customerService.saveCustomer(customerDTO);
+        System.out.println(customerDTO);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(params = {"customerCode"})
+    public void deleteCustomer(@RequestParam String customerCode) {
+        customerService.deleteCustomer(customerCode);
+    }
+
+    @PutMapping
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateCustomer(@RequestBody CustomerDTO dto) {
+        customerService.updateCustomer(dto);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(path = "/searchCustomer", params = {"customerCode"})
+    public Customer searchCustomerCode(String customerCode) {
+        return customerService.searchCustomerCode(customerCode);
+    }
 }

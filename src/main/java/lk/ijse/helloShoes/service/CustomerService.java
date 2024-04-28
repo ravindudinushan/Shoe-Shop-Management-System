@@ -11,6 +11,6 @@ public interface CustomerService {
     void updateCustomer(CustomerDTO dto);
     void deleteCustomer(String customerCode);
     List<CustomerDTO> getAllCustomer();
-    CustomDTO CustomerIdGenerate();
+    CustomDTO customerIdGenerate();
     Customer searchCustomerCode(String customerCode);
 }

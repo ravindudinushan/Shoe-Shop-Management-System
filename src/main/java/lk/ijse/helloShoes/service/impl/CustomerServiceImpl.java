@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomDTO CustomerIdGenerate() {
+    public CustomDTO customerIdGenerate() {
         return null;
     }
 
