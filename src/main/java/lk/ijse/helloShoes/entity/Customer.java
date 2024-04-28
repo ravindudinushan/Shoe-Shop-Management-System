@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -21,7 +20,7 @@ public class Customer {
     private String customerName;
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    private LocalDate date;
+    private Date date;
     @Enumerated(EnumType.STRING)
     private Level level;
     private int points;
