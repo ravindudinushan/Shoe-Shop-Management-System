@@ -22,7 +22,7 @@ public class SupplierController {
     SupplierService supplierService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<SupplierDTO> getAllCustomers(){
+    public List<SupplierDTO> getAllSupplier(){
         return supplierService.getAllSupplier();
     }
 
