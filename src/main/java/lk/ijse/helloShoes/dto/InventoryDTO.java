@@ -14,6 +14,7 @@ public class InventoryDTO {
     private Object itemPic;
     private String category;
     private int size;
-    private double unitPrice;
+    private double unitPriceBuy;
+    private double unitPriceSale;
     private Status status;
 }

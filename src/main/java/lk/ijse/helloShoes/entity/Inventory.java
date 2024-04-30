@@ -19,6 +19,7 @@ public class Inventory {
     private String category;
     private int size;
     private double unitPrice;
+    private double unitPriceSale;
     private int quantity;
     @Enumerated(EnumType.STRING)
     private Status status;
