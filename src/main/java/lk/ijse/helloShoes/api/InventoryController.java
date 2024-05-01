@@ -27,7 +27,7 @@ public class InventoryController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public void saveInventory(@RequestBody InventoryDTO dto){
-        String encodedImageData = encodeToBase64(dto.getItemPic());
+        String encodedImageData = encodeToBase64(dto.getItemPic().getBytes());
         dto.setItemPic(encodedImageData);
 
         // Save the inventory
@@ -43,13 +43,18 @@ public class InventoryController {
     @PutMapping
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateInventory(@RequestBody InventoryDTO dto) {
+        // Encode the image data to base64
+        String encodedImageData = encodeToBase64(dto.getItemPic().getBytes());
+        dto.setItemPic(encodedImageData);
+
+        // Update the inventory
         inventoryService.updateInventory(dto);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @GetMapping(path = "/searchInventory", params = {"inventoryCode"})
-    public Inventory searchInventoryCode(String inventoryCode) {
-        return inventoryService.searchInventoryCode(inventoryCode);
+    @GetMapping(path = "/searchInventory", params = {"itemCode"})
+    public Inventory searchInventoryCode(String itemCode) {
+        return inventoryService.searchInventoryCode(itemCode);
     }
 
     private String encodeToBase64(byte[] imageData) {

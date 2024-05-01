@@ -28,7 +28,7 @@ public class InventoryServiceImpl implements InventoryService {
         if (repo.existsById(dto.getItemCode())) {
             throw new RuntimeException("Item Already Exist. Please enter another id..!");
         }
-        String encodedImageData = encodeToBase64(dto.getItemPic());
+        String encodedImageData = encodeToBase64(dto.getItemPic().getBytes());
         dto.setItemPic(encodedImageData);
 
         // Save the inventory
@@ -41,7 +41,12 @@ public class InventoryServiceImpl implements InventoryService {
         if(!repo.existsById(dto.getItemCode())){
             throw new NotFoundException("Update Failed; item code: " + dto.getItemCode() + " does not exist");
         }
-        repo.save(mapper.map(dto, Inventory.class));
+        String encodedImageData = encodeToBase64(dto.getItemPic().getBytes());
+        dto.setItemPic(encodedImageData);
+
+        // Save the inventory
+        Inventory inventory = mapper.map(dto, Inventory.class);
+        repo.save(inventory);
     }
 
     @Override
