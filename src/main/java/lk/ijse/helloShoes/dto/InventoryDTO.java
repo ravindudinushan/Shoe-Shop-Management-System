@@ -11,10 +11,11 @@ import lombok.NoArgsConstructor;
 public class InventoryDTO {
     private String itemCode;
     private String itemDesc;
-    private Object itemPic;
+    private String  itemPic;
     private String category;
     private int size;
     private double unitPriceBuy;
     private double unitPriceSale;
+    private int quantity;
     private Status status;
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -27,7 +28,12 @@ public class InventoryServiceImpl implements InventoryService {
         if (repo.existsById(dto.getItemCode())) {
             throw new RuntimeException("Item Already Exist. Please enter another id..!");
         }
-        repo.save(mapper.map(dto, Inventory.class));
+        String encodedImageData = encodeToBase64(dto.getItemPic());
+        dto.setItemPic(encodedImageData);
+
+        // Save the inventory
+        Inventory inventory = mapper.map(dto, Inventory.class);
+        repo.save(inventory);
     }
 
     @Override
@@ -62,5 +68,10 @@ public class InventoryServiceImpl implements InventoryService {
             throw new RuntimeException("Wrong ID. Please enter Valid id..!");
         }
         return mapper.map(repo.findById(itemCode).get(), Inventory.class);
+    }
+
+    // Method to encode byte array to base64 string
+    private String encodeToBase64(byte[] imageData) {
+        return Base64.getEncoder().encodeToString(imageData);
     }
 }
