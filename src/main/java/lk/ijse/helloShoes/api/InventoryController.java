@@ -36,8 +36,8 @@ public class InventoryController {
                                      @RequestPart("unitPrice") double unitPrice,
                                      @RequestPart("status") Status status){
         String base64Pic = Base64.getEncoder().encodeToString(itemPic.getBytes()); //Build Base64 image
-        InventoryDTO inventory = new InventoryDTO(itemCode,itemDesc,base64Pic,category,size,unitPrice,status);
-        inventoryService.saveInventory(inventory);
+//        InventoryDTO inventory = new InventoryDTO(itemCode,itemDesc,base64Pic,category,size,unitPrice,status);
+//        inventoryService.saveInventory(inventory);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
