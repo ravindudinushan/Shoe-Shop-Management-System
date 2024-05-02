@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -23,4 +25,6 @@ public class Supplier {
     @Embedded
     private Contact contact;
     private String email;
+//    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
+//    private List<SupplierDetails> saleDetails;
 }

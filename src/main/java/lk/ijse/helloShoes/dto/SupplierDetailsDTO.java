@@ -1,15 +1,13 @@
-package lk.ijse.helloShoes.entity;
+package lk.ijse.helloShoes.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SaleDetails_PK implements Serializable {
-    private String orderNo;
+public class SupplierDetailsDTO{
+    private String supplierCode;
     private String itemCode;
 }
