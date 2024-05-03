@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/sale")
+@RequestMapping("api/v1//sale")
 @CrossOrigin
 public class SaleController {
 
