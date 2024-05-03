@@ -20,7 +20,7 @@ public class InventoryController {
     InventoryService inventoryService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<InventoryDTO> getAllCustomers(){
+    public List<InventoryDTO> getAllInventory(){
         return inventoryService.getAllInventory();
     }
 
