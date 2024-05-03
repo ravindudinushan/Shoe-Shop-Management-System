@@ -1,5 +1,6 @@
 package lk.ijse.helloShoes.dto;
 
+import lk.ijse.helloShoes.embeded.Address;
 import lk.ijse.helloShoes.enums.Gender;
 import lk.ijse.helloShoes.enums.Role;
 import lombok.AllArgsConstructor;
@@ -22,5 +23,9 @@ public class EmployeeDTO {
     private Date dob;
     private Date dateOfJoin;
     private String branch;
-
+    private Address address;
+    private String contact;
+    private String email;
+    private String emergencyPerson;
+    private String emergencyContact;
 }
