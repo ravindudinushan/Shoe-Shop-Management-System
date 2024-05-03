@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    List<UserDTO> getAllCustomer(){
+    List<UserDTO> getAllUser(){
         return userService.getAllUser();
     }
 
@@ -31,19 +31,19 @@ public class UserController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void updateCustomer(@Valid @RequestBody UserDTO userDTO){
+    void updateUser(@Valid @RequestBody UserDTO userDTO){
         userService.updateUser(userDTO.getEmail(),userDTO);
     }
 
     @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void deleteCustomer(@RequestBody UserDTO userDTO){
+    void deleteUser(@RequestBody UserDTO userDTO){
         userService.deleteUser(userDTO.getEmail());
     }
 
     @PatchMapping(value = "/{email}/{role}",consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    UserDTO getCustomer(@PathVariable("email") String email, @PathVariable("role") String role){
+    UserDTO getUser(@PathVariable("email") String email, @PathVariable("role") String role){
         return userService.getUserDetails(email ,role);
     }
 }
