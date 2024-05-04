@@ -23,7 +23,11 @@ public class EmployeeDTO {
     private Date dob;
     private Date dateOfJoin;
     private String branch;
-    private Address address;
+    private String  address1;
+    private String  address2;
+    private String  address3;
+    private String  address4;
+    private String  address5;
     private String contact;
     private String email;
     private String emergencyPerson;

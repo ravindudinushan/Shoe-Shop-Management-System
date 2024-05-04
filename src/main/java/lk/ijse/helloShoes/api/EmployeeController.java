@@ -35,10 +35,9 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public void saveEmployee(@ModelAttribute EmployeeDTO dto, @ModelAttribute Address address){
+    public void saveEmployee(@RequestBody EmployeeDTO dto){
         String encodedImageData = encodeToBase64(dto.getProfilePic().getBytes());
         dto.setProfilePic(encodedImageData);
-        dto.setAddress(address);
         employeeService.saveEmployee(dto);
     }
 

@@ -2,9 +2,7 @@ package lk.ijse.helloShoes.service.impl;
 
 import lk.ijse.helloShoes.dto.CustomDTO;
 import lk.ijse.helloShoes.dto.EmployeeDTO;
-import lk.ijse.helloShoes.dto.InventoryDTO;
 import lk.ijse.helloShoes.entity.Employee;
-import lk.ijse.helloShoes.entity.Inventory;
 import lk.ijse.helloShoes.repo.EmployeeRepo;
 import lk.ijse.helloShoes.service.EmployeeService;
 import lk.ijse.helloShoes.service.exception.NotFoundException;
@@ -34,7 +32,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         String encodedImageData = encodeToBase64(dto.getProfilePic().getBytes());
         dto.setProfilePic(encodedImageData);
 
-        // Save the inventory
         Employee employee = mapper.map(dto, Employee.class);
         repo.save(employee);
     }

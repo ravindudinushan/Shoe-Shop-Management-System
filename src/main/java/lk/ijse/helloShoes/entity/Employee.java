@@ -1,7 +1,6 @@
 package lk.ijse.helloShoes.entity;
 
 import jakarta.persistence.*;
-import lk.ijse.helloShoes.embeded.Address;
 import lk.ijse.helloShoes.enums.Gender;
 import lk.ijse.helloShoes.enums.Role;
 import lombok.AllArgsConstructor;
@@ -29,8 +28,11 @@ public class Employee {
     private Date dob;
     private Date dateOfJoin;
     private String branch;
-    @Embedded
-    private Address address;
+    private String  address1;
+    private String  address2;
+    private String  address3;
+    private String  address4;
+    private String  address5;
     private String contact;
     private String email;
     private String emergencyPerson;
