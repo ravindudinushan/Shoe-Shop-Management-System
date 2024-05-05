@@ -46,4 +46,24 @@ public class SaleController {
     public @ResponseBody CustomDTO getSumOrders() {
         return saleService.getSumOrders();
     }
+
+    @GetMapping("/total-sales-profit")
+    public Object[] getTotalSalesAndProfit() {
+        return saleService.getTotalSalesAndProfit();
+    }
+
+    @GetMapping("/most-sold-item")
+    public Object[] getMostSoldItem() {
+        return saleService.getMostSoldItem();
+    }
+
+    @GetMapping("/most-sold-item-image")
+    public String getMostSoldItemImage() {
+        return saleService.getBase64EncodedImageOfMostSoldItem();
+    }
+
+    @GetMapping("/most-sold-item-quantity")
+    public int getMostSoldItemQuantity() {
+        return saleService.getMostSoldItemQuantity();
+    }
 }

@@ -71,4 +71,24 @@ public class SaleServiceImpl implements SaleService {
     public CustomDTO getSumOrders() {
         return new CustomDTO(saleRepo.getSumOrders());
     }
+
+    @Override
+    public Object[] getTotalSalesAndProfit() {
+        return saleRepo.getTotalSalesAndProfit();
+    }
+
+    @Override
+    public Object[] getMostSoldItem() {
+        return saleRepo.getMostSoldItem();
+    }
+
+    @Override
+    public String getBase64EncodedImageOfMostSoldItem() {
+        return saleRepo.getBase64EncodedImageOfMostSoldItem();
+    }
+
+    @Override
+    public int getMostSoldItemQuantity() {
+        return saleRepo.getMostSoldItemQuantity();
+    }
 }

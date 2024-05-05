@@ -20,4 +20,12 @@ public interface SaleService {
 
     @ResponseBody
     CustomDTO getSumOrders();
+
+    Object[] getTotalSalesAndProfit();
+
+    Object[] getMostSoldItem();
+
+    String getBase64EncodedImageOfMostSoldItem();
+
+    int getMostSoldItemQuantity();
 }
