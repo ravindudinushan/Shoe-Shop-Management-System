@@ -2,6 +2,7 @@ package lk.ijse.helloShoes.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lk.ijse.helloShoes.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +21,9 @@ public class InventoryDTO {
     private String category;
     @NotBlank(message = "Size can not be null")
     private int size;
+    @Positive(message = "Unit price must be a positive value")
     private double unitPriceBuy;
+    @Positive(message = "Unit price must be a positive value")
     private double unitPriceSale;
     private int quantity;
     @NotBlank(message = "Status can not be null")

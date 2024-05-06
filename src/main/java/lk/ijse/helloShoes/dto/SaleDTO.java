@@ -3,6 +3,7 @@ package lk.ijse.helloShoes.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lk.ijse.helloShoes.enums.PaymentMethod;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class SaleDTO {
     @Null(message = "ID is auto generated")
     private String orderNo;
     private String customerCode;
+    @Positive(message = "Total price must be a positive value")
     private double totalPrice;
     private Timestamp purchaseDate;
     private PaymentMethod paymentMethod;
