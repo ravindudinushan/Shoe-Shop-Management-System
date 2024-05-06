@@ -18,5 +18,6 @@ public class UserDTO {
     private String email;
     @NotBlank(message = "Password Can't Be Null")
     private String password;
+    @NotBlank(message = "Role can not be null")
     private Role role;
 }
