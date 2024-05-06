@@ -4,7 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
-import lk.ijse.helloShoes.embeded.Address;
 import lk.ijse.helloShoes.enums.Gender;
 import lk.ijse.helloShoes.enums.Role;
 import lombok.AllArgsConstructor;
