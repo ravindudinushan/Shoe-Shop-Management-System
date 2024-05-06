@@ -30,6 +30,7 @@ public class CustomerDTO {
     private Date dob;
     @NotBlank(message = "Address can not be null")
     private Address address;
+    @Pattern(regexp = "^(?:\\+?94|0)(?:[1-9]\\d{1}|(?:2[0-4]|3[0-5]|4[0-6]|[5-7][0-5]|77|81|91)(?!\\d{2}))\\d{6}$", message = "Invalid Contact number")
     private String contact;
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email not valid")
     private String email;
