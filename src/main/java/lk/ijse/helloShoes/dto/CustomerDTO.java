@@ -30,12 +30,15 @@ public class CustomerDTO {
     private Level level;
     @NotBlank(message = "Points can not be null")
     private int points;
+    @NotBlank(message = "Date of Birth can not be null")
     @Past(message = "Date of Birth must be in the past")
     private Date dob;
     @NotBlank(message = "Address can not be null")
     private Address address;
+    @NotBlank(message = "Contact can not be null")
     @Pattern(regexp = "^(?:\\+?94|0)(?:[1-9]\\d{1}|(?:2[0-4]|3[0-5]|4[0-6]|[5-7][0-5]|77|81|91)(?!\\d{2}))\\d{6}$", message = "Invalid Contact number")
     private String contact;
+    @NotBlank(message = "Email can not be null")
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email not valid")
     private String email;
 }

@@ -18,6 +18,7 @@ public class SaleDTO {
     @Null(message = "ID is auto generated")
     private String orderNo;
     private String customerCode;
+    @NotBlank(message = "Total price can not be null")
     @Positive(message = "Total price must be a positive value")
     private double totalPrice;
     @NotBlank(message = "Date can not be null")

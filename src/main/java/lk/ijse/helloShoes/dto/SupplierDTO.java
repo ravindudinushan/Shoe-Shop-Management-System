@@ -23,8 +23,10 @@ public class SupplierDTO {
     private Category category;
     @NotBlank(message = "Address can not be null")
     private Address address;
+    @NotBlank(message = "Contact can not be null")
     @Pattern(regexp = "^(?:\\+?94|0)(?:[1-9]\\d{1}|(?:2[0-4]|3[0-5]|4[0-6]|[5-7][0-5]|77|81|91)(?!\\d{2}))\\d{6}$", message = "Invalid contact number")
     private Contact contact;
+    @NotBlank(message = "Email can not be null")
     @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email not valid")
     private String email;
 }
