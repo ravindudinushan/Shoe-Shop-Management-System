@@ -19,12 +19,13 @@ public class InventoryDTO {
     private String  itemPic;
     @NotBlank(message = "Category can not be null")
     private String category;
-    @NotBlank(message = "Size can not be null")
+    @Positive(message = "Size must be a positive integer value")
     private int size;
     @Positive(message = "Unit price must be a positive value")
     private double unitPriceBuy;
     @Positive(message = "Unit price must be a positive value")
     private double unitPriceSale;
+    @Positive(message = "Quantity must be a positive integer value")
     private int quantity;
     @NotBlank(message = "Status can not be null")
     private Status status;

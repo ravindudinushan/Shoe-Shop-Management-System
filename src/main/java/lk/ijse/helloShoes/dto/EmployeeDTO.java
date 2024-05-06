@@ -33,6 +33,7 @@ public class EmployeeDTO {
     private Role role;
     @Past(message = "Date of Birth must be in the past")
     private Date dob;
+    @NotBlank(message = "Date of join can not be null")
     private Date dateOfJoin;
     @NotBlank(message = "Name can not be null")
     private String branch;

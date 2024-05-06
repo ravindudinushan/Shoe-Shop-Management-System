@@ -24,9 +24,11 @@ public class CustomerDTO {
     private String customerName;
     @NotBlank(message = "Gender can not be null")
     private Gender gender;
+    @NotBlank(message = "Date can not be null")
     private Date date;
     @NotBlank(message = "Level can not be null")
     private Level level;
+    @NotBlank(message = "Points can not be null")
     private int points;
     @Past(message = "Date of Birth must be in the past")
     private Date dob;

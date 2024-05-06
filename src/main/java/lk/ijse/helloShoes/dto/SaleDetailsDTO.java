@@ -13,5 +13,6 @@ public class SaleDetailsDTO {
     private String itemCode;
     @Positive(message = "Unit price must be a positive value")
     private double unitPriceSale;
+    @Positive(message = "Quantity must be a positive integer value")
     private int quantity;
 }

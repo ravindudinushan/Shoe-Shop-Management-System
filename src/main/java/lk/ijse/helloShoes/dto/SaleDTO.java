@@ -20,8 +20,11 @@ public class SaleDTO {
     private String customerCode;
     @Positive(message = "Total price must be a positive value")
     private double totalPrice;
+    @NotBlank(message = "Date can not be null")
     private Timestamp purchaseDate;
+    @NotBlank(message = "Payment Method can not be null")
     private PaymentMethod paymentMethod;
+    @NotBlank(message = "Points can not be null")
     private double addPoints;
     @NotBlank(message = "Name can not be null")
     @Pattern(regexp = "[A-Za-z ]+", message = "Name is not valid")
