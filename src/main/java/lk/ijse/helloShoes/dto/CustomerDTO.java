@@ -2,6 +2,7 @@ package lk.ijse.helloShoes.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import lk.ijse.helloShoes.embeded.Address;
 import lk.ijse.helloShoes.enums.Gender;
@@ -27,6 +28,7 @@ public class CustomerDTO {
     @NotBlank(message = "Level can not be null")
     private Level level;
     private int points;
+    @Past(message = "Date of Birth must be in the past")
     private Date dob;
     @NotBlank(message = "Address can not be null")
     private Address address;
