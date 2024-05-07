@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
-import lk.ijse.helloShoes.embeded.Address;
+import lk.ijse.helloShoes.embeded.Address1;
 import lk.ijse.helloShoes.enums.Gender;
 import lk.ijse.helloShoes.enums.Level;
 import lombok.AllArgsConstructor;
@@ -34,7 +34,7 @@ public class CustomerDTO {
     @Past(message = "Date of Birth must be in the past")
     private Date dob;
     @NotBlank(message = "Address can not be null")
-    private Address address;
+    private Address1 address;
     @NotBlank(message = "Contact can not be null")
     @Pattern(regexp = "^(?:\\+?94|0)(?:[1-9]\\d{1}|(?:2[0-4]|3[0-5]|4[0-6]|[5-7][0-5]|77|81|91)(?!\\d{2}))\\d{6}$", message = "Invalid Contact number")
     private String contact;

@@ -2,7 +2,7 @@ package lk.ijse.helloShoes.api;
 
 import lk.ijse.helloShoes.dto.CustomDTO;
 import lk.ijse.helloShoes.dto.CustomerDTO;
-import lk.ijse.helloShoes.embeded.Address;
+import lk.ijse.helloShoes.embeded.Address1;
 import lk.ijse.helloShoes.entity.Customer;
 import lk.ijse.helloShoes.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class CustomerController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public void saveCustomer(@ModelAttribute CustomerDTO customerDTO, @ModelAttribute Address address) {
+    public void saveCustomer(@ModelAttribute CustomerDTO customerDTO, @ModelAttribute Address1 address) {
         customerDTO.setAddress(address);
         customerService.saveCustomer(customerDTO);
         System.out.println(customerDTO);
