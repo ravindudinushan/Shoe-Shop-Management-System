@@ -1,0 +1,19 @@
+package lk.ijse.helloShoe;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class HelloShoeApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(HelloShoeApplication.class, args);
+	}
+
+	@Bean
+	public ModelMapper modelMapper(){
+		return new ModelMapper();
+	}
+}
