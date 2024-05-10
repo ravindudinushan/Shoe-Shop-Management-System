@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link href="../assets/icon/logo.png" rel="icon">
+
+    <meta content="Shoe Pvt Ltd" name="keywords">
+    <meta content="This is Shoe Pvt Ltd Web Project." name="description">
+    <meta content="Ravindu Dinushan" name="author">
+    <meta content="Ravindu Dinushan" name="owner">
+    <meta content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" name="viewport">
+    <meta content="green" name="theme-color">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/bootstrap-5.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+
+    <!-- Template Dashboard CSS File -->
+    <link href="../assets/css/dashboardStyle.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="userDashboard.html" class="logo d-flex align-items-center">
+            <span class="d-none d-lg-block">Shoe Sale</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="../assets/img/testimonials/testimonials-4.jpg" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">L.K San</span>
+                </a><!-- End Profile Iamge Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>L.K San</h6>
+                        <span>User</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="" >
+                            <i class="bi bi-person"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                            <i class="bi bi-gear"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Need Help?</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="login.html">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header>
+<!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link" id="userDashboard" href="userDashboard.html">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" id="customerDashboard" href="user_CustDashboard.html">
+                <i class="bi bi-kanban"></i>
+                <span>Customer Dashboard</span>
+            </a>
+        </li>
+        <!-- End Details Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" id="myDetailsSection" href="user_ProfileDashboard.html">
+                <i class="bi bi-car-front"></i>
+                <span>User Profile Details</span>
+            </a>
+        </li>
+        <!-- End Rent Nav -->
+
+        <!-- End Rent Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="login.html">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>LogOut</span>
+            </a>
+        </li>
+        <!-- End Login Page Nav -->
+
+    </ul>
+
+</aside>
+<!-- End Sidebar-->
+
+<!-- ======= Main ======= -->
+<main id="main" class="main">
+
+    <div class="pageTitle">
+        <h1>User Dashboard</h1>
+        <section class="container-fluid mt-3" id="bookingResponse">
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Home</a></li>
+                    <li class="breadcrumb-item active">User Dashboard</li>
+                </ol>
+            </nav>
+        </section>
+    </div>
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <!-- Left side columns -->
+            <div class="col-lg-8">
+                <div class="row">
+
+                    <!-- Car Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card car-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total sales</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class='bx bxs-cart'></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 id="carCount">0</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Car Card -->
+
+                    <!-- Available Car Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card car-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total profit</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class='bx bx-money-withdraw'></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 id="availableCarCount">0</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Car Card -->
+
+                    <!-- Reserved Car Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card car-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Most sale item</h5>
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class='bx bxs-shield-alt-2'></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 id="reservedCarCount">0</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Car Card -->
+
+
+                    <!-- Item Card -->
+
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card driver-card">
+                            <div class="card-body">
+                                <h5 class="card-title"> Item qty</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class='bx bxs-lock-alt'></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 id="availableDriverCount">0</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+    <!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>Shoe Pvt Ltd</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        Designed by <a href="">Ravindu Dinushan</a>
+    </div>
+</footer>
+<!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="../assets/vendor/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/vendor/jQuery/jquery-3.6.1.min.js "></script>
+<script rel="script" src="../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.js"></script>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<!-- Template Dashboard Main JS File -->
+<script src="../assets/js/dashboardMain.js"></script>
+
+<!-- Controller JS File -->
+<script src="../controller/regUserDashboardController.js"></script>
+
+<!-- Util JS File -->
+<script src="../util/alert.js" rel="script"></script>
+<script src="../util/validation.js" rel="script"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#bookingResponse").css('display', 'block');
+        $("#rentDetails").css('display', 'none');
+        $("#profileDetails").css('display', 'none');
+    });
+
+    $("#userDashboardSection").click(function () {
+        $("#bookingResponse").css('display', 'block');
+        $("#rentDetails").css('display', 'none');
+        $("#profileDetails").css('display', 'none');
+    });
+
+    $("#rentSection").click(function () {
+        $("#bookingResponse").css('display', 'none');
+        $("#rentDetails").css('display', 'block');
+        $("#profileDetails").css('display', 'none');
+    });
+
+    $("#bookingResponseSection").click(function () {
+        $("#bookingResponse").css('display', 'block');
+        $("#rentDetails").css('display', 'none');
+        $("#profileDetails").css('display', 'none');
+    });
+
+    $("#myDetailsSection,#userDetails,#userDetailss").click(function () {
+        $("#bookingResponse").css('display', 'none');
+        $("#rentDetails").css('display', 'none');
+        $("#profileDetails").css('display', 'block');
+    });
+    <!-- Initialize Swiper -->
+    const progressCircle = document.querySelector(".autoplay-progress svg");
+    const progressContent = document.querySelector(".autoplay-progress span");
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev"
+        },
+        on: {
+            autoplayTimeLeft(s, time, progress) {
+                progressCircle.style.setProperty("--progress", 1 - progress);
+                progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+            }
+        }
+    });
+</script>
+</div>
+</body>
+</html>
