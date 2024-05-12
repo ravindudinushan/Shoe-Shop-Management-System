@@ -10,6 +10,7 @@ import lk.ijse.helloShoe.enums.Level;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -25,13 +26,14 @@ public class CustomerDTO {
     @NotBlank(message = "Gender can not be null")
     private Gender gender;
     @NotBlank(message = "Date can not be null")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @NotBlank(message = "Level can not be null")
     private Level level;
     @NotBlank(message = "Points can not be null")
     private int points;
     @NotBlank(message = "Date of Birth can not be null")
-    @Past(message = "Date of Birth must be in the past")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
     @NotBlank(message = "Address can not be null")
     private Address1 address;
