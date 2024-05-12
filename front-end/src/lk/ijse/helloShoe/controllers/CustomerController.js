@@ -48,7 +48,7 @@ $("#btnSaveCustomer").click(function () {
     $.ajax({
         url: baseUrl + "customer", method: "post", data: formData, dataType: "json", success: function (res) {
             saveUpdateAlert("Customer", res.message);
-            loadAllCustomer();
+            loadCustomers();
         }, error: function (error) {
             unSuccessUpdateAlert("Customer", JSON.parse(error.responseText).message);
         }
@@ -84,44 +84,6 @@ function setTextFieldValues(customerCode, customerName, gender, contact, email, 
 /**
  * load all customers Method
  * */
-// function loadAllCustomer() {
-//     $("#customerTable").empty();
-//     $.ajax({
-//         url: baseUrl + "customer",
-//         method: "GET", success: function (res) {
-//             console.log(res);
-//
-//             for (let i of res) {
-//                 let customerCode = i.customerCode;
-//                 let customerName = i.customerName;
-//                 let gender = i.gender;
-//                 let contact = i.contact;
-//                 let email = i.email;
-//                 let dob = i.dob;
-//                 let level = i.level;
-//                 let date = i.date;
-//                 let address1 = i.address1;
-//                 let address2 = i.address2;
-//                 let address3 = i.address3;
-//                 let address4 = i.address4;
-//                 let address5 = i.address5;
-//                 let points = i.points;
-//
-//                 let row = "<tr><td>" + customerCode + "</td><td>" + customerName + "</td><td>" + gender + "</td><td>" + contact + "</td><td>" + email + "</td><td>" + dob + "</td><td>" + level + "</td><td>" + date + "</td><td>" + address1 + "</td><td>" + address2 + "</td><td>" + address3 + "</td><td>" + address4 + "</td><td>" + address5 + "</td><td>" + points + "</td></tr>";
-//                 $("#customerTable").append(row);
-//             }
-//             blindClickEvents();
-//             generateCustomerID();
-//             setTextFieldValues("", "", "", "", "", "", "", "", "","", "", "", "", "");
-//             console.log(res.message);
-//         }, error: function (error) {
-//             let message = JSON.parse(error.responseText).message;
-//             console.log(message);
-//         }
-//
-//     });
-// }
-
 function loadCustomers() {
     $.ajax({
         type: "GET",
@@ -134,7 +96,8 @@ function loadCustomers() {
             console.log(data.message);
         },
         error: function (error) {
-            console.log("Error loading customers: ", error);
+            let message = JSON.parse(error.responseText).message;
+            console.log(message);
         }
     });
 }
@@ -229,7 +192,7 @@ $("#searchCusId").on("keypress", function (event) {
                 blindClickEvents();
             },
             error: function (error) {
-                loadAllCustomer();
+                loadCustomers();
                 let message = JSON.parse(error.responseText).message;
                 emptyMassage(message);
             }
@@ -242,9 +205,6 @@ $("#searchCusId").on("keypress", function (event) {
  * Customer Update
  * */
 
-/**
- * Update Action
- * */
 $("#btnUpdateCustomer").click(function () {
 
     let cusCode = $("#txtCusId").val();
@@ -273,7 +233,7 @@ $("#btnUpdateCustomer").click(function () {
         data: JSON.stringify(customerOb),
         success: function (res) {
             saveUpdateAlert("Customer", res.message);
-            loadAllCustomer();
+            loadCustomers();
         },
         error: function (error) {
             let message = JSON.parse(error.responseText).message;
@@ -317,7 +277,7 @@ $("#btnDeleteCustomer").click(function () {
         data: JSON.stringify(customerOb),
         success: function (res) {
             saveUpdateAlert("Customer", res.message);
-            loadAllCustomer();
+            loadCustomers();
         },
         error: function (error) {
             let message = JSON.parse(error.responseText).message;
