@@ -172,35 +172,6 @@ function blindClickEvents() {
     $("#btnSaveCustomer").attr('disabled', true);
 }
 
-
-/**
- * Search id and Load Table
- * */
-$("#searchCusId").on("keypress", function (event) {
-    if (event.which === 13) {
-        var search = $("#searchCusId").val();
-        $("#customerTable").empty();
-        $.ajax({
-            url: baseUrl + "customer/searchCustomer/?customerCode="+ search,
-            method: "GET",
-            contentType: "application/json",
-            dataType: "json",
-            success: function (res) {
-                console.log(res);
-                let row = "<tr><td>" + res.customerCode + "</td><td>" + res.customerName + "</td><td>" + res.gender + "</td><td>" + res.contact + "</td><td>" + res.email + "</td><td>" + res.dob + "</td><td>" + res.level + "</td><td>" + res.date + "</td><td>" + res.address1 + "</td><td>" + res.address2 + "</td><td>" + res.address3 + "</td><td>" + res.address4 + "</td><td>" + res.address5 + "</td><td>" + res.points + "</td></tr>";
-                $("#customerTable").append(row);
-                blindClickEvents();
-            },
-            error: function (error) {
-                loadCustomers();
-                let message = JSON.parse(error.responseText).message;
-                emptyMassage(message);
-            }
-        })
-    }
-
-});
-
 /**
  * Customer Update
  * */
@@ -249,42 +220,80 @@ $("#btnUpdateCustomer").click(function () {
 /**
  * Delete Action
  * */
-$("#btnDeleteCustomer").click(function () {
+// $("#btnDeleteCustomer").click(function () {
+//
+//     let cusCode = $("#txtCusId").val();
+//     let cusName = $("#txtCusName").val();
+//     let cusGender = $("#combGender").val();
+//     let cusContact = $("#txtContact").val();
+//     let cusEmail = $("#txtEmail").val();
+//     let cusDob = $("#txtDob").val();
+//     let cusLevel = $("#combLevel").val();
+//     let cusDate = $("#txtDate").val();
+//     let cusAddress1 = $("#txtAddress1").val();
+//     let cusAddress2 = $("#txtAddress2").val();
+//     let cusAddress3 = $("#txtAddress3").val();
+//     let cusAddress4 = $("#txtAddress4").val();
+//     let cusAddress5 = $("#txtAddress5").val();
+//     let cusPoints = $("#txtPoints").val();
+//
+//     const customerOb = {
+//         customerCode: cusCode, customerName: cusName, gender: cusGender, contact: cusContact, email: cusEmail, dob: cusDob, level: cusLevel, date: cusDate, address1: cusAddress1, address2: cusAddress2, address3: cusAddress3, address4: cusAddress4, address5: cusAddress5, points: cusPoints
+//     };
+//
+//     $.ajax({
+//         url: baseUrl + "customer?customerCode=\" + customerCode + ",
+//         method: "delete",
+//         contentType: "application/json",
+//         data: JSON.stringify(customerOb),
+//         success: function (res) {
+//             saveUpdateAlert("Customer", res.message);
+//             loadCustomers();
+//         },
+//         error: function (error) {
+//             let message = JSON.parse(error.responseText).message;
+//             unSuccessUpdateAlert("Customer", message);
+//         }
+//     });
+// });
 
-    let cusCode = $("#txtCusId").val();
-    let cusName = $("#txtCusName").val();
-    let cusGender = $("#combGender").val();
-    let cusContact = $("#txtContact").val();
-    let cusEmail = $("#txtEmail").val();
-    let cusDob = $("#txtDob").val();
-    let cusLevel = $("#combLevel").val();
-    let cusDate = $("#txtDate").val();
-    let cusAddress1 = $("#txtAddress1").val();
-    let cusAddress2 = $("#txtAddress2").val();
-    let cusAddress3 = $("#txtAddress3").val();
-    let cusAddress4 = $("#txtAddress4").val();
-    let cusAddress5 = $("#txtAddress5").val();
-    let cusPoints = $("#txtPoints").val();
+    //Delete customer
+    $("#btnDeleteCustomer").click(function () {
+        var customerId = $("#txtCusId").val();
+        $.ajax({
+            type: "DELETE",
+            url: "http://localhost:8080/app/api/v1/customer",
+            data: { customerCode: customerId },
+            success: function () {
+                alert("Customer deleted successfully!");
+                loadCustomers();
+            },
+            error: function (error) {
+                console.log("Error deleting customer: ", error);
+            }
+        });
+    });
 
-    const customerOb = {
-        customerCode: cusCode, customerName: cusName, gender: cusGender, contact: cusContact, email: cusEmail, dob: cusDob, level: cusLevel, date: cusDate, address1: cusAddress1, address2: cusAddress2, address3: cusAddress3, address4: cusAddress4, address5: cusAddress5, points: cusPoints
-    };
-
-    $.ajax({
-        url: baseUrl + "customer?customerCode=\" + customerCode + ",
-        method: "delete",
-        contentType: "application/json",
-        data: JSON.stringify(customerOb),
-        success: function (res) {
-            saveUpdateAlert("Customer", res.message);
+    // Search customer
+    $("#searchCusId").on("input", function () {
+        var customerId = $(this).val().trim();
+        if (customerId !== "") {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/app/api/v1/customer/searchCustomer",
+                data: { customerCode: customerId },
+                success: function (customer) {
+                    displayCustomers([customer]);
+                    blindClickEvents();
+                },
+                error: function (error) {
+                    console.log("Error searching customer: ", error);
+                }
+            });
+        } else {
             loadCustomers();
-        },
-        error: function (error) {
-            let message = JSON.parse(error.responseText).message;
-            unSuccessUpdateAlert("Customer", message);
         }
     });
-});
 
 /**
  * Auto Forces Input Fields Save
