@@ -1,15 +1,6 @@
 let baseUrl = "http://localhost:8080/app/api/v1/";
 loadCustomers();
 /**
- * Customer Save
- * */
-
-// $("#btnSaveCustomer").attr('disabled', true);
-// $("#btnUpdateCustomer").attr('disabled', true);
-// $("#btnDeleteCustomer").attr('disabled', true);
-
-/**
- * Customer Save
  * Customer ID
  * */
 function generateCustomerID() {
@@ -42,20 +33,37 @@ function generateCustomerID() {
  * Button Add New Customer
  * */
 
-$("#btnSaveCustomer").click(function () {
-    let formData = $("#customerForm").serialize();
-    console.log(formData);
-    $.ajax({
-        url: baseUrl + "customer", method: "post", data: formData, dataType: "json", success: function (res) {
-            saveUpdateAlert("Customer", res.message);
-            loadCustomers();
-        }, error: function (error) {
-            unSuccessUpdateAlert("Customer", JSON.parse(error.responseText).message);
-        }
+// $("#btnSaveCustomer").click(function () {
+//     let formData = $("#customerForm").serialize();
+//     console.log(formData);
+//     $.ajax({
+//         url: baseUrl + "customer", method: "post", data: formData, dataType: "json", success: function (res) {
+//             saveUpdateAlert("Customer", res.message);
+//             loadCustomers();
+//         }, error: function (error) {
+//             unSuccessUpdateAlert("Customer", JSON.parse(error.responseText).message);
+//         }
+//     });
+// });
+
+    // Save customer
+    $("#btnSaveCustomer").click(function () {
+        var formData = $("#customerForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "customer",
+            data: formData,
+            success: function () {
+                updateAlert("Customer Saved Successfully");
+                loadCustomers();
+                $("#customerForm")[0].reset();
+            },
+            error: function (error) {
+                unSuccessUpdateAlert("Customer Saved UnSuccessfully");
+                console.log("Error saving customer: ", error);
+            }
+        });
     });
-});
-
-
 /**
  * clear input fields Values Method
  * */
@@ -87,7 +95,7 @@ function setTextFieldValues(customerCode, customerName, gender, contact, email, 
 function loadCustomers() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/app/api/v1/customer",
+        url: baseUrl + "customer",
         success: function (data) {
             displayCustomers(data);
             blindClickEvents();
@@ -169,7 +177,7 @@ function blindClickEvents() {
         $("#txtAddress5").val(address5);
         $("#txtPoints").val(points);
     });
-    $("#btnSaveCustomer").attr('disabled', true);
+   // $("#btnSaveCustomer").attr('disabled', true);
 }
 
 /**
@@ -203,7 +211,7 @@ $("#btnUpdateCustomer").click(function () {
         contentType: "application/json",
         data: JSON.stringify(customerOb),
         success: function (res) {
-            saveUpdateAlert("Customer", res.message);
+            updateAlert("Customer", res.message);
             loadCustomers();
         },
         error: function (error) {
@@ -332,54 +340,6 @@ $("#btnDeleteCustomer").click(function () {
 // }
 
 // $(document).ready(function () {
-//     // Function to load all customers on page load
-//     function loadCustomers() {
-//         $.ajax({
-//             type: "GET",
-//             url: "http://localhost:8080/app/api/v1/customer",
-//             success: function (data) {
-//                 displayCustomers(data);
-//             },
-//             error: function (error) {
-//                 console.log("Error loading customers: ", error);
-//             }
-//         });
-//     }
-//
-//     // Function to display customers in the table
-//     function displayCustomers(customers) {
-//         $("#customerTable").empty();
-//         customers.forEach(function (customer) {
-//             let address1 = customer.address ? customer.address.address1 : '';
-//             let address2 = customer.address ? customer.address.address2 : '';
-//             let address3 = customer.address ? customer.address.address3 : '';
-//             let address4 = customer.address ? customer.address.address4 : '';
-//             let address5 = customer.address ? customer.address.address5 : '';
-//
-//             $("#customerTable").append(
-//                 `<tr>
-//                 <td>${customer.customerCode}</td>
-//                 <td>${customer.customerName}</td>
-//                 <td>${customer.gender}</td>
-//                 <td>${customer.contact}</td>
-//                 <td>${customer.email}</td>
-//                 <td>${new Date(customer.dob).toLocaleDateString()}</td>
-//                 <td>${customer.level}</td>
-//                 <td>${new Date(customer.date).toLocaleDateString()}</td>
-//                 <td>${address1}</td>
-//                 <td>${address2}</td>
-//                 <td>${address3}</td>
-//                 <td>${address4}</td>
-//                 <td>${address5}</td>
-//                 <td>${customer.points}</td>
-//             </tr>`
-//             );
-//         });
-//     }
-//
-//     // Load customers on page load
-//     loadCustomers();
-//
 //     // Save customer
 //     $("#btnSaveCustomer").click(function () {
 //         var formData = $("#customerForm").serialize();
