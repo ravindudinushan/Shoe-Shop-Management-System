@@ -32,21 +32,7 @@ function generateCustomerID() {
 /**
  * Button Add New Customer
  * */
-
-// $("#btnSaveCustomer").click(function () {
-//     let formData = $("#customerForm").serialize();
-//     console.log(formData);
-//     $.ajax({
-//         url: baseUrl + "customer", method: "post", data: formData, dataType: "json", success: function (res) {
-//             saveUpdateAlert("Customer", res.message);
-//             loadCustomers();
-//         }, error: function (error) {
-//             unSuccessUpdateAlert("Customer", JSON.parse(error.responseText).message);
-//         }
-//     });
-// });
-
-    // Save customer
+ // Save customer
     $("#btnSaveCustomer").click(function () {
         var formData = $("#customerForm").serialize();
         $.ajax({
@@ -151,9 +137,9 @@ function blindClickEvents() {
         let gender = $(this).children().eq(2).text();
         let contact = $(this).children().eq(3).text();
         let email = $(this).children().eq(4).text();
-        let dob = $(this).children().eq(5).text();
+        let dob = new Date($(this).children().eq(5).text()).toISOString().split('T')[0];
         let level = $(this).children().eq(6).text();
-        let date = $(this).children().eq(7).text();
+        let date = new Date($(this).children().eq(7).text()).toISOString().split('T')[0];
         let address1 = $(this).children().eq(8).text();
         let address2 = $(this).children().eq(9).text();
         let address3 = $(this).children().eq(10).text();
@@ -183,40 +169,39 @@ function blindClickEvents() {
 /**
  * Customer Update
  * */
-
+    // Update customer
 $("#btnUpdateCustomer").click(function () {
-
-    let cusCode = $("#txtCusId").val();
-    let cusName = $("#txtCusName").val();
-    let cusGender = $("#combGender").val();
-    let cusContact = $("#txtContact").val();
-    let cusEmail = $("#txtEmail").val();
-    let cusDob = $("#txtDob").val();
-    let cusLevel = $("#combLevel").val();
-    let cusDate = $("#txtDate").val();
-    let cusAddress1 = $("#txtAddress1").val();
-    let cusAddress2 = $("#txtAddress2").val();
-    let cusAddress3 = $("#txtAddress3").val();
-    let cusAddress4 = $("#txtAddress4").val();
-    let cusAddress5 = $("#txtAddress5").val();
-    let cusPoints = $("#txtPoints").val();
-
-    const customerOb = {
-        customerCode: cusCode, customerName: cusName, gender: cusGender, contact: cusContact, email: cusEmail, dob: cusDob, level: cusLevel, date: cusDate, address1: cusAddress1, address2: cusAddress2, address3: cusAddress3, address4: cusAddress4, address5: cusAddress5, points: cusPoints
+    var formData = {
+        customerCode: $("#txtCusId").val(),
+        customerName: $("#txtCusName").val(),
+        gender: $("#combGender").val(),
+        contact: $("#txtContact").val(),
+        email: $("#txtEmail").val(),
+        dob: $("#txtDob").val(),
+        level: $("#combLevel").val(),
+        date: $("#txtDate").val(),
+        address: {
+            address1: $("#txtAddress1").val(),
+            address2: $("#txtAddress2").val(),
+            address3: $("#txtAddress3").val(),
+            address4: $("#txtAddress4").val(),
+            address5: $("#txtAddress5").val()
+        },
+        points: $("#txtPoints").val()
     };
 
     $.ajax({
+        type: "PUT",
         url: baseUrl + "customer",
-        method: "put",
         contentType: "application/json",
-        data: JSON.stringify(customerOb),
-        success: function (res) {
-            updateAlert("Customer", res.message);
+        data: JSON.stringify(formData),
+        success: function () {
+            updateAlert("Customer updated successfully!");
             loadCustomers();
         },
         error: function (error) {
-            let message = JSON.parse(error.responseText).message;
-            unSuccessUpdateAlert("Customer", message);
+            unSuccessUpdateAlert("Customer updated unsuccessfully!");
+            console.log("Error updating customer: ", error);
         }
     });
 });
@@ -338,76 +323,3 @@ $("#btnDeleteCustomer").click(function () {
 //         $("#btnDeleteCustomer").attr('disabled', false);
 //     }
 // }
-
-// $(document).ready(function () {
-//     // Save customer
-//     $("#btnSaveCustomer").click(function () {
-//         var formData = $("#customerForm").serialize();
-//         $.ajax({
-//             type: "POST",
-//             url: "http://localhost:8080/app/api/v1/customer",
-//             data: formData,
-//             success: function () {
-//                 alert("Customer saved successfully!");
-//                 loadCustomers();
-//             },
-//             error: function (error) {
-//                 console.log("Error saving customer: ", error);
-//             }
-//         });
-//     });
-//
-//     // Update customer
-//     $("#btnUpdateCustomer").click(function () {
-//         var formData = $("#customerForm").serialize();
-//         $.ajax({
-//             type: "PUT",
-//             url: "http://localhost:8080/app/api/v1/customer",
-//             data: formData,
-//             success: function () {
-//                 alert("Customer updated successfully!");
-//                 loadCustomers();
-//             },
-//             error: function (error) {
-//                 console.log("Error updating customer: ", error);
-//             }
-//         });
-//     });
-//
-//     // Delete customer
-//     $("#btnDeleteCustomer").click(function () {
-//         var customerId = $("#txtCusId").val();
-//         $.ajax({
-//             type: "DELETE",
-//             url: "http://localhost:8080/app/api/v1/customer",
-//             data: { customerCode: customerId },
-//             success: function () {
-//                 alert("Customer deleted successfully!");
-//                 loadCustomers();
-//             },
-//             error: function (error) {
-//                 console.log("Error deleting customer: ", error);
-//             }
-//         });
-//     });
-//
-//     // Search customer
-//     $("#searchCusId").on("input", function () {
-//         var customerId = $(this).val().trim();
-//         if (customerId !== "") {
-//             $.ajax({
-//                 type: "GET",
-//                 url: "http://localhost:8080/app/api/v1/customer/searchCustomer",
-//                 data: { customerCode: customerId },
-//                 success: function (customer) {
-//                     displayCustomers([customer]);
-//                 },
-//                 error: function (error) {
-//                     console.log("Error searching customer: ", error);
-//                 }
-//             });
-//         } else {
-//             loadCustomers();
-//         }
-//     });
-// });
