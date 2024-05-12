@@ -216,63 +216,21 @@ $("#btnUpdateCustomer").click(function () {
 /**
  * Customer Delete
  * */
-
-/**
- * Delete Action
- * */
-// $("#btnDeleteCustomer").click(function () {
-//
-//     let cusCode = $("#txtCusId").val();
-//     let cusName = $("#txtCusName").val();
-//     let cusGender = $("#combGender").val();
-//     let cusContact = $("#txtContact").val();
-//     let cusEmail = $("#txtEmail").val();
-//     let cusDob = $("#txtDob").val();
-//     let cusLevel = $("#combLevel").val();
-//     let cusDate = $("#txtDate").val();
-//     let cusAddress1 = $("#txtAddress1").val();
-//     let cusAddress2 = $("#txtAddress2").val();
-//     let cusAddress3 = $("#txtAddress3").val();
-//     let cusAddress4 = $("#txtAddress4").val();
-//     let cusAddress5 = $("#txtAddress5").val();
-//     let cusPoints = $("#txtPoints").val();
-//
-//     const customerOb = {
-//         customerCode: cusCode, customerName: cusName, gender: cusGender, contact: cusContact, email: cusEmail, dob: cusDob, level: cusLevel, date: cusDate, address1: cusAddress1, address2: cusAddress2, address3: cusAddress3, address4: cusAddress4, address5: cusAddress5, points: cusPoints
-//     };
-//
-//     $.ajax({
-//         url: baseUrl + "customer?customerCode=\" + customerCode + ",
-//         method: "delete",
-//         contentType: "application/json",
-//         data: JSON.stringify(customerOb),
-//         success: function (res) {
-//             saveUpdateAlert("Customer", res.message);
-//             loadCustomers();
-//         },
-//         error: function (error) {
-//             let message = JSON.parse(error.responseText).message;
-//             unSuccessUpdateAlert("Customer", message);
-//         }
-//     });
-// });
-
-    //Delete customer
-    $("#btnDeleteCustomer").click(function () {
-        var customerId = $("#txtCusId").val();
-        $.ajax({
-            type: "DELETE",
-            url: "http://localhost:8080/app/api/v1/customer",
-            data: { customerCode: customerId },
-            success: function () {
-                alert("Customer deleted successfully!");
-                loadCustomers();
-            },
-            error: function (error) {
-                console.log("Error deleting customer: ", error);
-            }
-        });
+ //Delete customer
+$("#btnDeleteCustomer").click(function () {
+    var customerId = $("#txtCusId").val();
+    $.ajax({
+        type: "DELETE",
+        url: baseUrl + "customer?customerCode=" + customerId, // Corrected URL
+        success: function () {
+            updateAlert("Customer Delete Successfully");
+            loadCustomers();
+        },
+        error: function (error) {
+            unSuccessUpdateAlert("Customer Delete UnSuccessfully");
+        }
     });
+});
 
     // Search customer
     $("#searchCusId").on("input", function () {
@@ -280,7 +238,7 @@ $("#btnUpdateCustomer").click(function () {
         if (customerId !== "") {
             $.ajax({
                 type: "GET",
-                url: "http://localhost:8080/app/api/v1/customer/searchCustomer",
+                url: baseUrl + "customer/searchCustomer",
                 data: { customerCode: customerId },
                 success: function (customer) {
                     displayCustomers([customer]);
