@@ -1,5 +1,5 @@
 let baseUrl = "http://localhost:8080/app/api/v1/";
-loadAllCustomer();
+loadCustomers();
 /**
  * Customer Save
  * */
@@ -84,41 +84,89 @@ function setTextFieldValues(customerCode, customerName, gender, contact, email, 
 /**
  * load all customers Method
  * */
-function loadAllCustomer() {
-    $("#customerTable").empty();
+// function loadAllCustomer() {
+//     $("#customerTable").empty();
+//     $.ajax({
+//         url: baseUrl + "customer",
+//         method: "GET", success: function (res) {
+//             console.log(res);
+//
+//             for (let i of res) {
+//                 let customerCode = i.customerCode;
+//                 let customerName = i.customerName;
+//                 let gender = i.gender;
+//                 let contact = i.contact;
+//                 let email = i.email;
+//                 let dob = i.dob;
+//                 let level = i.level;
+//                 let date = i.date;
+//                 let address1 = i.address1;
+//                 let address2 = i.address2;
+//                 let address3 = i.address3;
+//                 let address4 = i.address4;
+//                 let address5 = i.address5;
+//                 let points = i.points;
+//
+//                 let row = "<tr><td>" + customerCode + "</td><td>" + customerName + "</td><td>" + gender + "</td><td>" + contact + "</td><td>" + email + "</td><td>" + dob + "</td><td>" + level + "</td><td>" + date + "</td><td>" + address1 + "</td><td>" + address2 + "</td><td>" + address3 + "</td><td>" + address4 + "</td><td>" + address5 + "</td><td>" + points + "</td></tr>";
+//                 $("#customerTable").append(row);
+//             }
+//             blindClickEvents();
+//             generateCustomerID();
+//             setTextFieldValues("", "", "", "", "", "", "", "", "","", "", "", "", "");
+//             console.log(res.message);
+//         }, error: function (error) {
+//             let message = JSON.parse(error.responseText).message;
+//             console.log(message);
+//         }
+//
+//     });
+// }
+
+function loadCustomers() {
     $.ajax({
-        url: baseUrl + "customer",
-        method: "GET", dataType: "json", success: function (res) {
-            console.log(res);
-
-            for (let i of res) {
-                let customerCode = i.customerCode;
-                let customerName = i.customerName;
-                let gender = i.gender;
-                let contact = i.contact;
-                let email = i.email;
-                let dob = i.dob;
-                let level = i.level;
-                let date = i.date;
-                let address1 = i.address1;
-                let address2 = i.address2;
-                let address3 = i.address3;
-                let address4 = i.address4;
-                let address5 = i.address5;
-                let points = i.points;
-
-                let row = "<tr><td>" + customerCode + "</td><td>" + customerName + "</td><td>" + gender + "</td><td>" + contact + "</td><td>" + email + "</td><td>" + dob + "</td><td>" + level + "</td><td>" + date + "</td><td>" + address1 + "</td><td>" + address2 + "</td><td>" + address3 + "</td><td>" + address4 + "</td><td>" + address5 + "</td><td>" + points + "</td></tr>";
-                $("#customerTable").append(row);
-            }
+        type: "GET",
+        url: "http://localhost:8080/app/api/v1/customer",
+        success: function (data) {
+            displayCustomers(data);
             blindClickEvents();
             generateCustomerID();
             setTextFieldValues("", "", "", "", "", "", "", "", "","", "", "", "", "");
-            console.log(res.message);
-        }, error: function (error) {
-            let message = JSON.parse(error.responseText).message;
-            console.log(message);
+            console.log(data.message);
+        },
+        error: function (error) {
+            console.log("Error loading customers: ", error);
         }
+    });
+}
 
+// Function to display customers in the table
+function displayCustomers(customers) {
+    $("#customerTable").empty();
+    customers.forEach(function (customer) {
+        let address1 = customer.address ? customer.address.address1 : '';
+        let address2 = customer.address ? customer.address.address2 : '';
+        let address3 = customer.address ? customer.address.address3 : '';
+        let address4 = customer.address ? customer.address.address4 : '';
+        let address5 = customer.address ? customer.address.address5 : '';
+
+        $("#customerTable").append(
+            `<tr>
+                <td>${customer.customerCode}</td>
+                <td>${customer.customerName}</td>
+                <td>${customer.gender}</td>
+                <td>${customer.contact}</td>
+                <td>${customer.email}</td>
+                <td>${new Date(customer.dob).toLocaleDateString()}</td>
+                <td>${customer.level}</td>
+                <td>${new Date(customer.date).toLocaleDateString()}</td>
+                <td>${address1}</td>
+                <td>${address2}</td>
+                <td>${address3}</td>
+                <td>${address4}</td>
+                <td>${address5}</td>
+                <td>${customer.points}</td>
+            </tr>`
+        );
     });
 }
 
@@ -355,3 +403,124 @@ $("#btnDeleteCustomer").click(function () {
 //         $("#btnDeleteCustomer").attr('disabled', false);
 //     }
 // }
+
+// $(document).ready(function () {
+//     // Function to load all customers on page load
+//     function loadCustomers() {
+//         $.ajax({
+//             type: "GET",
+//             url: "http://localhost:8080/app/api/v1/customer",
+//             success: function (data) {
+//                 displayCustomers(data);
+//             },
+//             error: function (error) {
+//                 console.log("Error loading customers: ", error);
+//             }
+//         });
+//     }
+//
+//     // Function to display customers in the table
+//     function displayCustomers(customers) {
+//         $("#customerTable").empty();
+//         customers.forEach(function (customer) {
+//             let address1 = customer.address ? customer.address.address1 : '';
+//             let address2 = customer.address ? customer.address.address2 : '';
+//             let address3 = customer.address ? customer.address.address3 : '';
+//             let address4 = customer.address ? customer.address.address4 : '';
+//             let address5 = customer.address ? customer.address.address5 : '';
+//
+//             $("#customerTable").append(
+//                 `<tr>
+//                 <td>${customer.customerCode}</td>
+//                 <td>${customer.customerName}</td>
+//                 <td>${customer.gender}</td>
+//                 <td>${customer.contact}</td>
+//                 <td>${customer.email}</td>
+//                 <td>${new Date(customer.dob).toLocaleDateString()}</td>
+//                 <td>${customer.level}</td>
+//                 <td>${new Date(customer.date).toLocaleDateString()}</td>
+//                 <td>${address1}</td>
+//                 <td>${address2}</td>
+//                 <td>${address3}</td>
+//                 <td>${address4}</td>
+//                 <td>${address5}</td>
+//                 <td>${customer.points}</td>
+//             </tr>`
+//             );
+//         });
+//     }
+//
+//     // Load customers on page load
+//     loadCustomers();
+//
+//     // Save customer
+//     $("#btnSaveCustomer").click(function () {
+//         var formData = $("#customerForm").serialize();
+//         $.ajax({
+//             type: "POST",
+//             url: "http://localhost:8080/app/api/v1/customer",
+//             data: formData,
+//             success: function () {
+//                 alert("Customer saved successfully!");
+//                 loadCustomers();
+//             },
+//             error: function (error) {
+//                 console.log("Error saving customer: ", error);
+//             }
+//         });
+//     });
+//
+//     // Update customer
+//     $("#btnUpdateCustomer").click(function () {
+//         var formData = $("#customerForm").serialize();
+//         $.ajax({
+//             type: "PUT",
+//             url: "http://localhost:8080/app/api/v1/customer",
+//             data: formData,
+//             success: function () {
+//                 alert("Customer updated successfully!");
+//                 loadCustomers();
+//             },
+//             error: function (error) {
+//                 console.log("Error updating customer: ", error);
+//             }
+//         });
+//     });
+//
+//     // Delete customer
+//     $("#btnDeleteCustomer").click(function () {
+//         var customerId = $("#txtCusId").val();
+//         $.ajax({
+//             type: "DELETE",
+//             url: "http://localhost:8080/app/api/v1/customer",
+//             data: { customerCode: customerId },
+//             success: function () {
+//                 alert("Customer deleted successfully!");
+//                 loadCustomers();
+//             },
+//             error: function (error) {
+//                 console.log("Error deleting customer: ", error);
+//             }
+//         });
+//     });
+//
+//     // Search customer
+//     $("#searchCusId").on("input", function () {
+//         var customerId = $(this).val().trim();
+//         if (customerId !== "") {
+//             $.ajax({
+//                 type: "GET",
+//                 url: "http://localhost:8080/app/api/v1/customer/searchCustomer",
+//                 data: { customerCode: customerId },
+//                 success: function (customer) {
+//                     displayCustomers([customer]);
+//                 },
+//                 error: function (error) {
+//                     console.log("Error searching customer: ", error);
+//                 }
+//             });
+//         } else {
+//             loadCustomers();
+//         }
+//     });
+// });
