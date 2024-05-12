@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Address1 {
-    String Address1;
-    String Address2;
-    String Address3;
-    String Address4;
-    String Address5;
+    String address1;
+    String address2;
+    String address3;
+    String address4;
+    String address5;
 }
