@@ -46,8 +46,7 @@ public class CustomerController {
         customerService.deleteCustomer(customerCode);
     }
 
-    @PutMapping
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateCustomer(@RequestBody CustomerDTO dto) {
         customerService.updateCustomer(dto);
     }
