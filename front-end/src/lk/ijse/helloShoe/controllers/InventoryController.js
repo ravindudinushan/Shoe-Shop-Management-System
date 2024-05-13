@@ -46,27 +46,31 @@ getAllInventory();
         });
     }
 
-    // Function to save inventory item
-    $("#btnSaveItem").click(function () {
-        var formData = new FormData($("#itemForm")[0]);
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/app/api/v1/inventory",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function () {
-                updateAlert("Item Saved Successfully");
-                getAllInventory();
-            },
-            error: function (error) {
-                unSuccessUpdateAlert("Item Saved UnSuccessfully");
-                console.log("Error:", error);
-            }
-        });
+$("#btnSaveItem").click(function () {
+    var formData = $("#itemForm").serializeArray(); // Serialize the form data as an array
+    var jsonData = {};
+    $(formData).each(function (index, obj) {
+        jsonData[obj.name] = obj.value; // Convert the serialized array to JSON object
     });
 
-    // Function to update inventory item
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/app/api/v1/inventory",
+        data: JSON.stringify(jsonData), // Convert JSON object to string
+        contentType: "application/json", // Set content type to JSON
+        success: function () {
+            updateAlert("Item Saved Successfully");
+            getAllInventory();
+        },
+        error: function (error) {
+            unSuccessUpdateAlert("Item Saved Unsuccessfully");
+            console.log("Error:", error);
+        }
+    });
+});
+
+
+// Function to update inventory item
     $("#btnUpdateItem").click(function () {
         var formData = new FormData($("#itemForm")[0]);
         $.ajax({
@@ -87,7 +91,8 @@ getAllInventory();
     });
 
     // Function to delete inventory item
-    function deleteInventory(itemCode) {
+$("#btnDeleteItem").click(function () {
+    var itemCode = $("#txtItemCode").val();
         $.ajax({
             type: "DELETE",
             url: `http://localhost:8080/app/api/v1/inventory?itemCode=${itemCode}`,
@@ -101,8 +106,7 @@ getAllInventory();
                 console.log("Error:", error);
             }
         });
-    }
-
+});
     // Function to search inventory item by item code
     $("#btnSearchItem").click(function () {
         var itemCode = $("#searchItemId").val();
