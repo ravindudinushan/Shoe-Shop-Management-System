@@ -338,110 +338,95 @@
                 <div class="card info-card">
                     <div class="search-bar mt-4">
                         <div class="search-form d-flex align-items-center">
-                            <input type="search" name="user_Id" id="search_Id" placeholder="Search" title="Enter search keyword">
+                            <input type="search" name="user_Id" id="searchItemId" placeholder="Search" title="Enter search keyword">
                             <button type="button" title="Search"><i class="bi bi-search"></i></button>
                         </div>
                     </div>
 
                     <div class="col-12 m-3 p-1">
-                        <form class="row" id="customerForm">
+                        <form class="row" id="itemForm">
                             <section id="sec1Customer" class="col-md-4 mt-3">
                                 <div class="mb-sm-0">
-                                    <label class="form-label" for="item Code">Item Code</label>
-                                    <input type="text" name="item Code" class="form-control" readonly id="item Code"
+                                    <label class="form-label" for="txtItemCode">Item Code</label>
+                                    <input type="text" name="itemCode" class="form-control" readonly id="txtItemCode"
                                            placeholder="I00-001">
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="item Name"> Item Name</label>
-                                    <input type="text" name="Item Name" class="form-control" id="item Name"
-                                           placeholder="Item Name">
+                                    <label class="form-label" for="txtItemName"> Item Description</label>
+                                    <input type="text" name="itemDesc" class="form-control" id="txtItemName"
+                                           placeholder="Item Description">
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="supplier Code">Supplier Code</label>
-                                    <input type="text" name="supplier Code" class="form-control" id="supplier Code"
-                                           placeholder="Supplier Code">
-                                    <span class="control-error"></span>
-                                </div>
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="supplier Name">Supplier Name</label>
-                                    <input type="text" name="supplier Name" class="form-control" id="supplier Name"
-                                           placeholder="Supplier Name">
+                                    <label for="txtCategory" class="form-label">Shoe Category</label>
+                                    <input type="text" name="category" class="form-control" id="txtCategory"
+                                           placeholder="Shoe Category">
                                     <span class="control-error"></span>
                                 </div>
 
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="txtPic">Item Pictures</label>
+                                    <input class="form-control" id="txtPic" type="file" name="itemPic">
+                                    <span class="control-error"></span>
+                                </div>
                             </section>
 
                             <section id="sec2Customer" class="col-md-4 mt-3">
-
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="Unit Price">Unit Price</label>
-                                    <input type="password" name="Unit Price" class="form-control" id="Unit Price"
-                                           placeholder="Unit Price">
+                                    <label class="form-label" for="txtSize">Shoe Size</label>
+                                    <input type="text" name="size" class="form-control" id="txtSize"
+                                           placeholder="Shoe Size">
+                                    <span class="control-error"></span>
+                                </div>
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="txtPriceBuy">Unit Price-Buy</label>
+                                    <input type="text" name="unitPriceBuy" class="form-control" id="txtPriceBuy"
+                                           placeholder="Unit Price-Buy">
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="expected Profit">Expected Profit</label>
-                                    <input type="password" name="expected Profit" class="form-control" id="expected Profit"
-                                           placeholder="Expected Profit">
+                                    <label class="form-label" for="txtPriceSale">Unit Price-Sale</label>
+                                    <input type="text" name="unitPriceSale" class="form-control" id="txtPriceSale"
+                                           placeholder="Unit Price-Sale">
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="profit Margin">Profit Margin</label>
-                                    <input type="password" name="profit Margin" class="form-control" id="profit Margin"
-                                           placeholder="Profit Margin">
-                                    <span class="control-error"></span>
-                                </div>
-
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="status">Status</label>
-                                    <input type="password" name="status" class="form-control" id="status"
-                                           placeholder="Status">
+                                    <label class="form-label" for="txtQty">Item Quantity</label>
+                                    <input type="text" name="quantity" class="form-control" id="txtQty"
+                                           placeholder="Item Quantity">
                                     <span class="control-error"></span>
                                 </div>
 
                             </section>
 
+                            <section id="sec3Customer" class="col-md-4 mt-3">
+                            <div class="mb-sm-0 mt-3">
+                                <label for="txtStatus" class="form-label">Status</label>
+                                <select class="form-control" id="txtStatus" name="status">
+                                    <option value=""></option>
+                                    <option value="LOW">LOW</option>
+                                    <option value="AVAILABLE">AVAILABLE</option>
+                                    <option value="NOT_AVAILABLE">NOT_AVAILABLE</option>
+                                </select>
+                                <span class="control-error"></span>
+                            </div>
+                            </section>
                             <section id="sec3" class="col-md-4 mt-3">
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="shoe Size">Shoe Size</label>
-                                    <input type="password" name="shoe Size" class="form-control" id="shoe Size"
-                                           placeholder="Shoe Size">
-                                    <span class="control-error"></span>
-                                </div>
-
-                                <div class="mb-sm-0 mt-3">
-                                    <label for="shoe Category" class="form-label">Shoe Category</label>
-                                    <select class="form-control" id="shoe Category" name="shoe Category">
-                                        <option value="Men">Men</option>
-                                        <option value="Women">Women</option>
-                                        <option value="Kids">Kids</option>
-                                    </select>
-                                    <span class="control-error"></span>
-                                </div>
-
-
-                                <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="item_pic">Item Pictures</label>
-                                    <input class="form-control" id="item_pic" type="file" name="item_pic">
-                                    <span class="control-error"></span>
-                                </div>
-
 
                                 <div class="mt-4 mb-3 d-grid gap-2 d-sm-flex justify-content-md-center">
-                                    <button class="btn btn-success me-md-1" id="btnSaveCar" type="button"
+                                    <button class="btn btn-success me-md-1" id="btnSaveItem" type="button"
                                             formaction="driverForm">Save
                                     </button>
 
-                                    <button class="btn btn-warning me-md-1" id="btnUpdateCustomer" type="button">
+                                    <button class="btn btn-warning me-md-1" id="btnUpdateItem" type="button">
                                         Update
                                     </button>
-                                    <button type="button" class="btn btn-danger me-md-1" id="btnDeleteCustomer">Delete
+                                    <button type="button" class="btn btn-danger me-md-1" id="btnDeleteItem">Delete
                                     </button>
                                 </div>
                             </section>
@@ -463,10 +448,9 @@
                                         <th scope="col">Item Picture</th>
                                         <th scope="col">Shoe Category</th>
                                         <th scope="col">Shoe Size</th>
-                                        <th scope="col">Supplier Code</th>
-                                        <th scope="col">Supplier Name</th>
-                                        <th scope="col">Unit Price</th>
-                                        <th scope="col">Expected Profit</th>
+                                        <th scope="col">Unit Price-Buy</th>
+                                        <th scope="col">Unit Price-Sale</th>
+                                        <th scope="col">Quantity</th>
                                         <th scope="col">Profit Profit</th>
                                         <th scope="col">Status</th>
 
