@@ -62,12 +62,6 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public InventoryDTO inventoryIdGenerate() {
-        return null;
-    }
-
-
-    @Override
     public Inventory searchInventoryCode(String itemCode) {
         if (!repo.existsById(itemCode)) {
             throw new RuntimeException("Wrong ID. Please enter Valid id..!");
