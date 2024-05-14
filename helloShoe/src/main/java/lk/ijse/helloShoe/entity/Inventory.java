@@ -18,9 +18,13 @@ public class Inventory {
     private String  itemPic;
     private String category;
     private int size;
+    private String supplierCode;
+    private String supplierName;
     private double unitPriceBuy;
     private double unitPriceSale;
     private int quantity;
+    private double profit;
+    private double profitMargin;
     @Enumerated(EnumType.STRING)
     private Status status;
 }

@@ -22,6 +22,10 @@ public class InventoryDTO {
     @NotBlank(message = "Category can not be null")
     @Positive(message = "Size must be a positive integer value")
     private int size;
+    @NotBlank(message = "Supplier Code can not be null")
+    private String supplierCode;
+    @NotBlank(message = "Supplier Name can not be null")
+    private String supplierName;
     @NotBlank(message = "Unit price can not be null")
     @Positive(message = "Unit price must be a positive value")
     private double unitPriceBuy;
@@ -31,6 +35,11 @@ public class InventoryDTO {
     @NotBlank(message = "Quantity can not be null")
     @Positive(message = "Quantity must be a positive integer value")
     private int quantity;
+    @NotBlank(message = "Profit can not be null")
+    @Positive(message = "Profit must be a positive value")
+    private double profit;
+    @NotBlank(message = "Profit can not be null")
+    private double profitMargin;
     @NotBlank(message = "Status can not be null")
     private Status status;
 }
