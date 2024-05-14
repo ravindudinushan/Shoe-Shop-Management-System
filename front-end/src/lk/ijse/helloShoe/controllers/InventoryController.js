@@ -40,17 +40,16 @@ getAllInventory();
             `);
         });
         // Bind delete event to newly added delete buttons
-        $(".btnDelete").click(function () {
-            var itemCode = $(this).data("item-code");
-            deleteInventory(itemCode);
-        });
     }
 
 $("#btnSaveItem").click(function () {
-    var formData = $("#itemForm").serializeArray(); // Serialize the form data as an array
+    // Serialize the entire form data
+    var formData = $("#itemForm").serializeArray();
+
+    // Convert the serialized form data to a JSON object
     var jsonData = {};
     $(formData).each(function (index, obj) {
-        jsonData[obj.name] = obj.value; // Convert the serialized array to JSON object
+        jsonData[obj.name] = obj.value;
     });
 
     $.ajax({
@@ -68,7 +67,6 @@ $("#btnSaveItem").click(function () {
         }
     });
 });
-
 
 // Function to update inventory item
     $("#btnUpdateItem").click(function () {
@@ -171,5 +169,5 @@ function blindClickEvents() {
         $("#txtQty").val(quantity);
         $("#txtStatus").val(status);
     });
-    // $("#btnSaveCustomer").attr('disabled', true);
+    // $("#btnSaveItem").attr('disabled', true);
 }
