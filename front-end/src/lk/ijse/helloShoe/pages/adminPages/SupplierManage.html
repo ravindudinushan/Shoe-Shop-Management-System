@@ -351,7 +351,7 @@
                 <div class="card info-card">
                     <div class="search-bar mt-4">
                         <div class="search-form d-flex align-items-center">
-                            <input type="search" name="car_Id" id="search_Id" placeholder="Search" title="Enter search keyword">
+                            <input type="search" name="searchSupCode" id="searchSupCode" placeholder="Search" title="Enter search keyword">
                             <button type="button" title="Search"><i class="bi bi-search"></i></button>
                         </div>
                     </div>
@@ -360,64 +360,63 @@
                         <form class="row" action="car" id="carForm" method="post">
                             <section id="sec1Car" class="col-md-4 mt-3">
                                 <div class="mb-sm-0">
-                                    <label class="form-label" for="supplier Code">Supplier Code</label>
-                                    <input class="form-control" id="supplier Code" type="text" readonly name="supplier Code" placeholder="S00-001">
+                                    <label class="form-label" for="txtSupplierCode">Supplier Code</label>
+                                    <input class="form-control" id="txtSupplierCode" type="text" readonly name="supplierCode" placeholder="S00-001">
                                 </div>
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="supplier Name">Supplier Name</label>
-                                    <input class="form-control" id="supplier Name" type="text" name="supplier Name" placeholder="Supplier Name">
+                                    <label class="form-label" for="txtSupplierName">Supplier Name</label>
+                                    <input class="form-control" id="txtSupplierName" type="text" name="supplierName" placeholder="Supplier Name">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="email">Email</label>
-                                    <input class="form-control" id="email" type="text" name="email" placeholder="Email Address">
+                                    <label class="form-label" for="txtCategory">Category</label>
+                                    <select class="form-control" id="txtCategory" name="category">
+                                        <option value="INTERNATIONAL">INTERNATIONAL</option>
+                                        <option value="LOCAL">LOCAL</option>
+                                    </select>
                                     <span class="control-error"></span>
                                 </div>
                             </section>
 
                             <section id="sec2Car" class="col-md-4 mt-3">
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="category">Category</label>
-                                    <select class="form-control" id="category" name="category">
-                                        <option value="International">International</option>
-                                        <option value="Local">Local</option>
-                                    </select>
+                                    <label class="form-label" for="txtContact1">Contact Number - Mobile </label>
+                                    <input class="form-control" id="txtContact1" type="text"
+                                           name="contact1" placeholder="Contact Number">
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="contact Number">Contact Number - Mobile </label>
-                                    <input class="form-control" id="contact Number" type="text"
-                                           name="contact Number" placeholder="Contact Number">
+                                    <label class="form-label" for="txtContact2">Contact Number - Landline </label>
+                                    <input class="form-control" id="txtContact2" type="text"
+                                           name="contact2" placeholder="Contact Number ">
                                     <span class="control-error"></span>
                                 </div>
-
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="Landline">Contact Number - Landline </label>
-                                    <input class="form-control" id="Landline" type="text"
-                                           name="Landline" placeholder="Contact Number ">
+                                    <label class="form-label" for="txtEmail">Email</label>
+                                    <input class="form-control" id="txtEmail" type="text" name="email" placeholder="Email Address">
                                     <span class="control-error"></span>
                                 </div>
-
                             </section>
 
                             <section id="sec3Car" class="col-md-4 mt-3">
                                 <div class="mb-sm-0">
-                                    <label class="form-label" for="Address-name">Address</label>
-                                    <input class="form-control" id="Address-name" type="text" name="Address-name" placeholder="Name">
-                                    <input class="form-control" id="Address-lane" type="text" name="Address-lane" placeholder="Lane">
-                                    <input class="form-control" id="Address-city" type="text" name="Address-city" placeholder="City">
-                                    <input class="form-control" id="Address-state" type="text" name="Address-state" placeholder="State">
-                                    <input class="form-control" id="Address-code" type="text" name="Address-code" placeholder="Code">
+                                    <label class="form-label" for="txtAddress1">Address</label>
+                                    <input class="form-control" id="txtAddress1" type="text" name="address1" placeholder="Name">
+                                    <input class="form-control" id="txtAddress2" type="text" name="address2" placeholder="Lane">
+                                    <input class="form-control" id="txtAddress3" type="text" name="address3" placeholder="City">
+                                    <input class="form-control" id="txtAddress4" type="text" name="address4" placeholder="State">
+                                    <input class="form-control" id="txtAddress5" type="text" name="address5" placeholder="Country">
+                                    <input class="form-control" id="txtAddress6" type="text" name="address6" placeholder="Code">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mt-4 mb-3 d-grid gap-2 d-sm-flex justify-content-md-center">
-                                    <button class="btn btn-success me-md-1" id="btnSaveCar" type="button"
+                                    <button class="btn btn-success me-md-1" id="btnSaveSupplier" type="button"
                                             formaction="driverForm">Save
                                     </button>
-                                    <button type="button" class="btn btn-warning me-md-1" id="btnUpdateCar">Update
+                                    <button type="button" class="btn btn-warning me-md-1" id="btnUpdateSupplier">Update
                                     </button>
-                                    <button type="button" class="btn btn-danger" id="btnDeleteCar">Delete</button>
+                                    <button type="button" class="btn btn-danger" id="btnDeleteSupplier">Delete</button>
                                 </div>
                             </section>
                         </form>
@@ -434,32 +433,27 @@
                                     <tr>
                                         <th scope="col">Code</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
                                         <th scope="col">Category</th>
-                                        <th scope="col">Contact Number</th>
-                                        <th scope="col">Contact Number</th>
-                                        <th scope="col">Address</th>
-<!--                                        <th scope="col">Daily Rent</th>-->
-<!--                                        <th scope="col">Monthly Rent</th>-->
-<!--                                        <th scope="col">Price KM</th>-->
-<!--                                        <th scope="col">Reg Number</th>-->
-<!--                                        <th scope="col">Free Mileage</th>-->
-<!--                                        <th scope="col">Color</th>-->
-<!--                                        <th scope="col">Availability</th>-->
+                                        <th scope="col">Contact Number1</th>
+                                        <th scope="col">Contact Number2</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Address1</th>
+                                        <th scope="col">Address2</th>
+                                        <th scope="col">Address3</th>
+                                        <th scope="col">Address4</th>
+                                        <th scope="col">Address5</th>
+                                        <th scope="col">Address6</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="carTable"></tbody>
+                                    <tbody id="supplierTable"></tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <!-- View Car Details Table End -->
                 </div>
             </div>
         </section>
     </div>
-    <!-- End Car Manage -->
-
 </main>
 <!-- End #main -->
 
@@ -486,8 +480,8 @@
 <script src="../../assets/js/dashboardMain.js"></script>
 
 <!-- Controller JS File -->
-<script src="../../controller/CarController.js"></script>
-<script src="../../controller/DashBoardController.js"></script>
+<script src="../../controllers/SupplierController.js"></script>
+<script src="../../controllers/DashBoardController.js"></script>
 
 <!-- Util JS File -->
 <script src="../../util/alert.js" rel="script"></script>
