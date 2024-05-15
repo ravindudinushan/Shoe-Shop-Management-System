@@ -382,11 +382,24 @@
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
+                                    <label class="fw-bold" for="cmbSupplierCode">Supplier Code</label>
+                                    <select aria-label="Default select example" class="form-select border-dark" id="cmbSupplierCode" name="supplierCode"
+                                            value="Supplier Code">
+                                    </select>
+                                </div>
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="fw-bold" for="txtSupplierName">Supplier Name</label>
+                                    <input class="form-control border-dark" disabled id="txtSupplierName" name="supplierName" type="text">
+                                </div>
+                                <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="txtPriceBuy">Unit Price-Buy</label>
                                     <input type="text" name="unitPriceBuy" class="form-control" id="txtPriceBuy"
                                            placeholder="Unit Price-Buy">
                                     <span class="control-error"></span>
                                 </div>
+                            </section>
+
+                            <section id="sec3Customer" class="col-md-4 mt-3">
 
                                 <div class="mb-sm-0 mt-3">
                                     <label class="form-label" for="txtPriceSale">Unit Price-Sale</label>
@@ -402,9 +415,18 @@
                                     <span class="control-error"></span>
                                 </div>
 
-                            </section>
-
-                            <section id="sec3Customer" class="col-md-4 mt-3">
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="txtProfit">Profit</label>
+                                    <input type="text" name="profit" class="form-control" id="txtProfit"
+                                           placeholder="Profit">
+                                    <span class="control-error"></span>
+                                </div>
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="txtProfitMargin">Profit Margin</label>
+                                    <input type="text" name="profitMargin" class="form-control" id="txtProfitMargin"
+                                           placeholder="Profit Margin">
+                                    <span class="control-error"></span>
+                                </div>
                             <div class="mb-sm-0 mt-3">
                                 <label for="txtStatus" class="form-label">Status</label>
                                 <select class="form-control" id="txtStatus" name="status">
@@ -416,8 +438,8 @@
                                 <span class="control-error"></span>
                             </div>
                             </section>
-                            <section id="sec3" class="col-md-4 mt-3">
 
+                            <section id="sec3" class="col-md-4 mt-3">
                                 <div class="mt-4 mb-3 d-grid gap-2 d-sm-flex justify-content-md-center">
                                     <button class="btn btn-success me-md-1" id="btnSaveItem" type="button"
                                             formaction="driverForm">Save
@@ -448,9 +470,13 @@
                                         <th scope="col">Item Picture</th>
                                         <th scope="col">Shoe Category</th>
                                         <th scope="col">Shoe Size</th>
+                                        <th scope="col">Supplier Code</th>
+                                        <th scope="col">Supplier Name</th>
                                         <th scope="col">Unit Price-Buy</th>
                                         <th scope="col">Unit Price-Sale</th>
                                         <th scope="col">Quantity</th>
+                                        <th scope="col">Profit</th>
+                                        <th scope="col">Profit Margin</th>
                                         <th scope="col">Status</th>
 
                                     </tr>
