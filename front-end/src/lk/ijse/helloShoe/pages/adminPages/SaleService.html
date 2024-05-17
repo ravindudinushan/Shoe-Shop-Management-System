@@ -363,31 +363,29 @@
 <!--                    </div>-->
                     <div class="row mt-1">
                         <div class="col-12 col-md-6 col-lg-6">
-                            <label class="fw-bold" for="orderId">Order No :</label>
-                            <select aria-label="Default select example" class="form-select border-dark" id="orderId"
-                                    value="Order ID">
-                            </select>
+                            <label class="fw-bold" for="orderId">Order No</label>
+                            <input class="form-control border-dark"  disabled id="orderId" type="text" value="ODI-001" placeholder="ODI-001">
                         </div>
 
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="orderDate">Order Date :</label>
+                        <label class="fw-bold" for="orderDate">Order Date</label>
                         <input class="form-control border-dark" id="orderDate" type="date">
                     </div>
                 </div>
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="cmbCustomerId">Customer ID :</label>
+                        <label class="fw-bold" for="cmbCustomerId">Customer ID</label>
                         <select aria-label="Default select example" class="form-select border-dark" id="cmbCustomerId"
                                 value="Customer ID">
                         </select>
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="customerName">Customer <br>Name : </label>
-                        <input class="form-control border-dark"  disabled id="customerName" type="text">
+                        <label class="fw-bold" for="txtCustomerName">CustomerName</label>
+                        <input class="form-control border-dark" disabled id="txtCustomerName" type="text">
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="cashierName">Cashier Name :</label>
+                        <label class="fw-bold" for="cashierName">Cashier Name</label>
                         <input class="form-control border-dark"  id="cashierName" type="text">
 
                     </div>
@@ -400,31 +398,36 @@
                 <h5 class="text-center p-2 text-light rounded-3" style="background: #a1a1a1">Item Details</h5>
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="cmbItemCode">Item Code :</label>
+                        <label class="fw-bold" for="cmbItemCode">Item Code</label>
                         <select aria-label="Default select example" class="form-select border-dark" id="cmbItemCode"
                                 value="Item Code">
                         </select>
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="itemDesc">Item desc :</label>
-                        <input class="form-control border-dark" disabled id="itemDesc" type="text">
+                        <label class="fw-bold" for="txtItemDesc">Item Desc</label>
+                        <input class="form-control border-dark" disabled id="txtItemDesc" type="text">
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="itemSize">Shoe  Size :</label>
+                        <label class="fw-bold" for="itemSize">Shoe  Size</label>
                         <input class="form-control border-dark" disabled id="itemSize" type="text">
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="qtyOnHand">Qty On Hand :</label>
+                        <label class="fw-bold" for="qtyOnHand">Qty On Hand</label>
                         <input class="form-control border-dark" disabled id="qtyOnHand" type="text">
                     </div>
                 </div>
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="buyPrice">Unit Price :</label>
-                        <input class="form-control border-dark" id="buyPrice" type="text">
+                        <label class="fw-bold" for="buyPrice">Unit Price</label>
+                        <input class="form-control border-dark" disabled id="buyPrice" type="text">
                         <strong class="control-error" id="lblCheckPrice"></strong>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <label class="fw-bold" for="buyQty">Buy Qty</label>
+                        <input class="form-control border-dark" id="buyQty" type="text">
+                        <strong class="control-error" id="lblCheckQty"></strong>
                     </div>
                     <div class="col-12 col-md-6 col-lg-6 mt-4 ">
                         <button class="btn btn-primary rounded-2" id="btnAddToCart" type="button">Add To Cart</button>
@@ -438,35 +441,25 @@
                 <h5 class="text-center bg-danger p-2 text-light rounded-3">Payment Details</h5>
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="txtPoint">Add <br>Point :</label>
+                        <label class="fw-bold" for="txtPoint">Add Point</label>
                         <input class="form-control border-dark"  id="txtPoint" type="text">
                     </div>
 
-
-
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="txtDiscount">Discount :</label>
-                        <input class="form-control border-dark" disabled id="txtDiscount" role="spinbutton" type="number">
+                        <label class="fw-bold" for="txtTotal">Total</label>
+                        <input class="form-control border-dark" disabled id="txtTotal" type="number">
                     </div>
+                </div>
+                <div class="mb-sm-0">
+                    <label for="cmbMethod" class="fw-bold">Pay Methods</label>
+                    <select class="form-control" id="cmbMethod" name="paymentMethod">
+                        <option value="CARD">CARD</option>
+                        <option value="CASH">CASH</option>
+                    </select>
+                    <span class="control-error"></span>
                 </div>
 
                 <div class="row mt-1">
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="txtMethod">Pay <br> Methods :</label>
-                        <input class="form-control border-dark" id="txtMethod" type="text">
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="txtCash">Cash :</label>
-                        <input class="form-control border-dark" disabled id="txtCash" type="text">
-                        <strong class="control-error" id="lblCheckSubtotal"></strong>
-                    </div>
-                </div>
-
-                <div class="row mt-1">
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="txtBalance">Balance :</label>
-                        <input class="form-control border-dark" disabled id="txtBalance" type="number">
-                    </div>
                     <div class="col-12 col-md-6 col-lg-6 mt-4">
                         <button class="btn btn-success rounded-2" id="btnPurchase" type="submit">Purchase</button>
                     </div>
@@ -534,12 +527,8 @@
                 </div>
             </section>
         </div>
-
     </section>
-
-
 </div>
-
             </div>
         </section>
     </div>

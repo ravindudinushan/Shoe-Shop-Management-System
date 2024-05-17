@@ -8,7 +8,7 @@ $("#btnAddToCart").attr('disabled', true);
 function generateOrderID() {
     $("#orderId").val("ODI-001");
     $.ajax({
-        url: baseUrl + "orders/OrderIdGenerate",
+        url: "http://localhost:8080/app/api/v1/sale/OrderIdGenerate",
         method: "GET",
         contentType: "application/json",
         dataType: "json",
@@ -34,95 +34,113 @@ function generateOrderID() {
  * Invoice Details
  * Customer Select Combo
  * */
-$("#cmbCustomerId").empty();
-$.ajax({
-    url: baseUrl + "customer/loadAllCustomer",
-    method: "GET",
-    dataType: "json",
-    success: function (res) {
-        console.log(res);
-        setDates();
+// Function to load customers into the combo box
+function loadCustomersIntoComboBox(customers) {
+    var comboBox = $('#cmbCustomerId');
+    comboBox.empty(); // Clear existing options
+    $.each(customers, function(index, customer) {
+        comboBox.append($('<option>', {
+            value: customer.customerCode,
+            text: customer.customerCode
+        }));
+    });
+}
 
-        for (let i of res.data) {
-            let id = i.id;
-
-            $("#cmbCustomerId").append(`<option>${id}</option>`);
-        }
-        generateOrderID();
-        console.log(res.message);
-    },
-    error: function (error) {
-        let message = JSON.parse(error.responseText).message;
-        console.log(message);
+// Function to update customer name based on selected customer ID
+function updateCustomerName() {
+    var selectedCustomerCode = $('#cmbCustomerId').val();
+    var selectedCustomer = customers.find(customer => customer.customerCode === selectedCustomerCode);
+    if (selectedCustomer) {
+        $('#txtCustomerName').val(selectedCustomer.customerName);
+    } else {
+        $('#txtCustomerName').val('');
     }
+}
 
-});
+// Declare the customers variable globally
+var customers = [];
 
-/** Customer cmb Search */
-$("#cmbCustomerId").click(function () {
-    var search = $("#cmbCustomerId").val();
+// Load customers data and populate the combo box
+function loadCustomers() {
     $.ajax({
-        url: baseUrl + "customer/searchCusId/?id="+ search,
-        method: "GET",
-        contentType: "application/json",
-        dataType: "json",
-        success: function (res) {
-            console.log(res);
-            $("#customerName").val(res.name);
-            $("#customerAddress").val(res.address);
-            $("#customerSalary").val(res.salary);
+        type: "GET",
+        url: "http://localhost:8080/app/api/v1/customer",
+        success: function (data) {
+            setDates()
+            customers = data; // Store customers data in the global variable
+            loadCustomersIntoComboBox(customers);
+            console.log("Customers loaded successfully:", data);
         },
         error: function (error) {
             let message = JSON.parse(error.responseText).message;
-            console.log(message);
+            console.log("Error loading customers:", message);
         }
-    })
+    });
+}
 
+// Event listener for combo box change event
+$('#cmbCustomerId').on('change', function() {
+    updateCustomerName();
 });
+
+// Initialize by loading customers
+loadCustomers();
 
 /**
  * Items Details
  * Item Select Combo
  * */
-$("#cmbItemCode").empty();
-$.ajax({
-    url: baseUrl + "item/loadAllItem",
-    method: "GET",
-    dataType: "json",
-    success: function (res) {
-        console.log(res);
-        for (let i of res.data) {
-            let code = i.code;
+function loadItemIntoComboBox(item) {
+    var comboBox = $('#cmbItemCode');
+    comboBox.empty(); // Clear existing options
+    $.each(items, function(index, item) {
+        comboBox.append($('<option>', {
+            value: item.itemCode,
+            text: item.itemCode
+        }));
+    });
+}
 
-            $("#cmbItemCode").append(`<option>${code}</option>`);
-        }
-        console.log(res.message);
-    },
-    error: function (error) {
-        let message = JSON.parse(error.responseText).message;
-        console.log(message);
+function updateItemName() {
+    var selectedItemCode = $('#cmbItemCode').val();
+    var selectedItem = items.find(item => item.itemCode === selectedItemCode);
+    if (selectedItem) {
+        $('#txtItemDesc').val(selectedItem.itemDesc);
+        $('#itemSize').val(selectedItem.size);
+        $('#qtyOnHand').val(selectedItem.quantity);
+        $('#buyPrice').val(selectedItem.unitPriceSale);
+    } else {
+        $('#txtItemDesc').val('');
+        $('#itemSize').val('');
+        $('#qtyOnHand').val('');
+        $('#buyPrice').val('');
     }
-});
+}
 
-$("#cmbItemCode").click(function () {
-    var search = $("#cmbItemCode").val();
+var items = [];
+
+function loadItem() {
     $.ajax({
-        url: baseUrl + "item/searchItemCode/?code="+ search,
-        method: "GET",
-        contentType: "application/json",
-        dataType: "json",
-        success: function (res) {
-            console.log(res);
-            $("#itemName").val(res.description);
-            $("#itemPrice").val(res.unitPrice);
-            $("#qtyOnHand").val(res.qty);
+        type: "GET",
+        url: "http://localhost:8080/app/api/v1/inventory",
+        success: function (data) {
+            items = data; // Store customers data in the global variable
+            loadItemIntoComboBox(items);
+            console.log("Customers loaded successfully:", data);
         },
         error: function (error) {
             let message = JSON.parse(error.responseText).message;
-            console.log(message);
+            console.log("Error loading customers:", message);
         }
-    })
+    });
+}
+
+$('#cmbItemCode').on('change', function() {
+    updateItemName();
 });
+
+loadItem();
+
 
 /**
  * Items Details
@@ -255,13 +273,14 @@ function manageTotal(preTotal, nowTotal) {
 $("#tblAddToCart").empty();
 function loadCartTableDetail() {
     itemCode = $("#cmbItemCode").val();
-    itemName = $("#itemName").val();
-    itemPrice = $("#itemPrice").val();
+    itemName = $("#txtItemDesc").val();
+    itemSize = $("#itemSize").val();
+    itemPrice = $("#buyPrice").val();
     itemQty = $("#qtyOnHand").val();
     itemOrderQty = $("#buyQty").val();
 
     let total = itemPrice * itemOrderQty;
-    let row = `<tr><td>${itemCode}</td><td>${itemName}</td><td>${itemPrice}</td><td>${itemOrderQty}</td><td>${total}</td></tr>`;
+    let row = `<tr><td>${itemCode}</td><td>${itemName}</td><td>${itemSize}</td><td>${itemPrice}</td><td>${itemOrderQty}</td><td>${total}</td></tr>`;
 
     $("#tblAddToCart").append(row);
 }
@@ -285,38 +304,38 @@ $(document).on("change keyup blur", "#buyQty", function () {
     }
 });
 
-/**
- * Logics
- * Place order
- * Enter Discount and sub Total display
- * */
+// /**
+//  * Logics
+//  * Place order
+//  * Enter Discount and sub Total display
+//  * */
+//
+// $(document).on("change keyup blur", "#txtDiscount", function () {
+//     discount = $("#txtDiscount").val();
+//     discount = (total / 100) * discount;
+//     subTotal = total - discount;
+//
+//     $("#txtSubTotal").val(subTotal);
+// });
+//
+// /**
+//  * Logics
+//  * Place order
+//  * Enter Cash and Balance display
+//  * */
 
-$(document).on("change keyup blur", "#txtDiscount", function () {
-    discount = $("#txtDiscount").val();
-    discount = (total / 100) * discount;
-    subTotal = total - discount;
-
-    $("#txtSubTotal").val(subTotal);
-});
-
-/**
- * Logics
- * Place order
- * Enter Cash and Balance display
- * */
-
-$(document).on("change keyup blur", "#txtCash", function () {
-    let cash = $("#txtCash").val();
-    let balance = cash - subTotal;
-    $("#txtBalance").val(balance);
-    if (balance < 0) {
-        $("#lblCheckSubtotal").parent().children('strong').text(balance + " : plz enter valid Balance");
-        $("#btnPurchase").attr('disabled', true);
-    } else {
-        $("#lblCheckSubtotal").parent().children('strong').text("");
-        $("#btnPurchase").attr('disabled', false);
-    }
-});
+// $(document).on("change keyup blur", "#txtCash", function () {
+//     let cash = $("#txtCash").val();
+//     let balance = cash - subTotal;
+//     $("#txtBalance").val(balance);
+//     if (balance < 0) {
+//         $("#lblCheckSubtotal").parent().children('strong').text(balance + " : plz enter valid Balance");
+//         $("#btnPurchase").attr('disabled', true);
+//     } else {
+//         $("#lblCheckSubtotal").parent().children('strong').text("");
+//         $("#btnPurchase").attr('disabled', false);
+//     }
+// });
 
 /**
  * Date Default
@@ -367,13 +386,13 @@ $("#btnPurchase").click(function () {
     console.log(orderDetails)
 
     $.ajax({
-        url: baseUrl + "orders",
+        url: "http://localhost:8080/app/api/v1/sale",
         method: "POST",
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(orderOb),
         success: function (res) {
-            saveUpdateAlert("Order", res.message);
+            updateAlert("Order", res.message);
             generateOrderID();
 
         },
@@ -396,7 +415,7 @@ $("#btnPurchase").click(function () {
  * Clear Method
  * */
 function clearDetails() {
-    $('#cmbCustomerId,#customerName,#customerAddress,#customerSalary,#cmbItemCode,#itemName,#itemPrice,#qtyOnHand,#buyQty,#txtDiscount,#txtTotal,#txtDiscount,#txtSubTotal,#txtCash,#txtBalance').val("");
+    $('#cmbCustomerId,#txtCustomerName,#cashierName,#cmbItemCode,#itemName,#txtItemDesc,#itemSize,#qtyOnHand,#buyPrice,#buyQty,#txtPoint,#txtTotal,#cmbMethod').val("");
     $("#tblAddToCart").empty();
     $("#btnPurchase").attr('disabled', true);
     $("#btnAddToCart").attr('disabled', true);
