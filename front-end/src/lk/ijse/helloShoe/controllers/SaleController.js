@@ -200,13 +200,15 @@ $("#btnAddToCart").on("click", function () {
         tableRow = $(this);
         let itemCode = $(this).children(":eq(0)").text();
         let itemName = $(this).children(":eq(1)").text();
-        let unitPrice = $(this).children(":eq(2)").text();
-        let qty = $(this).children(":eq(3)").text();
-        let total = $(this).children(":eq(4)").text();
+        let size = $(this).children(":eq(2)").text();
+        let unitPrice = $(this).children(":eq(3)").text();
+        let qty = $(this).children(":eq(4)").text();
+        let total = $(this).children(":eq(5)").text();
 
         $("#cmbItemCode").val(itemCode);
-        $("#itemName").val(itemName);
-        $("#itemPrice").val(unitPrice);
+        $("#txtItemDesc").val(itemName);
+        $("#itemSize").val(size);
+        $("#buyPrice").val(unitPrice);
         $("#buyQty").val(qty);
         $("#txtTotal").val(total);
 
