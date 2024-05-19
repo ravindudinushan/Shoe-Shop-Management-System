@@ -18,7 +18,7 @@ public class Sale {
     private String orderNo;
     @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "customerCode", referencedColumnName = "customerCode", nullable = false)
-    private Customer customerId;
+    private Customer customerCode;
     private double totalPrice;
     private Timestamp purchaseDate;
     @Enumerated(EnumType.STRING)

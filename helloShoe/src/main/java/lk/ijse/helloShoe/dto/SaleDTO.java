@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -30,4 +31,5 @@ public class SaleDTO {
     @NotBlank(message = "Name can not be null")
     @Pattern(regexp = "[A-Za-z ]+", message = "Name is not valid")
     private String cashierName;
+    private List<SaleDetailsDTO> saleDetails;
 }
