@@ -1,5 +1,6 @@
 package lk.ijse.helloShoe.service.impl;
 
+import jakarta.annotation.PostConstruct;
 import lk.ijse.helloShoe.dto.CustomDTO;
 import lk.ijse.helloShoe.dto.SaleDTO;
 import lk.ijse.helloShoe.dto.SaleDetailsDTO;
@@ -11,12 +12,16 @@ import lk.ijse.helloShoe.repo.SaleDetailsRepo;
 import lk.ijse.helloShoe.repo.SaleRepo;
 import lk.ijse.helloShoe.service.SaleService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
+import org.modelmapper.TypeMap;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -34,6 +39,17 @@ public class SaleServiceImpl implements SaleService {
     @Autowired
     private ModelMapper mapper;
 
+    @PostConstruct
+    public void configureMapper() {
+        mapper.addMappings(new PropertyMap<Sale, SaleDTO>() {
+            @Override
+            protected void configure() {
+                map().setCustomerCode(source.getCustomerCode().getCustomerCode());
+            }
+        });
+    }
+
+
     @Override
     public void placeOrder(SaleDTO dto) {
         Sale sale = mapper.map(dto, Sale.class);
@@ -50,16 +66,20 @@ public class SaleServiceImpl implements SaleService {
         }
     }
 
+    private SaleDTO convertToDTO(Sale sale) {
+        return mapper.map(sale, SaleDTO.class);
+    }
+
     @Override
     public ArrayList<SaleDTO> LoadOrders() {
-        return mapper.map(saleRepo.findAll(), new TypeToken<ArrayList<SaleDTO>>() {
-        }.getType());
+        List<Sale> sales = saleRepo.findAll();
+        return sales.stream().map(this::convertToDTO).collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
     public ArrayList<SaleDetailsDTO> LoadOrderDetails() {
-        return mapper.map(saleDetailsRepo.findAll(), new TypeToken<ArrayList<SaleDetailsDTO>>() {
-        }.getType());
+        List<SaleDetails> saleDetails = saleDetailsRepo.findAll();
+        return mapper.map(saleDetails, new TypeToken<List<SaleDetailsDTO>>() {}.getType());
     }
 
     @Override
