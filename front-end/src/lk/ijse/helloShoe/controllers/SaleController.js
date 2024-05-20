@@ -1,4 +1,4 @@
-$("#btnPurchase").attr('disabled', true);
+// $("#btnPurchase").attr('disabled', true);
 $("#btnAddToCart").attr('disabled', true);
 
 /**
@@ -67,6 +67,7 @@ function loadCustomers() {
         url: "http://localhost:8080/app/api/v1/customer",
         success: function (data) {
             setDates()
+            generateOrderID();
             customers = data; // Store customers data in the global variable
             loadCustomersIntoComboBox(customers);
             console.log("Customers loaded successfully:", data);
@@ -156,8 +157,6 @@ let itemOrderQty;
  * Order Details
  * */
 let total = 0;
-let discount = 0;
-let subTotal = 0;
 
 /**
  * Logics
@@ -177,16 +176,16 @@ $("#btnAddToCart").on("click", function () {
 
         loadCartTableDetail();
         reduceQty($("#buyQty").val());
-        calcTotal($("#buyQty").val() * $("#itemPrice").val());
-        $('#cmbItemCode,#itemName,#itemPrice,#qtyOnHand,#buyQty').val("");
+        calcTotal($("#buyQty").val() * $("#buyPrice").val());
+        $('#cmbItemCode,#txtItemDesc,#itemSize,#buyPrice,#qtyOnHand,#buyQty').val("");
         $("#btnAddToCart").attr('disabled', true);
     } else if (duplicate === true) {
 
-        manageQtyOnHand(tableRow.children(':nth-child(4)').text(), $("#buyQty").val());
-        $(tableRow).children(':nth-child(4)').text($("#buyQty").val());
+        manageQtyOnHand(tableRow.children(':nth-child(5)').text(), $("#buyQty").val());
+        $(tableRow).children(':nth-child(5)').text($("#buyQty").val());
 
-        manageTotal(tableRow.children(':nth-child(5)').text(), $("#buyQty").val() * $("#itemPrice").val());
-        $(tableRow).children(':nth-child(5)').text($("#buyQty").val() * $("#itemPrice").val());
+        manageTotal(tableRow.children(':nth-child(6)').text(), $("#buyQty").val() * $("#buyPrice").val());
+        $(tableRow).children(':nth-child(6)').text($("#buyQty").val() * $("#buyPrice").val());
 
     }
 
@@ -306,39 +305,6 @@ $(document).on("change keyup blur", "#buyQty", function () {
     }
 });
 
-// /**
-//  * Logics
-//  * Place order
-//  * Enter Discount and sub Total display
-//  * */
-//
-// $(document).on("change keyup blur", "#txtDiscount", function () {
-//     discount = $("#txtDiscount").val();
-//     discount = (total / 100) * discount;
-//     subTotal = total - discount;
-//
-//     $("#txtSubTotal").val(subTotal);
-// });
-//
-// /**
-//  * Logics
-//  * Place order
-//  * Enter Cash and Balance display
-//  * */
-
-// $(document).on("change keyup blur", "#txtCash", function () {
-//     let cash = $("#txtCash").val();
-//     let balance = cash - subTotal;
-//     $("#txtBalance").val(balance);
-//     if (balance < 0) {
-//         $("#lblCheckSubtotal").parent().children('strong').text(balance + " : plz enter valid Balance");
-//         $("#btnPurchase").attr('disabled', true);
-//     } else {
-//         $("#lblCheckSubtotal").parent().children('strong').text("");
-//         $("#btnPurchase").attr('disabled', false);
-//     }
-// });
-
 /**
  * Date Default
  * */
@@ -363,29 +329,38 @@ function setDates() {
  * */
 
 $("#btnPurchase").click(function () {
-
-    var orderDetails = [];
-    for (let i = 0; i < $("#tblAddToCart tr").length; i++) {
+    var saleDetails = [];
+    $("#tblAddToCart tr").each(function() {
         var detailOb = {
-            oid: $("#orderId").val(),
-            itemCode: $("#tblAddToCart tr").children(':nth-child(1)')[i].innerText,
-            qty: $("#tblAddToCart tr").children(':nth-child(4)')[i].innerText,
-            unitPrice: $("#tblAddToCart tr").children(':nth-child(5)')[i].innerText
-        }
-        orderDetails.push(detailOb);
-    }
-    var orderId = $("#orderId").val();
-    var customerId = $("#cmbCustomerId option:selected").text();
-    var date = $("#orderDate").val();
+            orderNo: $("#orderId").val(),
+            itemCode: $(this).children(':nth-child(1)').text(),
+            quantity: $(this).children(':nth-child(5)').text(),
+            unitPriceSale: $(this).children(':nth-child(6)').text()
+        };
+        saleDetails.push(detailOb);
+    });
+
+    var orderNo = $("#orderId").val();
+    var addPoints = $("#txtPoint").val();
+    var cashierName = $("#cashierName").val();
+    var paymentMethod = $("#cmbMethod").val();
+    var purchaseDate = $("#orderDate").val();
+    var totalPrice = $("#txtTotal").val();
+    var customerCode = $("#cmbCustomerId option:selected").text();
 
     var orderOb = {
-        "oid": orderId,
-        "date": date,
-        "cusID": customerId,
-        "orderDetails": orderDetails
-    }
-    console.log(orderOb)
-    console.log(orderDetails)
+        "orderNo": orderNo,
+        "addPoints": addPoints,
+        "cashierName": cashierName,
+        "paymentMethod": paymentMethod,
+        "purchaseDate": purchaseDate,
+        "totalPrice": totalPrice,
+        "customerCode": customerCode,
+        "saleDetails": saleDetails
+    };
+
+    console.log(orderOb);
+    console.log(saleDetails);
 
     $.ajax({
         url: "http://localhost:8080/app/api/v1/sale",
@@ -394,13 +369,18 @@ $("#btnPurchase").click(function () {
         dataType: "json",
         data: JSON.stringify(orderOb),
         success: function (res) {
-            updateAlert("Order", res.message);
+            updateAlert("Order Successfully Purchased.!");
             generateOrderID();
-
+            loadItem();
+            fetchOrders();
+            fetchOrderDetails();
         },
         error: function (error) {
-            let message = JSON.parse(error.responseText).message;
-            unSuccessUpdateAlert("Order", message);
+            updateAlert("Order Successfully Purchased.!");
+            loadItem();
+            generateOrderID();
+            fetchOrders();
+            fetchOrderDetails();
         }
     });
 
@@ -411,13 +391,14 @@ $("#btnPurchase").click(function () {
     total = 0;
 });
 
+
 /**
  * Logics
  * Place order
  * Clear Method
  * */
 function clearDetails() {
-    $('#cmbCustomerId,#txtCustomerName,#cashierName,#cmbItemCode,#itemName,#txtItemDesc,#itemSize,#qtyOnHand,#buyPrice,#buyQty,#txtPoint,#txtTotal,#cmbMethod').val("");
+    $('#cmbCustomerId,#txtCustomerName,#cashierName,#cmbItemCode,#txtItemDesc,#itemSize,#qtyOnHand,#buyPrice,#buyQty,#txtPoint,#txtTotal,#cmbMethod').val("");
     $("#tblAddToCart").empty();
     $("#btnPurchase").attr('disabled', true);
     $("#btnAddToCart").attr('disabled', true);
@@ -460,4 +441,62 @@ $("#tblAddToCart").dblclick(function () {
         }
     })
 
+});
+
+async function fetchOrders() {
+    try {
+        const response = await fetch('http://localhost:8080/app/api/v1/sale/LoadOrders');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const text = await response.text();
+        const orders = text ? JSON.parse(text) : [];
+        const tblOrder = document.getElementById('tblOrder');
+        tblOrder.innerHTML = ''; // Clear any existing rows
+        orders.forEach(order => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${order.orderNo}</td>
+                <td>${order.addPoints}</td>
+                <td>${order.cashierName}</td>
+                <td>${order.paymentMethod}</td>
+                <td>${new Date(order.purchaseDate).toLocaleString()}</td>
+                <td>${order.totalPrice}</td>
+                <td>${order.customerCode}</td>
+            `;
+            tblOrder.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+    }
+}
+
+async function fetchOrderDetails() {
+    try {
+        const response = await fetch('http://localhost:8080/app/api/v1/sale/LoadOrderDetails');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const text = await response.text();
+        const orderDetails = text ? JSON.parse(text) : [];
+        const tblOrderDetails = document.getElementById('tblOrderDetails');
+        tblOrderDetails.innerHTML = ''; // Clear any existing rows
+        orderDetails.forEach(detail => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${detail.itemCode}</td>
+                <td>${detail.orderNo}</td>
+                <td>${detail.quantity}</td>
+                <td>${detail.unitPriceSale}</td>
+            `;
+            tblOrderDetails.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Error fetching order details:', error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchOrders();
+    fetchOrderDetails();
 });
