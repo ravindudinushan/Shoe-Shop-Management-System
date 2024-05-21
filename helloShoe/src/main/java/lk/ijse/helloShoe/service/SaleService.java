@@ -21,7 +21,9 @@ public interface SaleService {
     @ResponseBody
     CustomDTO getSumOrders();
 
-    Object[] getTotalSalesAndProfit();
+    Double getTotalSales();
+
+    Double getTotalProfit();
 
     Object[] getMostSoldItem();
 

@@ -93,10 +93,14 @@ public class SaleServiceImpl implements SaleService {
     }
 
     @Override
-    public Object[] getTotalSalesAndProfit() {
-        return saleRepo.getTotalSalesAndProfit();
+    public Double getTotalSales() {
+        return saleDetailsRepo.findTotalSales();
     }
 
+    @Override
+    public Double getTotalProfit() {
+        return saleDetailsRepo.findTotalProfit();
+    }
     @Override
     public Object[] getMostSoldItem() {
         return saleRepo.getMostSoldItem();

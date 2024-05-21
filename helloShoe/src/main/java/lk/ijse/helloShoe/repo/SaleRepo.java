@@ -11,9 +11,6 @@ public interface SaleRepo extends JpaRepository<Sale,String> {
     @Query(value = "SELECT COUNT(order_no) FROM Sale", nativeQuery = true)
     int getSumOrders();
 
-    @Query(value = "SELECT SUM(total_price) AS total_sales, SUM(total_price - add_points) AS total_profit FROM sale", nativeQuery = true)
-    Object[] getTotalSalesAndProfit();
-
     @Query(value = "SELECT item_code FROM sale_details GROUP BY item_code ORDER BY quantity DESC LIMIT 1", nativeQuery = true)
     Object[] getMostSoldItem();
 

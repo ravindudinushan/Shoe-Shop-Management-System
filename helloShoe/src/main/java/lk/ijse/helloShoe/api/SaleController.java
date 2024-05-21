@@ -49,10 +49,14 @@ public class SaleController {
         return new ResponseEntity<>(sumOrders, HttpStatus.OK);
     }
 
-    @GetMapping("/total-sales-profit")
-    public ResponseEntity<Object[]> getTotalSalesAndProfit() {
-        Object[] totalSalesAndProfit = saleService.getTotalSalesAndProfit();
-        return new ResponseEntity<>(totalSalesAndProfit, HttpStatus.OK);
+    @GetMapping("/totalSale")
+    public Double getTotalSales() {
+        return saleService.getTotalSales();
+    }
+
+    @GetMapping("/totalProfit")
+    public Double getTotalProfit() {
+        return saleService.getTotalProfit();
     }
 
     @GetMapping("/most-sold-item")
