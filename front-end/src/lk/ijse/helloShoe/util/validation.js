@@ -1,14 +1,13 @@
-function checkValidity(object) {
+function checkValidity(validations) {
     let errorCount = 0;
-    for (let validation of object) {
+    for (let validation of validations) {
         if (check(validation.reg, validation.field)) {
             textSuccess(validation.field, "");
         } else {
-            errorCount = errorCount + 1;
+            errorCount++;
             setTextError(validation.field, validation.error);
         }
     }
-    setButtonState(errorCount);
 }
 
 function check(regex, txtField) {

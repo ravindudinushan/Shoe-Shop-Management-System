@@ -1,10 +1,6 @@
 let baseUrl = "http://localhost:8080/app/api/v1/";
 loadCustomers();
 
-$("#btnSaveCustomer").attr('disabled', true);
-$("#btnUpdateCustomer").attr('disabled', true);
-$("#btnDeleteCustomer").attr('disabled', true);
-
 /**
  * Customer ID
  * */
@@ -38,7 +34,11 @@ function generateCustomerID() {
  * Button Add New Customer
  * */
  // Save customer
-    $("#btnSaveCustomer").click(function () {
+$("#btnSaveCustomer").click(function () {
+    // Validate fields before saving
+    checkValidity(customerValidations);
+    if (allFieldsValid(customerValidations)) {
+        // Proceed with saving
         var formData = $("#customerForm").serialize();
         $.ajax({
             type: "POST",
@@ -50,11 +50,15 @@ function generateCustomerID() {
                 $("#customerForm")[0].reset();
             },
             error: function (error) {
-                unSuccessUpdateAlert("Customer Saved UnSuccessfully");
+                unSuccessUpdateAlert("Customer Saved Unsuccessfully");
                 console.log("Error saving customer: ", error);
             }
         });
-    });
+    } else {
+        // Display error message or prevent submission
+        // You may display a general error message or handle errors for specific fields
+    }
+});
 /**
  * clear input fields Values Method
  * */
@@ -74,10 +78,6 @@ function setTextFieldValues(customerCode, customerName, gender, contact, email, 
     $("#txtAddress5").val(address5);
     $("#txtPoints").val(points);
     $("#txtCusName").focus();
-    checkValidity(customerValidations);
-    $("#btnSaveCustomer").attr('disabled', true);
-    $("#btnUpdateCustomer").attr('disabled', true);
-    $("#btnDeleteCustomer").attr('disabled', true);
 }
 
 /**
@@ -168,49 +168,56 @@ function blindClickEvents() {
         $("#txtAddress5").val(address5);
         $("#txtPoints").val(points);
     });
-   $("#btnSaveCustomer").attr('disabled', true);
 }
 
 /**
  * Customer Update
  * */
     // Update customer
+// Update customer with validation
 $("#btnUpdateCustomer").click(function () {
-    var formData = {
-        customerCode: $("#txtCusId").val(),
-        customerName: $("#txtCusName").val(),
-        gender: $("#combGender").val(),
-        contact: $("#txtContact").val(),
-        email: $("#txtEmail").val(),
-        dob: $("#txtDob").val(),
-        level: $("#combLevel").val(),
-        date: $("#txtDate").val(),
-        address: {
-            address1: $("#txtAddress1").val(),
-            address2: $("#txtAddress2").val(),
-            address3: $("#txtAddress3").val(),
-            address4: $("#txtAddress4").val(),
-            address5: $("#txtAddress5").val()
-        },
-        points: $("#txtPoints").val()
-    };
+    // Validate fields before updating
+    checkValidity(customerValidations);
+    if (allFieldsValid(customerValidations)) {
+        // Proceed with updating
+        var formData = {
+            customerCode: $("#txtCusId").val(),
+            customerName: $("#txtCusName").val(),
+            gender: $("#combGender").val(),
+            contact: $("#txtContact").val(),
+            email: $("#txtEmail").val(),
+            dob: $("#txtDob").val(),
+            level: $("#combLevel").val(),
+            date: $("#txtDate").val(),
+            address: {
+                address1: $("#txtAddress1").val(),
+                address2: $("#txtAddress2").val(),
+                address3: $("#txtAddress3").val(),
+                address4: $("#txtAddress4").val(),
+                address5: $("#txtAddress5").val()
+            },
+            points: $("#txtPoints").val()
+        };
 
-    $.ajax({
-        type: "PUT",
-        url: baseUrl + "customer",
-        contentType: "application/json",
-        data: JSON.stringify(formData),
-        success: function () {
-            updateAlert("Customer updated successfully!");
-            loadCustomers();
-        },
-        error: function (error) {
-            unSuccessUpdateAlert("Customer updated unsuccessfully!");
-            console.log("Error updating customer: ", error);
-        }
-    });
+        $.ajax({
+            type: "PUT",
+            url: baseUrl + "customer",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function () {
+                updateAlert("Customer updated successfully!");
+                loadCustomers();
+            },
+            error: function (error) {
+                unSuccessUpdateAlert("Customer updated unsuccessfully!");
+                console.log("Error updating customer: ", error);
+            }
+        });
+    } else {
+        // Display error message or prevent submission
+        console.log("Validation failed");
+    }
 });
-
 /**
  * Customer Delete
  * */
@@ -251,156 +258,31 @@ $("#btnDeleteCustomer").click(function () {
         }
     });
 
-/**
- * Auto Forces Input Fields Save
- * */
-$("#txtCusId").focus();
-const regExCusID = /^(C00-)[0-9]{3,4}$/;
-const regExCusName = /^[A-z ]{3,20}$/;
-const regExCusAddress = /^[A-z0-9/ ]{4,30}$/;
-const regExContact = /^\d{10}$/;
-const regExEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const regExPoints = /^[0-9]{1,}[.]?[0-9]{1,2}$/
+// Define validation rules for each field
+const customerValidations = [
+    { field: $("#txtCusName"), reg: /^[a-zA-Z\s]+$/, error: "Invalid name. Only alphabets and spaces allowed." },
+    { field: $("#txtContact"), reg: /^\d{10}$/, error: "Invalid contact number. Must be 10 digits." },
+    { field: $("#txtEmail"), reg: /^\S+@\S+\.\S+$/, error: "Invalid email address." },
+    { field: $("#txtDob"), reg: /^\d{4}-\d{2}-\d{2}$/, error: "Invalid date of birth format. Use YYYY-MM-DD." },
+    { field: $("#txtDate"), reg: /^\d{4}-\d{2}-\d{2}$/, error: "Invalid joining date format. Use YYYY-MM-DD." },
+    { field: $("#txtAddress1"), reg: /^[a-zA-Z0-9\s,-]+$/, error: "Invalid address." },
+    { field: $("#txtAddress2"), reg: /^[a-zA-Z0-9\s,-]+$/, error: "Invalid address." },
+    { field: $("#txtAddress3"), reg: /^[a-zA-Z0-9\s,-]+$/, error: "Invalid address." },
+    { field: $("#txtAddress4"), reg: /^[a-zA-Z0-9\s,-]+$/, error: "Invalid address." },
+    { field: $("#txtAddress5"), reg: /^[a-zA-Z0-9\s,-]+$/, error: "Invalid address." },
+    { field: $("#txtPoints"), reg: /^\d+$/, error: "Invalid points. Must be a number." }
+];
 
-let customerValidations = [];
-customerValidations.push({
-    reg: regExCusID, field: $('#txtCusId'), error: 'Customer ID Pattern is Wrong : C00-001'
-});
-customerValidations.push({
-    reg: regExCusName, field: $('#txtCusName'), error: 'Customer Name Pattern is Wrong : A-z 3-20'
-});
-customerValidations.push({
-    reg: regExCusAddress, field: $('#txtAddress1'), error: 'Customer Address Pattern is Wrong : A-z 0-9 ,/'
-});
-customerValidations.push({
-    reg: regExCusAddress, field: $('#txtAddress2'), error: 'Customer Address Pattern is Wrong : A-z 0-9 ,/'
-});
-customerValidations.push({
-    reg: regExCusAddress, field: $('#txtAddress3'), error: 'Customer Address Pattern is Wrong : A-z 0-9 ,/'
-});
-customerValidations.push({
-    reg: regExCusAddress, field: $('#txtAddress4'), error: 'Customer Address Pattern is Wrong : A-z 0-9 ,/'
-});
-customerValidations.push({
-    reg: regExCusAddress, field: $('#txtAddress5'), error: 'Customer Address Pattern is Wrong : A-z 0-9 ,/'
-});
-customerValidations.push({
-    reg: regExContact, field: $('#txtContact'), error: 'Customer Contact Number Pattern is Wrong :'
-});
-
-customerValidations.push({
-    reg: regExEmail, field: $('#txtEmail'), error: 'Customer Email Pattern is Wrong : '
-});
-
-customerValidations.push({
-    reg: regExPoints, field: $('#txtPoints'), error: 'Customer Points Pattern is Wrong : '
-});
-
-//disable tab key of all four text fields using grouping selector in CSS
-$("#txtCusId,#txtCusName,combGender,txtContact,txtEmil,txtDob,combLevel,txtDate,txtAddress1,txtAddress2,txtAddress3,txtAddress4,txtAddress5,txtPoints").on('keydown', function (event) {
-    if (event.key === "Tab") {
-        event.preventDefault();
+function allFieldsValid(validations) {
+    for (let validation of validations) {
+        if (!check(validation.reg, validation.field)) {
+            return false;
+        }
     }
-});
-
-$("#txtCusId,#txtCusName,txtContact,txtEmil,txtAddress1,txtAddress2,txtAddress3,txtAddress4,txtAddress5,txtPoints").on('keyup', function (event) {
-    checkValidity(customerValidations);
-});
-
-$("#txtCusId,#txtCusName,txtContact,txtEmil,txtAddress1,txtAddress2,txtAddress3,txtAddress4,txtAddress5,txtPoints").on('blur', function (event) {
-    checkValidity(customerValidations);
-});
-
-// $("#txtCusId").on('keydown', function (event) {
-//     if (event.key === "Enter" && check(regExCusID, $("#txtCusId"))) {
-//         $("#txtCusName").focus();
-//     } else {
-//         focusText($("#txtCusId"));
-//     }
-// });
-//
-// $("#txtCusName").on('keydown', function (event) {
-//     if (event.key === "Enter" && check(regExCusName, $("#txtCusName"))) {
-//         focusText($("#txtAddress1"));
-//     }
-// });
-//
-// $("#txtAddress1,#txtAddress2,#txtAddress3,#txtAddress4,#txtAddress5").on('keydown', function (event) {
-//     if (event.key === "Enter" && check(regExCusAddress, $("#txtCusAddress"))) {
-//         focusText($("#txtCustomerSalary"));
-//     }
-// });
-//
-// $("#txtCustomerSalary").on('keydown', function (event) {
-//     if (event.key === "Enter" && check(regExSalary, $("#txtCustomerSalary"))) {
-//         if (event.which === 13) {
-//             $('#btnSaveCustomer').focus();
-//         }
-//     }
-// });
-
-function setButtonState(value) {
-    if (value > 0) {
-        $("#btnSaveCustomer").attr('disabled', true);
-        $("#btnUpdateCustomer").attr('disabled', true);
-        $("#btnDeleteCustomer").attr('disabled', true);
-    } else {
-        $("#btnSaveCustomer").attr('disabled', false);
-        $("#btnUpdateCustomer").attr('disabled', false);
-        $("#btnDeleteCustomer").attr('disabled', false);
-    }
+    return true;
 }
 
-
-// const validateCustomer = (customer) => {
-//     const errors = {};
-//
-//     // Validate Customer Code
-//     if (!customer.customerCode || typeof customer.customerCode !== 'string') {
-//         errors.customerCode = 'Customer Code is required and must be a string.';
-//     }
-//
-//     // Validate Customer Name
-//     if (!customer.customerName || typeof customer.customerName !== 'string') {
-//         errors.customerName = 'Customer Name is required and must be a string.';
-//     }
-//
-//     // Validate Gender
-//     if (!customer.gender || !['MALE', 'FEMALE'].includes(customer.gender)) {
-//         errors.gender = 'Gender is required and must be either MALE or FEMALE.';
-//     }
-//
-//     // Validate Contact Number
-//     if (!customer.contact || !/^\d{10}$/.test(customer.contact)) {
-//         errors.contact = 'Contact Number is required and must be a valid 10-digit number.';
-//     }
-//
-//     // Validate Email
-//     if (!customer.email || !/\S+@\S+\.\S+/.test(customer.email)) {
-//         errors.email = 'Email is required and must be a valid email address.';
-//     }
-//
-//     // Validate DOB
-//     if (!customer.dob || !isValidDate(customer.dob)) {
-//         errors.dob = 'DOB is required and must be a valid date.';
-//     }
-//
-//     // Validate Level
-//     if (!customer.level || !['GOLD', 'SILVER', 'BRONZE', 'NEW'].includes(customer.level)) {
-//         errors.level = 'Level is required and must be GOLD, SILVER, BRONZE, or NEW.';
-//     }
-//
-//     // Validate Joining Date
-//     if (!customer.date || !isValidDate(customer.date)) {
-//         errors.date = 'Joining Date is required and must be a valid date.';
-//     }
-//
-//     // Add more validations for address fields, points, etc. as needed
-//
-//     return errors;
-// };
-//
-// const isValidDate = (dateString) => {
-//     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-//     return dateString.match(dateRegex) !== null;
-// };
+// Bind validation to input events
+$("#txtCusName, #txtContact, #txtEmail, #txtDob, #txtDate, #txtAddress1, #txtAddress2, #txtAddress3, #txtAddress4, #txtAddress5, #txtPoints").on('input', function () {
+    checkValidity(customerValidations);
+});
