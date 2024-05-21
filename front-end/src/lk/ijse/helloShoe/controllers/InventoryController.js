@@ -96,33 +96,36 @@ function loadSuppliers() {
 }
 
 $("#btnSaveItem").click(function () {
-    // Serialize the entire form data
-    var formData = $("#itemForm").serializeArray();
+    checkValidity(inventoryValidations);
+    if (allFieldsValid(inventoryValidations)) {
+        var formData = $("#itemForm").serializeArray();
+        var jsonData = {};
+        $(formData).each(function (index, obj) {
+            jsonData[obj.name] = obj.value;
+        });
 
-    // Convert the serialized form data to a JSON object
-    var jsonData = {};
-    $(formData).each(function (index, obj) {
-        jsonData[obj.name] = obj.value;
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/app/api/v1/inventory",
-        data: JSON.stringify(jsonData), // Convert JSON object to string
-        contentType: "application/json", // Set content type to JSON
-        success: function () {
-            updateAlert("Item Saved Successfully");
-            getAllInventory();
-        },
-        error: function (error) {
-            unSuccessUpdateAlert("Item Saved Unsuccessfully");
-            console.log("Error:", error);
-        }
-    });
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/app/api/v1/inventory",
+            data: JSON.stringify(jsonData),
+            contentType: "application/json",
+            success: function () {
+                updateAlert("Item Saved Successfully");
+                getAllInventory();
+            },
+            error: function (error) {
+                unSuccessUpdateAlert("Item Saved Unsuccessfully");
+                console.log("Error:", error);
+            }
+        });
+    } else {
+        console.log("Validation failed");
+    }
 });
-
 // Function to update inventory item
-    $("#btnUpdateItem").click(function () {
+$("#btnUpdateItem").click(function () {
+    checkValidity(inventoryValidations);
+    if (allFieldsValid(inventoryValidations)) {
         var formData = new FormData($("#itemForm")[0]);
         $.ajax({
             type: "PUT",
@@ -139,7 +142,10 @@ $("#btnSaveItem").click(function () {
                 console.log("Error:", error);
             }
         });
-    });
+    } else {
+        console.log("Validation failed");
+    }
+});
 
     // Function to delete inventory item
 $("#btnDeleteItem").click(function () {
@@ -234,5 +240,24 @@ function blindClickEvents() {
         $("#txtProfitMargin").val(profitMargin);
         $("#txtStatus").val(status);
     });
-    // $("#btnSaveItem").attr('disabled', true);
+}
+
+const inventoryValidations = [
+    { field: $("#txtItemCode"), reg: /^I\d{2}-\d{3}$/, error: "Invalid item code. Format should be I00-000." },
+    { field: $("#txtItemName"), reg: /^[a-zA-Z\s]+$/, error: "Invalid item description. Only alphabets and spaces allowed." },
+    { field: $("#txtCategory"), reg: /^[a-zA-Z\s]+$/, error: "Invalid category. Only alphabets and spaces allowed." },
+    { field: $("#txtSize"), reg: /^\d+$/, error: "Invalid size. Must be a number." },
+    { field: $("#txtPriceBuy"), reg: /^\d+(\.\d{1,2})?$/, error: "Invalid price. Must be a valid number." },
+    { field: $("#txtPriceSale"), reg: /^\d+(\.\d{1,2})?$/, error: "Invalid price. Must be a valid number." },
+    { field: $("#txtQty"), reg: /^\d+$/, error: "Invalid quantity. Must be a number." },
+    { field: $("#txtProfit"), reg: /^\d+(\.\d{1,2})?$/, error: "Invalid profit. Must be a valid number." },
+    { field: $("#txtProfitMargin"), reg: /^\d+(\.\d{1,2})?$/, error: "Invalid profit margin. Must be a valid number." }
+];
+
+$("#txtItemCode, #txtItemName, #txtCategory, #txtSize, #txtPriceBuy, #txtPriceSale, #txtQty, #txtProfit, #txtProfitMargin").on('input', function () {
+    checkValidity(inventoryValidations);
+});
+
+function allFieldsValid(validations) {
+    return validations.every(validation => validation.reg.test(validation.field.val()));
 }
