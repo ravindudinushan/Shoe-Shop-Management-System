@@ -32,23 +32,33 @@ function generateSupplierID() {
  * Button Add New Supplier
  * */
 // Save customer
+// Save supplier with validation
 $("#btnSaveSupplier").click(function () {
-    var formData = $("#supplierForm").serialize();
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/app/api/v1/supplier",
-        data: formData,
-        success: function () {
-            updateAlert("Supplier Saved Successfully");
-            loadSuppliers();
-            $("#supplierForm")[0].reset();
-        },
-        error: function (error) {
-            unSuccessUpdateAlert("Supplier Saved UnSuccessfully");
-            console.log("Error saving supplier: ", error);
-        }
-    });
+    // Validate fields before saving
+    checkValidity(supplierValidations);
+    if (allFieldsValid(supplierValidations)) {
+        // Proceed with saving
+        var formData = $("#supplierForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/app/api/v1/supplier",
+            data: formData,
+            success: function () {
+                updateAlert("Supplier Saved Successfully");
+                loadSuppliers();
+                $("#supplierForm")[0].reset();
+            },
+            error: function (error) {
+                unSuccessUpdateAlert("Supplier Saved UnSuccessfully");
+                console.log("Error saving supplier: ", error);
+            }
+        });
+    } else {
+        // Display error message or prevent submission
+        console.log("Validation failed");
+    }
 });
+
 /**
  * clear input fields Values Method
  * */
@@ -160,40 +170,49 @@ function blindClickEvents() {
 /**
  * Supplier Update
  * */
+// Update supplier with validation
 $("#btnUpdateSupplier").click(function () {
-    var formData = {
-        supplierCode: $("#txtSupplierCode").val(),
-        supplierName: $("#txtSupplierName").val(),
-        category: $("#txtCategory").val(),
-        contact: {
-            contact1: $("#txtContact1").val(),
-            contact2: $("#txtContact2").val()
-        },
-        email: $("#txtEmail").val(),
-        address: {
-            address1: $("#txtAddress1").val(),
-            address2: $("#txtAddress2").val(),
-            address3: $("#txtAddress3").val(),
-            address4: $("#txtAddress4").val(),
-            address5: $("#txtAddress5").val(),
-            address6: $("#txtAddress6").val()
-        },
-    };
+    // Validate fields before updating
+    checkValidity(supplierValidations);
+    if (allFieldsValid(supplierValidations)) {
+        // Proceed with updating
+        var formData = {
+            supplierCode: $("#txtSupplierCode").val(),
+            supplierName: $("#txtSupplierName").val(),
+            category: $("#txtCategory").val(),
+            contact: {
+                contact1: $("#txtContact1").val(),
+                contact2: $("#txtContact2").val()
+            },
+            email: $("#txtEmail").val(),
+            address: {
+                address1: $("#txtAddress1").val(),
+                address2: $("#txtAddress2").val(),
+                address3: $("#txtAddress3").val(),
+                address4: $("#txtAddress4").val(),
+                address5: $("#txtAddress5").val(),
+                address6: $("#txtAddress6").val()
+            }
+        };
 
-    $.ajax({
-        type: "PUT",
-        url: "http://localhost:8080/app/api/v1/supplier",
-        contentType: "application/json",
-        data: JSON.stringify(formData),
-        success: function () {
-            updateAlert("Supplier updated successfully!");
-            loadSuppliers();
-        },
-        error: function (error) {
-            unSuccessUpdateAlert("Supplier updated unsuccessfully!");
-            console.log("Error updating Supplier: ", error);
-        }
-    });
+        $.ajax({
+            type: "PUT",
+            url: "http://localhost:8080/app/api/v1/supplier",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function () {
+                updateAlert("Supplier updated successfully!");
+                loadSuppliers();
+            },
+            error: function (error) {
+                unSuccessUpdateAlert("Supplier updated unsuccessfully!");
+                console.log("Error updating Supplier: ", error);
+            }
+        });
+    } else {
+        // Display error message or prevent submission
+        console.log("Validation failed");
+    }
 });
 
 /**
@@ -234,3 +253,31 @@ $("#searchSupCode").on("input", function () {
         loadSuppliers();
     }
 });
+
+const supplierValidations = [
+    { field: $("#txtSupplierName"), reg: /^[a-zA-Z\s]{3,50}$/, error: "Supplier Name should be between 3 to 50 alphabetic characters." },
+    { field: $("#txtContact1"), reg: /^[0-9]{10}$/, error: "Contact Number (Mobile) should be a 10-digit number." },
+    { field: $("#txtContact2"), reg: /^[0-9]{10}$/, error: "Contact Number (Landline) should be a 10-digit number." },
+    { field: $("#txtEmail"), reg: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, error: "Invalid email address." },
+    { field: $("#txtAddress1"), reg: /^.{3,100}$/, error: "Address1 should be between 3 to 100 characters." },
+    { field: $("#txtAddress2"), reg: /^.{3,100}$/, error: "Address2 should be between 0 to 100 characters." },
+    { field: $("#txtAddress3"), reg: /^.{3,50}$/, error: "City should be between 3 to 50 characters." },
+    { field: $("#txtAddress4"), reg: /^.{3,50}$/, error: "State should be between 3 to 50 characters." },
+    { field: $("#txtAddress5"), reg: /^.{3,50}$/, error: "Country should be between 3 to 50 characters." },
+    { field: $("#txtAddress6"), reg: /^.{3,50}$/, error: "Code should be between 3 to 50 characters." }
+];
+
+// Bind validation to input events for real-time validation
+$("#txtSupplierName, #txtContact1, #txtContact2, #txtEmail, #txtAddress1, #txtAddress2, #txtAddress3, #txtAddress4, #txtAddress5, #txtAddress6").on('input', function () {
+    checkValidity(supplierValidations);
+});
+
+// Function to check if all fields are valid
+function allFieldsValid(validations) {
+    for (let validation of validations) {
+        if (!check(validation.reg, validation.field)) {
+            return false;
+        }
+    }
+    return true;
+}
