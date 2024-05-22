@@ -11,7 +11,7 @@ public interface SaleDetailsRepo extends JpaRepository<SaleDetails,String> {
             nativeQuery = true)
     Double findTotalSales();
 
-    @Query(value = "SELECT SUM((sd.unit_price_sale - i.unit_price_buy) * sd.quantity) AS totalProfit " +
+    @Query(value = "SELECT SUM(sd.unit_price_sale * sd.quantity) - SUM(i.unit_price_buy * sd.quantity) AS totalProfit " +
             "FROM sale_details sd " +
             "JOIN inventory i ON sd.item_code = i.item_code " +
             "JOIN sale s ON sd.order_no = s.order_no " +

@@ -46,7 +46,7 @@ getAllInventory();
         // Bind delete event to newly added delete buttons
     }
 
-// Function to load suppliers into the combo box with supplier code as value
+//Function to load suppliers into the combo box with supplier code as value
 function loadSuppliersIntoComboBox(suppliers) {
     var comboBox = $('#cmbSupplierCode');
     comboBox.empty(); // Clear existing options
@@ -95,55 +95,117 @@ function loadSuppliers() {
     });
 }
 
-$("#btnSaveItem").click(function () {
+$("#btnSaveItem").click(function() {
     checkValidity(inventoryValidations);
     if (allFieldsValid(inventoryValidations)) {
-        var formData = $("#itemForm").serializeArray();
-        var jsonData = {};
-        $(formData).each(function (index, obj) {
-            jsonData[obj.name] = obj.value;
-        });
+        var image = $("#itmCapturedImage");
+        var imageUrl = image.attr('src');
+        if (!imageUrl || imageUrl === '../../assets/img/login1.jpg') {
+            alert("Error");
+            return; // Ensure to return if there's an error
+        }
+
+        // Collect form data manually to include all fields
+        let formData = {
+            itemCode: $("#txtItemCode").val(),
+            itemDesc: $("#txtItemName").val(),
+            itemPic: imageUrl,
+            category: $("#txtCategory").val(),
+            size: $("#txtSize").val(),
+            supplierCode: $("#cmbSupplierCode").val(),
+            supplierName: $("#txtSupplierName").val(),
+            unitPriceBuy: $("#txtPriceBuy").val(),
+            unitPriceSale: $("#txtPriceSale").val(),
+            quantity: $("#txtQty").val(),
+            profit: $("#txtProfit").val(),
+            profitMargin: $("#txtProfitMargin").val(),
+            status: $("#txtStatus").val()
+        };
 
         $.ajax({
-            type: "POST",
             url: "http://localhost:8080/app/api/v1/inventory",
-            data: JSON.stringify(jsonData),
+            method: "POST",
             contentType: "application/json",
-            success: function () {
+            data: JSON.stringify(formData),
+            success: function (response) {
                 updateAlert("Item Saved Successfully");
                 getAllInventory();
             },
-            error: function (error) {
-                unSuccessUpdateAlert("Item Saved Unsuccessfully");
-                console.log("Error:", error);
+            error: function (xhr, status, error) {
+                unSuccessUpdateAlert("Item Save Failed");
+                getAllInventory();
             }
         });
-    } else {
-        console.log("Validation failed");
     }
 });
-// Function to update inventory item
-$("#btnUpdateItem").click(function () {
+
+// // Function to update inventory item
+// $("#btnUpdateItem").click(function () {
+//     checkValidity(inventoryValidations);
+//     if (allFieldsValid(inventoryValidations)) {
+//         var formData = new FormData($("#itemForm")[0]);
+//         $.ajax({
+//             type: "PUT",
+//             url: "http://localhost:8080/app/api/v1/inventory",
+//             data: formData,
+//             contentType: false,
+//             processData: false,
+//             success: function () {
+//                 updateAlert("Item Update Successfully");
+//                 getAllInventory();
+//             },
+//             error: function (error) {
+//                 unSuccessUpdateAlert("Item Update UnSuccessfully");
+//                 console.log("Error:", error);
+//             }
+//         });
+//     } else {
+//         console.log("Validation failed");
+//     }
+// });
+
+// Update method
+$("#btnUpdateItem").click(function() {
     checkValidity(inventoryValidations);
     if (allFieldsValid(inventoryValidations)) {
-        var formData = new FormData($("#itemForm")[0]);
+        var image = $("#itmCapturedImage");
+        var imageUrl = image.attr('src');
+        if (!imageUrl || imageUrl === '../../assets/img/login1.jpg') {
+            alert("Error");
+            return; // Ensure to return if there's an error
+        }
+
+        // Collect form data manually to include all fields
+        let formData = {
+            itemCode: $("#txtItemCode").val(),
+            itemDesc: $("#txtItemName").val(),
+            itemPic: imageUrl,
+            category: $("#txtCategory").val(),
+            size: $("#txtSize").val(),
+            supplierCode: $("#cmbSupplierCode").val(),
+            supplierName: $("#txtSupplierName").val(),
+            unitPriceBuy: $("#txtPriceBuy").val(),
+            unitPriceSale: $("#txtPriceSale").val(),
+            quantity: $("#txtQty").val(),
+            profit: $("#txtProfit").val(),
+            profitMargin: $("#txtProfitMargin").val(),
+            status: $("#txtStatus").val()
+        };
+
         $.ajax({
-            type: "PUT",
-            url: "http://localhost:8080/app/api/v1/inventory",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function () {
-                updateAlert("Item Update Successfully");
+            url: "http://localhost:8080/app/api/v1/inventory/" + formData.itemCode, // Assuming itemCode is the identifier
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function (response) {
+                updateAlert("Item Updated Successfully");
                 getAllInventory();
             },
-            error: function (error) {
-                unSuccessUpdateAlert("Item Update UnSuccessfully");
-                console.log("Error:", error);
+            error: function (xhr, status, error) {
+                unSuccessUpdateAlert("Item Update Failed");
+                getAllInventory();
             }
         });
-    } else {
-        console.log("Validation failed");
     }
 });
 
@@ -261,3 +323,23 @@ $("#txtItemCode, #txtItemName, #txtCategory, #txtSize, #txtPriceBuy, #txtPriceSa
 function allFieldsValid(validations) {
     return validations.every(validation => validation.reg.test(validation.field.val()));
 }
+
+$('#itemImgFile').change(function() {
+    var fileInput = $('#itemImgFile')[0];
+    var file = fileInput.files[0];
+
+    if (file && (file.type.includes('image') || file.type === 'image/gif')) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#itmVideo').hide();
+            $('#itmCapturedImage').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+        $("#itmClear").prop("disabled", false);
+        $(this).val("");
+    } else {
+        $('#itemImgFileError').text('Please upload an image or GIF.');
+        $('#itemImgFileError').css("border", "1px solid #ced4da");
+    }
+
+});
