@@ -15,6 +15,7 @@ public class SaleDetails {
     private String orderNo;
     @Id
     private String itemCode;
+    private double unitPriceBuy;
     private double unitPriceSale;
     private int quantity;
     //Out-Verse
