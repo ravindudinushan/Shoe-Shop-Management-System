@@ -420,7 +420,12 @@
                 </div>
                 <div class="row mt-1">
                     <div class="col-12 col-md-6 col-lg-6">
-                        <label class="fw-bold" for="buyPrice">Unit Price</label>
+                        <label class="fw-bold" for="price">Unit Price-Sale</label>
+                        <input class="form-control border-dark" disabled id="price" type="text">
+                        <strong class="control-error" id="CheckPrice"></strong>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <label class="fw-bold" for="buyPrice">Unit Price-Sale</label>
                         <input class="form-control border-dark" disabled id="buyPrice" type="text">
                         <strong class="control-error" id="lblCheckPrice"></strong>
                     </div>
@@ -488,7 +493,8 @@
                                 <th>Item Code</th>
                                 <th>Item Desc</th>
                                 <th>Shoe Size</th>
-                                <th>Unit Price</th>
+                                <th>Unit Price-Buy</th>
+                                <th>Unit Price-Sale</th>
                                 <th>Quantity</th>
                                 <th>Total Price</th>
 <!--                                <th>Pay Methods</th>-->
@@ -540,7 +546,8 @@
                                 <th>Item Code</th>
                                 <th>Order No</th>
                                 <th>Quantity</th>
-                                <th>Unit Price</th>
+                                <th>Unit Price-Buy</th>
+                                <th>Unit Price-Sale</th>
                             </tr>
                             </thead>
                             <tbody id="tblOrderDetails"></tbody>

@@ -109,11 +109,13 @@ function updateItemName() {
         $('#txtItemDesc').val(selectedItem.itemDesc);
         $('#itemSize').val(selectedItem.size);
         $('#qtyOnHand').val(selectedItem.quantity);
+        $('#price').val(selectedItem.unitPriceBuy);
         $('#buyPrice').val(selectedItem.unitPriceSale);
     } else {
         $('#txtItemDesc').val('');
         $('#itemSize').val('');
         $('#qtyOnHand').val('');
+        $('#price').val('');
         $('#buyPrice').val('');
     }
 }
@@ -177,7 +179,7 @@ $("#btnAddToCart").on("click", function () {
         loadCartTableDetail();
         reduceQty($("#buyQty").val());
         calcTotal($("#buyQty").val() * $("#buyPrice").val());
-        $('#cmbItemCode,#txtItemDesc,#itemSize,#buyPrice,#qtyOnHand,#buyQty').val("");
+        $('#cmbItemCode,#txtItemDesc,#itemSize,#price,#buyPrice,#qtyOnHand,#buyQty').val("");
         $("#btnAddToCart").attr('disabled', true);
     } else if (duplicate === true) {
 
@@ -200,14 +202,16 @@ $("#btnAddToCart").on("click", function () {
         let itemCode = $(this).children(":eq(0)").text();
         let itemName = $(this).children(":eq(1)").text();
         let size = $(this).children(":eq(2)").text();
-        let unitPrice = $(this).children(":eq(3)").text();
-        let qty = $(this).children(":eq(4)").text();
-        let total = $(this).children(":eq(5)").text();
+        let unitPriceBuy = $(this).children(":eq(3)").text();
+        let unitPriceSale = $(this).children(":eq(4)").text();
+        let qty = $(this).children(":eq(5)").text();
+        let total = $(this).children(":eq(6)").text();
 
         $("#cmbItemCode").val(itemCode);
         $("#txtItemDesc").val(itemName);
         $("#itemSize").val(size);
-        $("#buyPrice").val(unitPrice);
+        $("#price").val(unitPriceBuy);
+        $("#buyPrice").val(unitPriceSale);
         $("#buyQty").val(qty);
         $("#txtTotal").val(total);
 
@@ -276,12 +280,13 @@ function loadCartTableDetail() {
     itemCode = $("#cmbItemCode").val();
     itemName = $("#txtItemDesc").val();
     itemSize = $("#itemSize").val();
-    itemPrice = $("#buyPrice").val();
+    itemPriceBuy = $("#price").val();
+    itemPriceSale = $("#buyPrice").val();
     itemQty = $("#qtyOnHand").val();
     itemOrderQty = $("#buyQty").val();
 
-    let total = itemPrice * itemOrderQty;
-    let row = `<tr><td>${itemCode}</td><td>${itemName}</td><td>${itemSize}</td><td>${itemPrice}</td><td>${itemOrderQty}</td><td>${total}</td></tr>`;
+    let total = itemPriceSale * itemOrderQty;
+    let row = `<tr><td>${itemCode}</td><td>${itemName}</td><td>${itemSize}</td><td>${itemPriceBuy}</td><td>${itemPriceSale}</td><td>${itemOrderQty}</td><td>${total}</td></tr>`;
 
     $("#tblAddToCart").append(row);
 }
@@ -334,8 +339,9 @@ $("#btnPurchase").click(function () {
         var detailOb = {
             orderNo: $("#orderId").val(),
             itemCode: $(this).children(':nth-child(1)').text(),
-            quantity: $(this).children(':nth-child(5)').text(),
-            unitPriceSale: $(this).children(':nth-child(6)').text()
+            quantity: $(this).children(':nth-child(6)').text(),
+            unitPriceBuy: $(this).children(':nth-child(4)').text(),
+            unitPriceSale: $(this).children(':nth-child(5)').text()
         };
         saleDetails.push(detailOb);
     });
@@ -398,7 +404,7 @@ $("#btnPurchase").click(function () {
  * Clear Method
  * */
 function clearDetails() {
-    $('#cmbCustomerId,#txtCustomerName,#cashierName,#cmbItemCode,#txtItemDesc,#itemSize,#qtyOnHand,#buyPrice,#buyQty,#txtPoint,#txtTotal,#cmbMethod').val("");
+    $('#cmbCustomerId,#txtCustomerName,#cashierName,#cmbItemCode,#txtItemDesc,#itemSize,#qtyOnHand,#price,#buyPrice,#buyQty,#txtPoint,#txtTotal,#cmbMethod').val("");
     $("#tblAddToCart").empty();
     $("#btnPurchase").attr('disabled', true);
     $("#btnAddToCart").attr('disabled', true);
@@ -487,6 +493,7 @@ async function fetchOrderDetails() {
                 <td>${detail.itemCode}</td>
                 <td>${detail.orderNo}</td>
                 <td>${detail.quantity}</td>
+                <td>${detail.unitPriceBuy}</td>
                 <td>${detail.unitPriceSale}</td>
             `;
             tblOrderDetails.appendChild(row);
