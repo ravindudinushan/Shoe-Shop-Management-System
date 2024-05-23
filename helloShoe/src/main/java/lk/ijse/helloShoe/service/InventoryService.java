@@ -6,9 +6,9 @@ import lk.ijse.helloShoe.entity.Inventory;
 import java.util.List;
 
 public interface InventoryService {
-    void saveInventory(InventoryDTO dto);
-    void updateInventory(InventoryDTO dto);
-    void deleteInventory(String itemCode);
     List<InventoryDTO> getAllInventory();
-    Inventory searchInventoryCode(String itemCode);
+    InventoryDTO getInventoryDetails(String id);
+    InventoryDTO saveInventory(InventoryDTO inventoryDTO);
+    void updateInventory(String id, InventoryDTO inventoryDTO);
+    void deleteInventory(String id);
 }

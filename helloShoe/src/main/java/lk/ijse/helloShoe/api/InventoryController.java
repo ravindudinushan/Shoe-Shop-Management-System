@@ -3,49 +3,68 @@ package lk.ijse.helloShoe.api;
 import lk.ijse.helloShoe.dto.InventoryDTO;
 import lk.ijse.helloShoe.entity.Inventory;
 import lk.ijse.helloShoe.service.InventoryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/inventory")
-@CrossOrigin
+@RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE,RequestMethod.PATCH, RequestMethod.OPTIONS})
 public class InventoryController {
-
-    @Autowired
-    InventoryService inventoryService;
+    private final InventoryService inventoryService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<InventoryDTO> getAllInventory(){
+    List<InventoryDTO> getAllInventory(){
         return inventoryService.getAllInventory();
     }
 
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public void saveInventory(@RequestBody InventoryDTO dto){
-        inventoryService.saveInventory(dto);
+    InventoryDTO saveInventory(@RequestPart("data") InventoryDTO inventoryDTO,@RequestPart("itempic") MultipartFile itempic){
+        String base64ProfilePic = null;
+        try {
+            base64ProfilePic = Base64.getEncoder().encodeToString(itempic.getBytes());
+            inventoryDTO.setItemPic(
+                    base64ProfilePic
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return inventoryService.saveInventory(inventoryDTO);
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(params = {"itemCode"})
-    public void deleteInventory(@RequestParam String itemCode) {
+    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    void updateInventory(@RequestPart("data") InventoryDTO inventoryDTO,@RequestPart("itempic") MultipartFile itempic){
+        String base64ProfilePic = null;
+        try {
+            base64ProfilePic = Base64.getEncoder().encodeToString(itempic.getBytes());
+            inventoryDTO.setItemPic(
+                    base64ProfilePic
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        inventoryService.updateInventory(inventoryDTO.getItemCode(),inventoryDTO);
+    }
+
+    @DeleteMapping(value = "/{id}",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    void deleteInventory(@PathVariable("id") String itemCode){
         inventoryService.deleteInventory(itemCode);
     }
 
-    @PutMapping
-    @PostMapping
-    public void updateInventory(@RequestBody InventoryDTO dto) {
-        inventoryService.updateInventory(dto);
+    @PatchMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    InventoryDTO getInventory(@PathVariable("id") String id){
+        return inventoryService.getInventoryDetails(id);
     }
-
-    @ResponseStatus(HttpStatus.CREATED)
-    @GetMapping(path = "/searchInventory", params = {"itemCode"})
-    public Inventory searchInventoryCode(String itemCode) {
-        return inventoryService.searchInventoryCode(itemCode);
-    }
-
 }
