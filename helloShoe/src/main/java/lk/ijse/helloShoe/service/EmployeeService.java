@@ -7,10 +7,10 @@ import lk.ijse.helloShoe.entity.Employee;
 import java.util.List;
 
 public interface EmployeeService {
-    void saveEmployee(EmployeeDTO dto);
-    void updateEmployee(EmployeeDTO dto);
-    void deleteEmployee(String employeeCode);
-    List<EmployeeDTO> getAllEmployee();
-    CustomDTO employeeIdGenerate();
-    Employee searchEmployeeCode(String employeeCode);
+    List<EmployeeDTO> getAllEmployees();
+    EmployeeDTO getEmployeeDetails(String id);
+    EmployeeDTO saveEmployee(EmployeeDTO employeeDTO);
+    void updateEmployee(String id, EmployeeDTO employeeDTO);
+    void deleteEmployee(String id);
+    String nextEmployeeCode();
 }

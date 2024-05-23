@@ -1,81 +1,77 @@
 package lk.ijse.helloShoe.service.impl;
 
-import lk.ijse.helloShoe.dto.CustomDTO;
 import lk.ijse.helloShoe.dto.EmployeeDTO;
 import lk.ijse.helloShoe.entity.Employee;
 import lk.ijse.helloShoe.repo.EmployeeRepo;
 import lk.ijse.helloShoe.service.EmployeeService;
+import lk.ijse.helloShoe.service.exception.DuplicateRecordException;
 import lk.ijse.helloShoe.service.exception.NotFoundException;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Base64;
 import java.util.List;
 
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
+    EmployeeRepo employeeRepository;
+    ModelMapper modelMapper;
 
-    @Autowired
-    private EmployeeRepo repo;
-
-    @Autowired
-    private ModelMapper mapper;
+    public EmployeeServiceImpl(EmployeeRepo employeeRepository, ModelMapper modelMapper) {
+        this.employeeRepository = employeeRepository;
+        this.modelMapper = modelMapper;
+    }
 
     @Override
-    public void saveEmployee(EmployeeDTO dto) {
-        if (repo.existsById(dto.getEmployeeCode())) {
-            throw new RuntimeException("Employee Already Exist. Please enter another id..!");
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeeRepository.findAll().stream().map(
+                employee -> modelMapper.map(employee, EmployeeDTO.class)
+        ).toList();
+    }
+
+    @Override
+    public EmployeeDTO getEmployeeDetails(String id) {
+        if(!employeeRepository.existsByEmployeeCode(id)){
+            throw new NotFoundException("Employee "+id+" Not Found!");
         }
-        String encodedImageData = encodeToBase64(dto.getProfilePic().getBytes());
-        dto.setProfilePic(encodedImageData);
-
-        Employee employee = mapper.map(dto, Employee.class);
-        repo.save(employee);
+        return modelMapper.map(employeeRepository.findByEmployeeCode(id), EmployeeDTO.class);
     }
 
     @Override
-    public void updateEmployee(EmployeeDTO dto) {
-        if (!repo.existsById(dto.getEmployeeCode())) {
-            throw new RuntimeException("Supplier Not Exist. Please enter Valid id..!");
+    public EmployeeDTO saveEmployee(EmployeeDTO employeeDTO) {
+        if(employeeRepository.existsByEmployeeCode(employeeDTO.getEmployeeCode())){
+            throw new DuplicateRecordException("This Employee "+employeeDTO.getEmployeeCode()+" already exicts...");
         }
-        String encodedImageData = encodeToBase64(dto.getProfilePic().getBytes());
-        dto.setProfilePic(encodedImageData);
-
-        // Save the inventory
-        Employee employee = mapper.map(dto, Employee.class);
-        repo.save(employee);
+        return modelMapper.map(employeeRepository.save(modelMapper.map(
+                employeeDTO, Employee.class)), EmployeeDTO.class
+        );
     }
 
     @Override
-    public void deleteEmployee(String employeeCode) {
-        if(!repo.existsById(employeeCode)){ throw new NotFoundException("Delete Failed; employee code: " + employeeCode + " does not exist");
+    public void updateEmployee(String id, EmployeeDTO employeeDTO) {
+        if(!employeeRepository.existsByEmployeeCode(id)){
+            throw new NotFoundException("Employee ID"+ id + "Not Found...");
         }
-        repo.deleteById(employeeCode);
+        employeeDTO.setEmployeeCode(id);
+        employeeRepository.save(modelMapper.map(employeeDTO,Employee.class));
     }
 
     @Override
-    public List<EmployeeDTO> getAllEmployee() {
-        return repo.findAll().stream().map(employee -> mapper.map(employee, EmployeeDTO.class)).toList();
-    }
-
-    @Override
-    public CustomDTO employeeIdGenerate() {
-        return new CustomDTO(repo.getLastIndex());
-    }
-
-    @Override
-    public Employee searchEmployeeCode(String employeeCode) {
-        if (!repo.existsById(employeeCode)) {
-            throw new RuntimeException("Wrong ID. Please enter Valid id..!");
+    public void deleteEmployee(String id) {
+        if(!employeeRepository.existsByEmployeeCode(id)){
+            throw  new NotFoundException("Employee ID"+ id + "Not Found...");
         }
-        return mapper.map(repo.findById(employeeCode).get(), Employee.class);
+        employeeRepository.deleteByEmployeeCode(id);
     }
 
-    // Method to encode byte array to base64 string
-    private String encodeToBase64(byte[] imageData) {
-        return Base64.getEncoder().encodeToString(imageData);
+    @Override
+    public String nextEmployeeCode() {
+        String lastEmployeeCode = employeeRepository.findLatestEmployeeCode();
+        if(lastEmployeeCode==null){lastEmployeeCode = "EM000";}
+        int numericPart = Integer.parseInt(lastEmployeeCode.substring(3));
+        numericPart++;
+        String nextEmployeeCode = "EM" + String.format("%03d", numericPart);
+        return nextEmployeeCode;
     }
 }
