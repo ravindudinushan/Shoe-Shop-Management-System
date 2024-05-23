@@ -339,7 +339,7 @@
                 <div class="card info-card">
                     <div class="search-bar mt-4">
                         <div class="search-form d-flex align-items-center">
-                            <input type="search" name="user_Id" id="search_Id" placeholder="Search" title="Enter search keyword">
+                            <input type="search" name="employeeSearch" id="searchEmployee" placeholder="Search" title="Enter search keyword">
                             <button type="button" title="Search"><i class="bi bi-search"></i></button>
                         </div>
                     </div>
@@ -348,14 +348,14 @@
                         <form class="row" id="customerForm">
                             <section id="sec1Customer" class="col-md-4 mt-3">
                                 <div class="mb-sm-0">
-                                    <label class="form-label" for="employee Code">Employee Code</label>
-                                    <input type="text" name="employee Code" class="form-control" readonly id="employee Code"
+                                    <label class="form-label" for="employeeCode">Employee Code</label>
+                                    <input type="text" name="employeeCode" class="form-control" readonly id="employeeCode"
                                            placeholder="E00-001">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="employee Name">Employee Name</label>
-                                    <input type="text" name="employee Name" class="form-control" id="employee Name"
+                                    <label class="form-label" for="employeeName">Employee Name</label>
+                                    <input type="text" name="employeeName" class="form-control" id="employeeName"
                                            placeholder="Employee Name">
                                     <span class="control-error"></span>
                                 </div>
@@ -366,14 +366,14 @@
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="contact_No">Contact Number</label>
-                                    <input type="text" name="contact_No" class="form-control" id="contact_No"
+                                    <label class="form-label" for="contactNo">Contact Number</label>
+                                    <input type="text" name="contactNo" class="form-control" id="contactNo"
                                            placeholder="Contact Number">
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="Employee DOB"> Employee DOB</label>
-                                    <input class="form-control border-dark" id="Employee DOB" type="date">
+                                    <label class="form-label" for="dob"> Employee DOB</label>
+                                    <input class="form-control border-dark" name="dob" id="dob" type="date">
                                     <span class="control-error"></span>
                                 </div>
 
@@ -385,8 +385,8 @@
                                 </div>
 
                                 <div class="mb-sm-0">
-                                    <label class="form-label" for="attached Branch">Attached Branch</label>
-                                    <input type="text" name="attached Branch" class="form-control" id="attached Branch"
+                                    <label class="form-label" for="attachedBranch">Attached Branch</label>
+                                    <input type="text" name="attachedBranch" class="form-control" id="attachedBranch"
                                            placeholder="Attached Branch">
                                     <span class="control-error"></span>
                                 </div>
@@ -395,8 +395,8 @@
 
                             <section id="sec2Customer" class="col-md-4 mt-3">
                                 <div class="mb-sm-0 mt-3">
-                                    <label for="access Role type" class="form-label">Access Role type</label>
-                                    <select class="form-control" id="access Role type" name="access Role type">
+                                    <label for="accessRole" class="form-label">Access Role type</label>
+                                    <select class="form-control" id="accessRole" name="accessRole">
                                         <option value="Admin">Admin</option>
                                         <option value="User">User</option>
                                     </select>
@@ -411,31 +411,31 @@
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label for="access Role type" class="form-label">Gender</label>
+                                    <label for="gender" class="form-label">Gender</label>
                                     <select class="form-control" id="gender" name="gender">
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="MALE">MALE</option>
+                                        <option value="FEMALE">FEMALE</option>
                                     </select>
                                     <span class="control-error"></span>
                                 </div>
 
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="guardian Name">Guardian Person</label>
-                                    <input type="text" name="guardian Name" class="form-control" id="guardian Name"
+                                    <label class="form-label" for="emergencyContactPerson">Emergency Person</label>
+                                    <input type="text" name="emergencyContactPerson" class="form-control" id="emergencyContactPerson"
                                            placeholder="Guardian Name">
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="Employee Joining Dates"> Employee Joining Dates</label>
-                                    <input class="form-control border-dark" id="Employee Joining Dates" type="date">
+                                    <label class="form-label" for="dateOfJoin"> Employee Joining Dates</label>
+                                    <input class="form-control border-dark" name="dateOfJoin" id="dateOfJoin" type="date">
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="Emergency Contact">Emergency Contact</label>
-                                    <input type="text" name="contact NUmber" class="form-control" id="Emergency Contact"
+                                    <label class="form-label" for="emergencyContact">Emergency Contact</label>
+                                    <input type="text" name="emergencyContact" class="form-control" id="emergencyContact"
                                            placeholder="Emergency Contact">
                                     <span class="control-error"></span>
                                 </div>
@@ -446,38 +446,38 @@
 
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="name"> Employee Address</label>
-                                    <input type="text" name="name" class="form-control" id="name"
+                                    <label class="form-label" for="addressLine01"> Employee Address</label>
+                                    <input type="text" name="addressLine01" class="form-control" id="addressLine01"
                                            placeholder="Name">
-                                    <input type="text" name="lane" class="form-control" id="lane"
+                                    <input type="text" name="addressLine02" class="form-control" id="addressLine02"
                                            placeholder="Lane">
-                                    <input type="text" name="city" class="form-control" id="city"
+                                    <input type="text" name="addressLine03" class="form-control" id="addressLine03"
                                            placeholder="City">
-                                    <input type="text" name="state" class="form-control" id="state"
+                                    <input type="text" name="addressLine04" class="form-control" id="addressLine04"
                                            placeholder="State">
-                                    <input type="text" name="code" class="form-control" id="code"
+                                    <input type="text" name="addressLine05" class="form-control" id="addressLine05"
                                            placeholder="Code">
 
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="View">Employee Profile Pic</label>
-                                    <input class="form-control" id="View" type="file" name="View">
+                                    <label class="form-label" for="employeeProfilePic">Employee Profile Pic</label>
+                                    <input class="form-control" id="employeeProfilePic" type="file" name="employeeProfilePic">
                                     <span class="control-error"></span>
                                 </div>
 
 
                                 <div class="mt-4 mb-3 d-grid gap-2 d-sm-flex justify-content-md-center">
 
-                                    <button class="btn btn-success me-md-1" id="btnSaveCar" type="button"
+                                    <button class="btn btn-success me-md-1" id="btnSaveEmployee" type="button"
                                             formaction="driverForm">Save
                                     </button>
 
-                                    <button class="btn btn-warning me-md-1" id="btnUpdateCustomer" type="button">
+                                    <button class="btn btn-warning me-md-1" id="btnUpdateEmployee" type="button">
                                         Update
                                     </button>
-                                    <button type="button" class="btn btn-danger me-md-1" id="btnDeleteCustomer">Delete
+                                    <button type="button" class="btn btn-danger me-md-1" id="btnDeleteEmployee">Delete
                                     </button>
                                 </div>
                             </section>
@@ -496,19 +496,23 @@
                                     <tr>
                                         <th scope="col">Employee Code</th>
                                         <th scope="col">Employee Name</th>
-                                        <th scope="col">Employee Gender</th>
-                                        <th scope="col">Employee Status</th>
+                                        <th scope="col">Employee Profile Picture</th>
+                                        <th scope="col">Gender</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Designation</th>
-                                        <th scope="col">Access Role</th>
-                                        <th scope="col">NIC Number</th>
-                                        <th scope="col">Employee DOB</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">DOB</th>
                                         <th scope="col">Date Of Join</th>
-                                        <th scope="col">Employee Profile Pic</th>
-                                        <th scope="col">Attach Branch</th>
+                                        <th scope="col">Branch</th>
+                                        <th scope="col">Address 1</th>
+                                        <th scope="col">Address 2</th>
+                                        <th scope="col">Address 3</th>
+                                        <th scope="col">Address 4</th>
+                                        <th scope="col">Address 5</th>
                                         <th scope="col">Contact Number</th>
-                                        <th scope="col">Guardian Person</th>
+                                        <th scope="col">email</th>
                                         <th scope="col">Emergency Contact</th>
-
+                                        <th scope="col">Emergency Person</th>
                                     </tr>
                                     </thead>
                                     <tbody id="customerTable"></tbody>
