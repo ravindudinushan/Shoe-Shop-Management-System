@@ -2,30 +2,30 @@ getAllInventory();
 /**
  * load all items Method
  * */
-    // Function to retrieve all inventory items
-    function getAllInventory() {
-        $.ajax({
-            type: "GET",
-            url: "http://localhost:8080/app/api/v1/inventory",
-            contentType: "application/json",
-            success: function (response) {
-                displayInventory(response);
-                blindClickEvents();
-                setTextFieldValues("", "", "", "", "", "", "","", "", "", "", "", "");
-                console.log(response.message);
-            },
-            error: function (error) {
-                let message = JSON.parse(error.responseText).message;
-                console.log(message);
-            }
-        });
-    }
+// Function to retrieve all inventory items
+function getAllInventory() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/app/api/v1/inventory",
+        contentType: "application/json",
+        success: function (response) {
+            displayInventory(response);
+            blindClickEvents();
+            setTextFieldValues("", "", "", "", "", "", "","", "", "", "", "", "");
+            console.log(response.message);
+        },
+        error: function (error) {
+            let message = JSON.parse(error.responseText).message;
+            console.log(message);
+        }
+    });
+}
 
-    // Function to display inventory items in table
-    function displayInventory(items) {
-        $("#itemTable").empty();
-        items.forEach(function (item) {
-            $("#itemTable").append(`
+// Function to display inventory items in table
+function displayInventory(items) {
+    $("#itemTable").empty();
+    items.forEach(function (item) {
+        $("#itemTable").append(`
                 <tr>
                     <td>${item.itemCode}</td>
                     <td>${item.itemDesc}</td>
@@ -42,9 +42,9 @@ getAllInventory();
                     <td>${item.status}</td>
                 </tr>
             `);
-        });
-        // Bind delete event to newly added delete buttons
-    }
+    });
+    // Bind delete event to newly added delete buttons
+}
 
 //Function to load suppliers into the combo box with supplier code as value
 function loadSuppliersIntoComboBox(suppliers) {
@@ -139,31 +139,6 @@ $("#btnSaveItem").click(function() {
     }
 });
 
-// // Function to update inventory item
-// $("#btnUpdateItem").click(function () {
-//     checkValidity(inventoryValidations);
-//     if (allFieldsValid(inventoryValidations)) {
-//         var formData = new FormData($("#itemForm")[0]);
-//         $.ajax({
-//             type: "PUT",
-//             url: "http://localhost:8080/app/api/v1/inventory",
-//             data: formData,
-//             contentType: false,
-//             processData: false,
-//             success: function () {
-//                 updateAlert("Item Update Successfully");
-//                 getAllInventory();
-//             },
-//             error: function (error) {
-//                 unSuccessUpdateAlert("Item Update UnSuccessfully");
-//                 console.log("Error:", error);
-//             }
-//         });
-//     } else {
-//         console.log("Validation failed");
-//     }
-// });
-
 // Update method
 $("#btnUpdateItem").click(function() {
     checkValidity(inventoryValidations);
@@ -172,7 +147,7 @@ $("#btnUpdateItem").click(function() {
         var imageUrl = image.attr('src');
         if (!imageUrl || imageUrl === '../../assets/img/login1.jpg') {
             alert("Error");
-            return; // Ensure to return if there's an error
+            return;
         }
 
         // Collect form data manually to include all fields
@@ -193,7 +168,7 @@ $("#btnUpdateItem").click(function() {
         };
 
         $.ajax({
-            url: "http://localhost:8080/app/api/v1/inventory/" + formData.itemCode, // Assuming itemCode is the identifier
+            url: "http://localhost:8080/app/api/v1/inventory", // Assuming itemCode is the identifier
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(formData),
@@ -209,44 +184,44 @@ $("#btnUpdateItem").click(function() {
     }
 });
 
-    // Function to delete inventory item
+// Function to delete inventory item
 $("#btnDeleteItem").click(function () {
     var itemCode = $("#txtItemCode").val();
-        $.ajax({
-            type: "DELETE",
-            url: `http://localhost:8080/app/api/v1/inventory?itemCode=${itemCode}`,
-            contentType: "application/json",
-            success: function () {
-                updateAlert("Item Delete Successfully");
-                getAllInventory();
-            },
-            error: function (error) {
-                unSuccessUpdateAlert("Item Delete UnSuccessfully");
-                console.log("Error:", error);
-            }
-        });
-});
-    // Function to search inventory item by item code
-    $("#btnSearchItem").click(function () {
-        var itemCode = $("#searchItemId").val();
-        $.ajax({
-            type: "GET",
-            url: `http://localhost:8080/app/api/v1/inventory/searchInventory?itemCode=${itemCode}`,
-            contentType: "application/json",
-            success: function (response) {
-                if (response) {
-                    displayInventory([response]);
-                } else {
-                    unSuccessUpdateAlert("Item not found!");
-                }
-            },
-            error: function (error) {
-                console.log("Error:", error);
-            }
-        });
+    $.ajax({
+        type: "DELETE",
+        url: `http://localhost:8080/app/api/v1/inventory?itemCode=${itemCode}`,
+        contentType: "application/json",
+        success: function () {
+            updateAlert("Item Delete Successfully");
+            getAllInventory();
+        },
+        error: function (error) {
+            unSuccessUpdateAlert("Item Delete UnSuccessfully");
+            console.log("Error:", error);
+        }
     });
+});
+// Function to search inventory item by item code
+$("#btnSearchItem").click(function () {
+    var itemCode = $("#searchItemId").val();
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/app/api/v1/inventory/searchInventory?itemCode=${itemCode}`,
+        contentType: "application/json",
+        success: function (response) {
+            if (response) {
+                displayInventory([response]);
+            } else {
+                unSuccessUpdateAlert("Item not found!");
+            }
+        },
+        error: function (error) {
+            console.log("Error:", error);
+        }
+    });
+});
 
-    getAllInventory();
+getAllInventory();
 
 /**
  * clear input fields Values Method
