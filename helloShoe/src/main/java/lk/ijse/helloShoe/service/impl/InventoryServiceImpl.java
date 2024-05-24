@@ -5,7 +5,6 @@ import lk.ijse.helloShoe.entity.Customer;
 import lk.ijse.helloShoe.entity.Inventory;
 import lk.ijse.helloShoe.repo.InventoryRepo;
 import lk.ijse.helloShoe.service.InventoryService;
-import lk.ijse.helloShoe.service.exception.DuplicateRecordException;
 import lk.ijse.helloShoe.service.exception.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,58 +18,46 @@ import java.util.List;
 @Transactional
 public class InventoryServiceImpl implements InventoryService {
 
-    InventoryRepo inventoryRepository;
-    ModelMapper modelMapper;
+    @Autowired
+    InventoryRepo repo;
 
-    public InventoryServiceImpl(InventoryRepo inventoryRepository, ModelMapper modelMapper) {
-        this.inventoryRepository = inventoryRepository;
-        this.modelMapper = modelMapper;
+    @Autowired
+    private ModelMapper mapper;
+
+    @Override
+    public void saveInventory(InventoryDTO dto) {
+        if (repo.existsById(dto.getItemCode())) {
+            throw new RuntimeException("Item Already Exist. Please enter another id..!");
+        }
+        repo.save(mapper.map(dto, Inventory.class));
+    }
+
+    @Override
+    public void updateInventory(InventoryDTO dto) {
+        if (!repo.existsById(dto.getItemCode())) {
+            throw new NotFoundException("Update Failed; item code: " + dto.getItemCode() + " does not exist");
+        }
+        repo.save(mapper.map(dto, Inventory.class));
+    }
+
+    @Override
+    public void deleteInventory(String itemCode) {
+        if (!repo.existsById(itemCode)) {
+            throw new NotFoundException("Delete Failed; item code: " + itemCode + " does not exist");
+        }
+        repo.deleteById(itemCode);
     }
 
     @Override
     public List<InventoryDTO> getAllInventory() {
-        return inventoryRepository.findAll().stream().map(
-                inventory -> modelMapper.map(inventory, InventoryDTO.class)
-        ).toList();
+        return repo.findAll().stream().map(inventory -> mapper.map(inventory, InventoryDTO.class)).toList();
     }
 
     @Override
-    public InventoryDTO getInventoryDetails(String id) {
-        if(!inventoryRepository.existsByItemCode(id)){
-            throw new NotFoundException("Inventory "+id+" Not Found!");
+    public Inventory searchInventoryCode(String itemCode) {
+        if (!repo.existsById(itemCode)) {
+            throw new RuntimeException("Wrong ID. Please enter Valid id..!");
         }
-        return modelMapper.map(inventoryRepository.findByItemCode(id), InventoryDTO.class);
-    }
-
-    @Override
-    public InventoryDTO saveInventory(InventoryDTO inventoryDTO) {
-        if(inventoryRepository.existsByItemCode(inventoryDTO.getItemCode())){
-            throw new DuplicateRecordException("This Inventory "+inventoryDTO.getItemCode()+" already exicts...");
-        }
-        return modelMapper.map(inventoryRepository.save(modelMapper.map(
-                inventoryDTO, Inventory.class)), InventoryDTO.class
-        );
-    }
-
-    @Override
-    public void updateInventory(String id, InventoryDTO inventoryDTO) {
-        Inventory existingInventory = inventoryRepository.findByItemCode(id);
-
-        if(existingInventory.getItemCode().isEmpty()){
-            throw new NotFoundException("Inventory "+ id + "Not Found...");
-        }
-
-        existingInventory.setItemDesc(inventoryDTO.getItemDesc());
-        existingInventory.setItemPic(inventoryDTO.getItemPic());
-
-        inventoryRepository.save(existingInventory);
-    }
-
-    @Override
-    public void deleteInventory(String id) {
-        if(!inventoryRepository.existsByItemCode(id)){
-            throw  new NotFoundException("Inventory "+ id + "Not Found...");
-        }
-        inventoryRepository.deleteByItemCode(id);
+        return mapper.map(repo.findById(itemCode).get(), Inventory.class);
     }
 }
