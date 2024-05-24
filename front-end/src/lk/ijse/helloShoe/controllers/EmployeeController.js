@@ -1,406 +1,338 @@
-// document.addEventListener("DOMContentLoaded", () => {
-//     bindClickEvents();
-//     loadEmployees();
-//     generateEmployeeID();
-// });
-//
-// async function generateEmployeeID() {
-//     try {
-//         const response = await fetch("http://localhost:8080/app/api/v1/employees/nextid");
-//         const employeeCode = await response.text();
-//         document.getElementById("employeeCode").value = employeeCode;
-//     } catch (error) {
-//         console.error('Error generating employee ID:', error);
-//     }
-// }
-//
-// async function saveEmployee() {
-//     if (!employeeValidations()) return;
-//
-//     const formData = new FormData();
-//     formData.append("data", JSON.stringify(getEmployeeData()));
-//     formData.append("profilepic", document.getElementById("employeeProfilePic").files[0]);
-//
-//     try {
-//         const response = await fetch("http://localhost:8080/app/api/v1/employees", {
-//             method: 'POST',
-//             body: formData
-//         });
-//
-//         if (response.status === 201) {
-//             alert('Employee saved successfully!');
-//             loadEmployees();
-//         } else {
-//             alert('Error saving employee');
-//         }
-//     } catch (error) {
-//         console.error('Error saving employee:', error);
-//     }
-// }
-//
-// async function updateEmployee() {
-//     if (!employeeValidations()) return;
-//
-//     const formData = new FormData();
-//     formData.append("data", JSON.stringify(getEmployeeData()));
-//     formData.append("profilepic", document.getElementById("employeeProfilePic").files[0]);
-//
-//     try {
-//         const response = await fetch("http://localhost:8080/app/api/v1/employees", {
-//             method: 'PUT',
-//             body: formData
-//         });
-//
-//         if (response.status === 202) {
-//             alert('Employee updated successfully!');
-//             loadEmployees();
-//         } else {
-//             alert('Error updating employee');
-//         }
-//     } catch (error) {
-//         console.error('Error updating employee:', error);
-//     }
-// }
-//
-// async function deleteEmployee() {
-//     const employeeCode = document.getElementById("employeeCode").value;
-//
-//     try {
-//         const response = await fetch(`http://localhost:8080/app/api/v1/employees/${employeeCode}`, {
-//             method: 'DELETE',
-//         });
-//
-//         if (response.status === 202) {
-//             alert('Employee deleted successfully!');
-//             loadEmployees();
-//         } else {
-//             alert('Error deleting employee');
-//         }
-//     } catch (error) {
-//         console.error('Error deleting employee:', error);
-//     }
-// }
-//
-// async function loadEmployees() {
-//     try {
-//         const response = await fetch("http://localhost:8080/app/api/v1/employees");
-//         const employees = await response.json();
-//         displayEmployees(employees);
-//     } catch (error) {
-//         console.error('Error loading employees:', error);
-//     }
-// }
-//
-// function displayEmployees(employees) {
-//     const employeeTable = document.getElementById("customerTable");
-//     employeeTable.innerHTML = "";
-//
-//     employees.forEach(employee => {
-//         const row = document.createElement("tr");
-//
-//         row.innerHTML = `
-//             <td>${employee.employeeCode}</td>
-//             <td>${employee.employeeName}</td>
-//             <td><img src="data:image/jpeg;base64,${employee.employeeProfilePic}" height="50"></td>
-//             <td>${employee.gender}</td>
-//             <td>${employee.status}</td>
-//             <td>${employee.designation}</td>
-//             <td>${employee.accessRole}</td>
-//             <td>${new Date(employee.dob).toLocaleDateString()}</td>
-//             <td>${new Date(employee.dateOfJoin).toLocaleDateString()}</td>
-//             <td>${employee.attachedBranch}</td>
-//             <td>${employee.addressLine01}</td>
-//             <td>${employee.addressLine02}</td>
-//             <td>${employee.addressLine03}</td>
-//             <td>${employee.addressLine04}</td>
-//             <td>${employee.addressLine05}</td>
-//             <td>${employee.contactNo}</td>
-//             <td>${employee.email}</td>
-//             <td>${employee.emergencyContact}</td>
-//             <td>${employee.emergencyContactPerson}</td>
-//         `;
-//
-//         row.addEventListener("click", () => setTextFieldValues(employee));
-//         employeeTable.appendChild(row);
-//     });
-// }
-//
-// function setTextFieldValues(employee) {
-//     document.getElementById("employeeCode").value = employee.employeeCode;
-//     document.getElementById("employeeName").value = employee.employeeName;
-//     document.getElementById("status").value = employee.status;
-//     document.getElementById("contactNo").value = employee.contactNo;
-//     document.getElementById("dob").value = new Date(employee.dob).toISOString().split('T')[0];
-//     document.getElementById("designation").value = employee.designation;
-//     document.getElementById("attachedBranch").value = employee.attachedBranch;
-//     document.getElementById("accessRole").value = employee.accessRole;
-//     document.getElementById("email").value = employee.email;
-//     document.getElementById("gender").value = employee.gender;
-//     document.getElementById("emergencyContactPerson").value = employee.emergencyContactPerson;
-//     document.getElementById("dateOfJoin").value = new Date(employee.dateOfJoin).toISOString().split('T')[0];
-//     document.getElementById("emergencyContact").value = employee.emergencyContact;
-//     document.getElementById("addressLine01").value = employee.addressLine01;
-//     document.getElementById("addressLine02").value = employee.addressLine02;
-//     document.getElementById("addressLine03").value = employee.addressLine03;
-//     document.getElementById("addressLine04").value = employee.addressLine04;
-//     document.getElementById("addressLine05").value = employee.addressLine05;
-// }
-//
-// function bindClickEvents() {
-//     document.getElementById("btnSaveEmployee").addEventListener("click", saveEmployee);
-//     document.getElementById("btnUpdateEmployee").addEventListener("click", updateEmployee);
-//     document.getElementById("btnDeleteEmployee").addEventListener("click", deleteEmployee);
-//     document.getElementById("searchEmployee").addEventListener("input", searchEmployee);
-// }
-//
-// function searchEmployee() {
-//     const searchTerm = document.getElementById("searchEmployee").value.toLowerCase();
-//     const rows = document.querySelectorAll("#customerTable tr");
-//
-//     rows.forEach(row => {
-//         const cells = row.querySelectorAll("td");
-//         let match = false;
-//
-//         cells.forEach(cell => {
-//             if (cell.innerText.toLowerCase().includes(searchTerm)) {
-//                 match = true;
-//             }
-//         });
-//
-//         row.style.display = match ? "" : "none";
-//     });
-// }
-//
-// function getEmployeeData() {
-//     return {
-//         employeeCode: document.getElementById("employeeCode").value,
-//         employeeName: document.getElementById("employeeName").value,
-//         status: document.getElementById("status").value,
-//         contactNo: document.getElementById("contactNo").value,
-//         dob: new Date(document.getElementById("dob").value).toISOString(),
-//         designation: document.getElementById("designation").value,
-//         attachedBranch: document.getElementById("attachedBranch").value,
-//         accessRole: document.getElementById("accessRole").value,
-//         email: document.getElementById("email").value,
-//         gender: document.getElementById("gender").value,
-//         emergencyContactPerson: document.getElementById("emergencyContactPerson").value,
-//         dateOfJoin: new Date(document.getElementById("dateOfJoin").value).toISOString(),
-//         emergencyContact: document.getElementById("emergencyContact").value,
-//         addressLine01: document.getElementById("addressLine01").value,
-//         addressLine02: document.getElementById("addressLine02").value,
-//         addressLine03: document.getElementById("addressLine03").value,
-//         addressLine04: document.getElementById("addressLine04").value,
-//         addressLine05: document.getElementById("addressLine05").value
-//     };
-// }
-//
-// function employeeValidations() {
-//     // Implement the necessary validation checks here and return false if any validation fails
-//     return true;
-// }
-document.addEventListener("DOMContentLoaded", () => {
-    bindClickEvents();
-    loadEmployees();
-    generateEmployeeID();
-});
+getAllEmployees();
 
-async function generateEmployeeID() {
-    try {
-        const response = await fetch("http://localhost:8080/app/api/v1/employees/nextid");
-        const employeeCode = await response.text();
-        document.getElementById("employeeCode").value = employeeCode;
-    } catch (error) {
-        console.error('Error generating employee ID:', error);
-    }
-}
+function generateEmployeeID() {
+    $("#employeeCode").val("E00-001");
+    $.ajax({
+        url: "http://localhost:8080/app/api/v1/employee/employeeIdGenerate",
+        method: "GET",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (resp) {
+            let id = resp.value;
+            console.log("id" +id);
+            let tempId = parseInt(id.split("-")[1]);
+            tempId = tempId + 1;
+            if (tempId <= 9) {
+                $("#employeeCode").val("E00-00" + tempId);
+            } else if (tempId <= 99) {
+                $("#employeeCode").val("E00-0" + tempId);
+            } else {
+                $("#employeeCode").val("E00-" + tempId);
+            }
+        },
+        error: function (ob, statusText, error) {
 
-async function saveEmployee() {
-    if (!employeeValidations()) return;
-
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(getEmployeeData()));
-    const profilePic = document.getElementById("employeeProfilePic").files[0];
-    if (profilePic) {
-        formData.append("profilepic", profilePic);
-    }
-
-    try {
-        const response = await fetch("http://localhost:8080/app/api/v1/employees", {
-            method: 'POST',
-            body: formData
-        });
-
-        if (response.status === 201) {
-            alert('Employee saved successfully!');
-            loadEmployees();
-        } else {
-            alert('Error saving employee');
         }
-    } catch (error) {
-        console.error('Error saving employee:', error);
-    }
-}
-
-async function updateEmployee() {
-    if (!employeeValidations()) return;
-
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(getEmployeeData()));
-    const profilePic = document.getElementById("employeeProfilePic").files[0];
-    if (profilePic) {
-        formData.append("profilepic", profilePic);
-    }
-
-    try {
-        const response = await fetch("http://localhost:8080/app/api/v1/employees", {
-            method: 'PUT',
-            body: formData
-        });
-
-        if (response.status === 202) {
-            alert('Employee updated successfully!');
-            loadEmployees();
-        } else {
-            alert('Error updating employee');
-        }
-    } catch (error) {
-        console.error('Error updating employee:', error);
-    }
-}
-
-async function deleteEmployee() {
-    const employeeCode = document.getElementById("employeeCode").value;
-
-    try {
-        const response = await fetch(`http://localhost:8080/app/api/v1/employees/${employeeCode}`, {
-            method: 'DELETE',
-        });
-
-        if (response.status === 202) {
-            alert('Employee deleted successfully!');
-            loadEmployees();
-        } else {
-            alert('Error deleting employee');
-        }
-    } catch (error) {
-        console.error('Error deleting employee:', error);
-    }
-}
-
-async function loadEmployees() {
-    try {
-        const response = await fetch("http://localhost:8080/app/api/v1/employees");
-        const employees = await response.json();
-        displayEmployees(employees);
-    } catch (error) {
-        console.error('Error loading employees:', error);
-    }
-}
-
-function displayEmployees(employees) {
-    const employeeTable = document.getElementById("customerTable");
-    employeeTable.innerHTML = "";
-
-    employees.forEach(employee => {
-        const row = document.createElement("tr");
-
-        row.innerHTML = `
-            <td>${employee.employeeCode}</td>
-            <td>${employee.employeeName}</td>
-            <td><img src="data:image/jpeg;base64,${employee.employeeProfilePic}" height="50"></td>
-            <td>${employee.gender}</td>
-            <td>${employee.status}</td>
-            <td>${employee.designation}</td>
-            <td>${employee.accessRole}</td>
-            <td>${new Date(employee.dob).toLocaleDateString()}</td>
-            <td>${new Date(employee.dateOfJoin).toLocaleDateString()}</td>
-            <td>${employee.attachedBranch}</td>
-            <td>${employee.addressLine01}</td>
-            <td>${employee.addressLine02}</td>
-            <td>${employee.addressLine03}</td>
-            <td>${employee.addressLine04}</td>
-            <td>${employee.addressLine05}</td>
-            <td>${employee.contactNo}</td>
-            <td>${employee.email}</td>
-            <td>${employee.emergencyContact}</td>
-            <td>${employee.emergencyContactPerson}</td>
-        `;
-
-        row.addEventListener("click", () => setTextFieldValues(employee));
-        employeeTable.appendChild(row);
     });
 }
 
-function setTextFieldValues(employee) {
-    document.getElementById("employeeCode").value = employee.employeeCode;
-    document.getElementById("employeeName").value = employee.employeeName;
-    document.getElementById("status").value = employee.status;
-    document.getElementById("contactNo").value = employee.contactNo;
-    document.getElementById("dob").value = new Date(employee.dob).toISOString().split('T')[0];
-    document.getElementById("designation").value = employee.designation;
-    document.getElementById("attachedBranch").value = employee.attachedBranch;
-    document.getElementById("accessRole").value = employee.accessRole;
-    document.getElementById("email").value = employee.email;
-    document.getElementById("gender").value = employee.gender;
-    document.getElementById("emergencyContactPerson").value = employee.emergencyContactPerson;
-    document.getElementById("dateOfJoin").value = new Date(employee.dateOfJoin).toISOString().split('T')[0];
-    document.getElementById("emergencyContact").value = employee.emergencyContact;
-    document.getElementById("addressLine01").value = employee.addressLine01;
-    document.getElementById("addressLine02").value = employee.addressLine02;
-    document.getElementById("addressLine03").value = employee.addressLine03;
-    document.getElementById("addressLine04").value = employee.addressLine04;
-    document.getElementById("addressLine05").value = employee.addressLine05;
+/**
+ * load all employees Method
+ * */
+// Function to retrieve all employees
+function getAllEmployees() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/app/api/v1/employee",
+        contentType: "application/json",
+        success: function (response) {
+            displayEmployees(response);
+            blindClickEvents();
+            setTextFieldValues("", "", "", "", "", "", "","", "", "", "", "", "", "", "", "", "", "", "");
+            console.log(response.message);
+        },
+        error: function (error) {
+            let message = JSON.parse(error.responseText).message;
+            console.log(message);
+        }
+    });
 }
 
-function bindClickEvents() {
-    document.getElementById("btnSaveEmployee").addEventListener("click", saveEmployee);
-    document.getElementById("btnUpdateEmployee").addEventListener("click", updateEmployee);
-    document.getElementById("btnDeleteEmployee").addEventListener("click", deleteEmployee);
-    document.getElementById("searchEmployee").addEventListener("input", searchEmployee);
+// Function to display inventory items in table
+function displayEmployees(employees) {
+    $("#employeeTable").empty();
+    employees.forEach(function (employee) {
+        $("#employeeTable").append(`
+                <tr>
+                    <td>${employee.employeeCode}</td>
+                    <td>${employee.employeeName}</td>
+                    <td><img src="data:image/png;base64,${employee.profilePic}" alt="Employee Image" style="width: 50px; height: 50px;"></td>
+                    <td>${employee.gender}</td>
+                    <td>${employee.status}</td>
+                    <td>${employee.designation}</td>
+                    <td>${employee.role}</td>
+                    <td>${new Date(employee.dob).toLocaleDateString()}</td>
+                    <td>${new Date(employee.dateOfJoin).toLocaleDateString()}</td>
+                    <td>${employee.branch}</td>
+                    <td>${employee.address1}</td>
+                    <td>${employee.address2}</td>
+                    <td>${employee.address3}</td>
+                    <td>${employee.address4}</td>
+                    <td>${employee.address5}</td>
+                    <td>${employee.contact}</td>
+                    <td>${employee.email}</td>
+                    <td>${employee.emergencyContact}</td>
+                    <td>${employee.emergencyPerson}</td>
+                </tr>
+            `);
+    });
 }
 
-function searchEmployee() {
-    const searchTerm = document.getElementById("searchEmployee").value.toLowerCase();
-    const rows = document.querySelectorAll("#customerTable tr");
+$("#btnSaveEmployee").click(function() {
+    checkValidity(employeeValidations);
+    if (allFieldsValid(employeeValidations)) {
+        var image = $("#capturedImage");
+        var imageUrl = image.attr('src');
+        if (!imageUrl || imageUrl === '../../assets/img/login1.jpg') {
+            alert("Error");
+            return; // Ensure to return if there's an error
+        }
 
-    rows.forEach(row => {
-        const cells = row.querySelectorAll("td");
-        let match = false;
+        // Collect form data manually to include all fields
+        let formData = {
+            employeeCode: $("#employeeCode").val(),
+            employeeName: $("#employeeName").val(),
+            profilePic: $("#profilePic").val(),
+            gender: $("#gender").val(),
+            status: $("#status").val(),
+            designation: $("#designation").val(),
+            role: $("#role").val(),
+            dob: $("#dob").val(),
+            dateOfJoin: $("#dateOfJoin").val(),
+            branch: $("#branch").val(),
+            address1: $("#address1").val(),
+            address2: $("#address2").val(),
+            address3: $("#address3").val(),
+            address4: $("#address4").val(),
+            address5: $("#address5").val(),
+            contact: $("#contact").val(),
+            email: $("#email").val(),
+            emergencyContact: $("#emergencyContact").val(),
+            emergencyPerson: $("#emergencyPerson").val()
+        };
 
-        cells.forEach(cell => {
-            if (cell.innerText.toLowerCase().includes(searchTerm)) {
-                match = true;
+        $.ajax({
+            url: "http://localhost:8080/app/api/v1/employee",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function (response) {
+                updateAlert("Employee Saved Successfully");
+                getAllEmployees();
+                generateEmployeeID();
+            },
+            error: function (xhr, status, error) {
+                unSuccessUpdateAlert("Employee Save Failed");
+                getAllEmployees();
             }
         });
+    }
+});
 
-        row.style.display = match ? "" : "none";
+// Update method
+$("#btnUpdateEmployee").click(function() {
+    checkValidity(employeeValidations);
+    if (allFieldsValid(employeeValidations)) {
+        var image = $("#capturedImage");
+        var imageUrl = image.attr('src');
+        if (!imageUrl || imageUrl === '../../assets/img/login1.jpg') {
+            alert("Error");
+            return;
+        }
+
+        // Collect form data manually to include all fields
+        let formData = {
+            employeeCode: $("#employeeCode").val(),
+            employeeName: $("#employeeName").val(),
+            profilePic: $("#profilePic").val(),
+            gender: $("#gender").val(),
+            status: $("#status").val(),
+            designation: $("#designation").val(),
+            role: $("#role").val(),
+            dob: $("#dob").val(),
+            dateOfJoin: $("#dateOfJoin").val(),
+            branch: $("#branch").val(),
+            address1: $("#address1").val(),
+            address2: $("#address2").val(),
+            address3: $("#address3").val(),
+            address4: $("#address4").val(),
+            address5: $("#address5").val(),
+            contact: $("#contact").val(),
+            email: $("#email").val(),
+            emergencyContact: $("#emergencyContact").val(),
+            emergencyPerson: $("#emergencyPerson").val()
+        };
+
+        $.ajax({
+            url: "http://localhost:8080/app/api/v1/employee", // Assuming itemCode is the identifier
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function (response) {
+                updateAlert("Employee Updated Successfully");
+                getAllEmployees();
+            },
+            error: function (xhr, status, error) {
+                unSuccessUpdateAlert("Employee Update Failed");
+                getAllEmployees();
+            }
+        });
+    }
+});
+
+// Function to delete inventory item
+$("#btnDeleteEmployee").click(function () {
+    var employeeCode = $("#employeeCode").val();
+    $.ajax({
+        type: "DELETE",
+        url: `http://localhost:8080/app/api/v1/employee?employeeCode=${employeeCode}`,
+        contentType: "application/json",
+        success: function () {
+            updateAlert("Employee Delete Successfully");
+            getAllEmployees();
+        },
+        error: function (error) {
+            unSuccessUpdateAlert("Employee Delete UnSuccessfully");
+            console.log("Error:", error);
+        }
+    });
+});
+// Function to search inventory item by item code
+$("#btnSearch").click(function () {
+    var employeeCode = $("#searchEmployee").val();
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/app/api/v1/inventory/searchEmployee?employeeCode=${employeeCode}`,
+        contentType: "application/json",
+        success: function (response) {
+            if (response) {
+                displayEmployees([response]);
+            } else {
+                unSuccessUpdateAlert("Item not found!");
+            }
+        },
+        error: function (error) {
+            console.log("Error:", error);
+        }
+    });
+});
+
+getAllEmployees();
+
+/**
+ * clear input fields Values Method
+ * */
+function setTextFieldValues(employeeCode, employeeName, profilePic, gender, status, designation, role, dob, dateOfJoin, branch, address1, address2, address3, address4 , address5, contact, email, emergencyContact, emergencyPerson) {
+    $("#employeeCode").val(employeeCode);
+    $("#employeeName").val(employeeName);
+    $("#profilePic").val(profilePic);
+    $("#gender").val(gender);
+    $("#status").val(status);
+    $("#designation").val(designation);
+    $("#role").val(role);
+    $("#dob").val(dob);
+    $("#dateOfJoin").val(dateOfJoin);
+    $("#branch").val(branch);
+    $("#address1").val(address1);
+    $("#address2").val(address2);
+    $("#address3").val(address3);
+    $("#address4").val(address4);
+    $("#address5").val(address5);
+    $("#contact").val(contact);
+    $("#email").val(email);
+    $("#emergencyContact").val(emergencyContact);
+    $("#emergencyPerson").val(emergencyPerson);
+    $("#employeeName").focus();
+}
+
+/**
+ * Table Listener Click and Load textFields
+ * */
+function blindClickEvents() {
+    $("#employeeTable>tr").on("click", function () {
+        let employeeCode = $(this).children().eq(0).text();
+        let employeeName = $(this).children().eq(1).text();
+        let profilePic = $(this).children().eq(2).text();
+        let gender = $(this).children().eq(3).text();
+        let status = $(this).children().eq(4).text();
+        let designation = $(this).children().eq(5).text();
+        let role = $(this).children().eq(6).text();
+        let dob = new Date($(this).children().eq(7).text()).toISOString().split('T')[0];
+        let dateOfJoin = new Date($(this).children().eq(8).text()).toISOString().split('T')[0];
+        let branch = $(this).children().eq(9).text();
+        let address1 = $(this).children().eq(10).text();
+        let address2 = $(this).children().eq(11).text();
+        let address3 = $(this).children().eq(12).text();
+        let address4 = $(this).children().eq(13).text();
+        let address5 = $(this).children().eq(14).text();
+        let contact = $(this).children().eq(15).text();
+        let email = $(this).children().eq(16).text();
+        let emergencyContact = $(this).children().eq(17).text();
+        let emergencyPerson = $(this).children().eq(18).text();
+
+        console.log(employeeCode, employeeName, profilePic, gender, status, designation, role, dob, dateOfJoin, branch, address1, address2, address3, address4 , address5, contact, email, emergencyContact, emergencyPerson);
+        $("#employeeCode").val(employeeCode);
+        $("#employeeName").val(employeeName);
+        $("#profilePic").val(profilePic);
+        $("#gender").val(gender);
+        $("#status").val(status);
+        $("#designation").val(designation);
+        $("#role").val(role);
+        $("#dob").val(dob);
+        $("#dateOfJoin").val(dateOfJoin);
+        $("#branch").val(branch);
+        $("#address1").val(address1);
+        $("#address2").val(address2);
+        $("#address3").val(address3);
+        $("#address4").val(address4);
+        $("#address5").val(address5);
+        $("#contact").val(contact);
+        $("#email").val(email);
+        $("#emergencyContact").val(emergencyContact);
+        $("#emergencyPerson").val(emergencyPerson);
     });
 }
 
-function getEmployeeData() {
-    return {
-        employeeCode: document.getElementById("employeeCode").value,
-        employeeName: document.getElementById("employeeName").value,
-        status: document.getElementById("status").value,
-        contactNo: document.getElementById("contactNo").value,
-        dob: new Date(document.getElementById("dob").value).toISOString(),
-        designation: document.getElementById("designation").value,
-        attachedBranch: document.getElementById("attachedBranch").value,
-        accessRole: document.getElementById("accessRole").value,
-        email: document.getElementById("email").value,
-        gender: document.getElementById("gender").value,
-        emergencyContactPerson: document.getElementById("emergencyContactPerson").value,
-        dateOfJoin: new Date(document.getElementById("dateOfJoin").value).toISOString(),
-        emergencyContact: document.getElementById("emergencyContact").value,
-        addressLine01: document.getElementById("addressLine01").value,
-        addressLine02: document.getElementById("addressLine02").value,
-        addressLine03: document.getElementById("addressLine03").value,
-        addressLine04: document.getElementById("addressLine04").value,
-        addressLine05: document.getElementById("addressLine05").value
-    };
-}
+const employeeValidations = [
+    { field: $("#employeeCode"), reg: /^E\d{2}-\d{3}$/, error: "Invalid employee code. Format should be I00-000." },
+    { field: $("#employeeName"), reg: /^[a-zA-Z\s]+$/, error: "Invalid employee name. Only alphabets and spaces allowed." },
+    { field: $("#status"), reg: /^[a-zA-Z\s]+$/, error: "Invalid status. Only alphabets and spaces allowed." },
+    { field: $("#designation"), reg: /^[a-zA-Z\s]+$/, error: "Invalid designation. Only alphabets and spaces allowed." },
+    { field: $("#branch"), reg: /^[a-zA-Z\s]+$/, error: "Invalid branch. Only alphabets and spaces allowed." },
+    { field: $("#address1"), reg: /^[a-zA-Z0-9\s,-]+$/, error: "Invalid address." },
+    { field: $("#address2"), reg: /^[a-zA-Z0-9\s,-]+$/, error: "Invalid address." },
+    { field: $("#address3"), reg: /^[a-zA-Z0-9\s,-]+$/, error: "Invalid address." },
+    { field: $("#address4"), reg: /^[a-zA-Z0-9\s,-]+$/, error: "Invalid address." },
+    { field: $("#address5"), reg: /^[a-zA-Z0-9\s,-]+$/, error: "Invalid address." },
+    { field: $("#contact"), reg: /^\d{10}$/, error: "Invalid contact number. Must be 10 digits." },
+    { field: $("#email"), reg: /^\S+@\S+\.\S+$/, error: "Invalid email address." },
+    { field: $("#emergencyContact"), reg: /^\d{10}$/, error: "Invalid contact number. Must be 10 digits." },
+    { field: $("#emergencyPerson"), reg: /^[a-zA-Z\s]+$/, error: "Invalid person name. Only alphabets and spaces allowed." }
+];
 
-function employeeValidations() {
-    // Implement the necessary validation checks here and return false if any validation fails
-    return true;
+$("#employeeCode, #employeeName, #profilePic, #gender, #status, #designation, #role, #dob, #dateOfJoin, #branch, #address1, #address2, #address3, #address4 , #address5, #contact, #email, #emergencyContact, #emergencyPerson").on('input', function () {
+    checkValidity(employeeValidations);
+});
+
+function allFieldsValid(validations) {
+    return validations.every(validation => validation.reg.test(validation.field.val()));
 }
+$('#employeeProfilePic').change(function() {
+    var fileInput = $('#employeeProfilePic')[0];
+    var file = fileInput.files[0];
+
+    if (file && (file.type.includes('image') || file.type === 'image/gif')) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#itmVideo').hide();
+            $('#capturedImage').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+        $("#itmClear").prop("disabled", false);
+        $(this).val("");
+    } else {
+        $('#itemImgFileError').text('Please upload an image or GIF.');
+        $('#itemImgFileError').css("border", "1px solid #ced4da");
+    }
+
+});

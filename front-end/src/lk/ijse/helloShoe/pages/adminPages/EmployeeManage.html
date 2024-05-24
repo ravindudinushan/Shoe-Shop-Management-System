@@ -366,8 +366,8 @@
                                     <span class="control-error"></span>
                                 </div>
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="contactNo">Contact Number</label>
-                                    <input type="text" name="contactNo" class="form-control" id="contactNo"
+                                    <label class="form-label" for="contact">Contact Number</label>
+                                    <input type="text" name="contact" class="form-control" id="contact"
                                            placeholder="Contact Number">
                                     <span class="control-error"></span>
                                 </div>
@@ -385,8 +385,8 @@
                                 </div>
 
                                 <div class="mb-sm-0">
-                                    <label class="form-label" for="attachedBranch">Attached Branch</label>
-                                    <input type="text" name="attachedBranch" class="form-control" id="attachedBranch"
+                                    <label class="form-label" for="branch">Attached Branch</label>
+                                    <input type="text" name="branch" class="form-control" id="branch"
                                            placeholder="Attached Branch">
                                     <span class="control-error"></span>
                                 </div>
@@ -395,8 +395,8 @@
 
                             <section id="sec2Customer" class="col-md-4 mt-3">
                                 <div class="mb-sm-0 mt-3">
-                                    <label for="accessRole" class="form-label">Access Role type</label>
-                                    <select class="form-control" id="accessRole" name="accessRole">
+                                    <label for="role" class="form-label">Access Role type</label>
+                                    <select class="form-control" id="role" name="role">
                                         <option value="ADMIN">ADMIN</option>
                                         <option value="USER">USER</option>
                                     </select>
@@ -421,8 +421,8 @@
 
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="emergencyContactPerson">Emergency Person</label>
-                                    <input type="text" name="emergencyContactPerson" class="form-control" id="emergencyContactPerson"
+                                    <label class="form-label" for="emergencyPerson">Emergency Person</label>
+                                    <input type="text" name="emergencyPerson" class="form-control" id="emergencyPerson"
                                            placeholder="Guardian Name">
                                     <span class="control-error"></span>
                                 </div>
@@ -446,24 +446,25 @@
 
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="addressLine01"> Employee Address</label>
-                                    <input type="text" name="addressLine01" class="form-control" id="addressLine01"
+                                    <label class="form-label" for="address1"> Employee Address</label>
+                                    <input type="text" name="address1" class="form-control" id="address1"
                                            placeholder="Name">
-                                    <input type="text" name="addressLine02" class="form-control" id="addressLine02"
+                                    <input type="text" name="address2" class="form-control" id="address2"
                                            placeholder="Lane">
-                                    <input type="text" name="addressLine03" class="form-control" id="addressLine03"
+                                    <input type="text" name="address3" class="form-control" id="address3"
                                            placeholder="City">
-                                    <input type="text" name="addressLine04" class="form-control" id="addressLine04"
+                                    <input type="text" name="address4" class="form-control" id="address4"
                                            placeholder="State">
-                                    <input type="text" name="addressLine05" class="form-control" id="addressLine05"
+                                    <input type="text" name="address5" class="form-control" id="address5"
                                            placeholder="Code">
 
                                     <span class="control-error"></span>
                                 </div>
 
                                 <div class="mb-sm-0 mt-3">
-                                    <label class="form-label" for="employeeProfilePic">Employee Profile Pic</label>
-                                    <input class="form-control" id="employeeProfilePic" type="file" name="employeeProfilePic">
+                                    <label class="form-label" for="profilePic">Item Pictures</label>
+                                    <input class="form-control" id="profilePic" type="file" name="profilePic">
+                                    <img src="" id="capturedImage" class="web" width="200"  style="display:block;">
                                     <span class="control-error"></span>
                                 </div>
 
@@ -515,7 +516,7 @@
                                         <th scope="col">Emergency Person</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="customerTable"></tbody>
+                                    <tbody id="employeeTable"></tbody>
                                 </table>
                             </div>
                         </div>
