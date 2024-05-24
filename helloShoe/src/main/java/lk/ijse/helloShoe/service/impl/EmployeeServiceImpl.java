@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -29,11 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (repo.existsById(dto.getEmployeeCode())) {
             throw new RuntimeException("Employee Already Exist. Please enter another id..!");
         }
-        String encodedImageData = encodeToBase64(dto.getProfilePic().getBytes());
-        dto.setProfilePic(encodedImageData);
-
-        Employee employee = mapper.map(dto, Employee.class);
-        repo.save(employee);
+                repo.save(mapper.map(dto, Employee.class));
     }
 
     @Override
@@ -41,12 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (!repo.existsById(dto.getEmployeeCode())) {
             throw new RuntimeException("Supplier Not Exist. Please enter Valid id..!");
         }
-        String encodedImageData = encodeToBase64(dto.getProfilePic().getBytes());
-        dto.setProfilePic(encodedImageData);
-
-        // Save the inventory
-        Employee employee = mapper.map(dto, Employee.class);
-        repo.save(employee);
+        repo.save(mapper.map(dto, Employee.class));
     }
 
     @Override
@@ -72,10 +62,5 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException("Wrong ID. Please enter Valid id..!");
         }
         return mapper.map(repo.findById(employeeCode).get(), Employee.class);
-    }
-
-    // Method to encode byte array to base64 string
-    private String encodeToBase64(byte[] imageData) {
-        return Base64.getEncoder().encodeToString(imageData);
     }
 }

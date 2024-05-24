@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Base64;
 import java.util.List;
 
 @RestController
@@ -35,8 +34,6 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public void saveEmployee(@RequestBody EmployeeDTO dto){
-        String encodedImageData = encodeToBase64(dto.getProfilePic().getBytes());
-        dto.setProfilePic(encodedImageData);
         employeeService.saveEmployee(dto);
     }
 
@@ -47,12 +44,7 @@ public class EmployeeController {
     }
 
     @PutMapping
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public void updateEmployee(@RequestBody EmployeeDTO dto) {
-        // Encode the image data to base64
-        String encodedImageData = encodeToBase64(dto.getProfilePic().getBytes());
-        dto.setProfilePic(encodedImageData);
-        // Update the inventory
         employeeService.updateEmployee(dto);
     }
 
@@ -60,9 +52,5 @@ public class EmployeeController {
     @GetMapping(path = "/searchEmployee", params = {"employeeCode"})
     public Employee searchInventoryCode(String employeeCode) {
         return employeeService.searchEmployeeCode(employeeCode);
-    }
-
-    private String encodeToBase64(byte[] imageData) {
-        return Base64.getEncoder().encodeToString(imageData);
     }
 }
