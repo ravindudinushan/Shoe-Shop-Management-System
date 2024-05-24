@@ -8,6 +8,6 @@ public interface EmployeeRepo extends JpaRepository<Employee,String> {
     Boolean existsByEmployeeCode(String id);
     Employee findByEmployeeCode(String id);
     void deleteByEmployeeCode(String id);
-    @Query(value = "SELECT employee_code FROM Employees ORDER BY employee_code DESC LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT employee_code FROM employee ORDER BY employee_code DESC LIMIT 1", nativeQuery = true)
     String findLatestEmployeeCode();
 }
