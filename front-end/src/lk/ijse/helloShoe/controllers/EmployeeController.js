@@ -37,6 +37,7 @@ function getAllEmployees() {
         contentType: "application/json",
         success: function (response) {
             displayEmployees(response);
+            generateEmployeeID();
             blindClickEvents();
             setTextFieldValues("", "", "", "", "", "", "","", "", "", "", "", "", "", "", "", "", "", "");
             console.log(response.message);
@@ -92,7 +93,7 @@ $("#btnSaveEmployee").click(function() {
         let formData = {
             employeeCode: $("#employeeCode").val(),
             employeeName: $("#employeeName").val(),
-            profilePic: $("#profilePic").val(),
+            profilePic: imageUrl,
             gender: $("#gender").val(),
             status: $("#status").val(),
             designation: $("#designation").val(),
@@ -119,7 +120,6 @@ $("#btnSaveEmployee").click(function() {
             success: function (response) {
                 updateAlert("Employee Saved Successfully");
                 getAllEmployees();
-                generateEmployeeID();
             },
             error: function (xhr, status, error) {
                 unSuccessUpdateAlert("Employee Save Failed");
@@ -144,7 +144,7 @@ $("#btnUpdateEmployee").click(function() {
         let formData = {
             employeeCode: $("#employeeCode").val(),
             employeeName: $("#employeeName").val(),
-            profilePic: $("#profilePic").val(),
+            profilePic: imageUrl,
             gender: $("#gender").val(),
             status: $("#status").val(),
             designation: $("#designation").val(),
@@ -317,8 +317,8 @@ $("#employeeCode, #employeeName, #profilePic, #gender, #status, #designation, #r
 function allFieldsValid(validations) {
     return validations.every(validation => validation.reg.test(validation.field.val()));
 }
-$('#employeeProfilePic').change(function() {
-    var fileInput = $('#employeeProfilePic')[0];
+$('#profilePic').change(function() {
+    var fileInput = $('#profilePic')[0];
     var file = fileInput.files[0];
 
     if (file && (file.type.includes('image') || file.type === 'image/gif')) {
