@@ -30,4 +30,6 @@ public interface SaleService {
     String getBase64EncodedImageOfMostSoldItem();
 
     int getMostSoldItemQuantity();
+
+    void deleteOrder(String orderNo);
 }

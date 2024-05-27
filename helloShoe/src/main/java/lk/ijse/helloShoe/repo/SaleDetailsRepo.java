@@ -18,4 +18,6 @@ public interface SaleDetailsRepo extends JpaRepository<SaleDetails,String> {
             "WHERE MONTH(s.purchase_date) = MONTH(CURDATE()) AND YEAR(s.purchase_date) = YEAR(CURDATE())",
             nativeQuery = true)
     Double findTotalProfit();
+
+    void deleteByOrderNo(String orderNo);
 }

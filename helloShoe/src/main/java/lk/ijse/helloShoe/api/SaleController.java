@@ -76,4 +76,10 @@ public class SaleController {
         int mostSoldItemQuantity = saleService.getMostSoldItemQuantity();
         return new ResponseEntity<>(mostSoldItemQuantity, HttpStatus.OK);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(params = {"orderNo"})
+    public void deleteOrder(@RequestParam String orderNo) {
+        saleService.deleteOrder(orderNo);
+    }
 }

@@ -115,4 +115,13 @@ public class SaleServiceImpl implements SaleService {
     public int getMostSoldItemQuantity() {
         return saleRepo.getMostSoldItemQuantity();
     }
+
+    @Override
+    public void deleteOrder(String orderNo) {
+        if (!saleRepo.existsById(orderNo)) {
+            throw new RuntimeException("Order " + orderNo + " not found.!");
+        }
+        saleDetailsRepo.deleteByOrderNo(orderNo);
+        saleRepo.deleteById(orderNo);
+    }
 }
