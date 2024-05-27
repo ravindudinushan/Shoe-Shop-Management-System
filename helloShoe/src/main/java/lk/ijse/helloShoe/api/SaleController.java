@@ -82,4 +82,10 @@ public class SaleController {
     public void deleteOrder(@RequestParam String orderNo) {
         saleService.deleteOrder(orderNo);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PostMapping("/refund")
+    public void refundOrder(@RequestParam String orderNo) {
+        saleService.refundOrder(orderNo);
+    }
 }

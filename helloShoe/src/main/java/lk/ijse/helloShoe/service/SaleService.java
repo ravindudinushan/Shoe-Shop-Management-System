@@ -32,4 +32,6 @@ public interface SaleService {
     int getMostSoldItemQuantity();
 
     void deleteOrder(String orderNo);
+
+    void refundOrder(String orderNo);
 }

@@ -124,4 +124,20 @@ public class SaleServiceImpl implements SaleService {
         saleDetailsRepo.deleteByOrderNo(orderNo);
         saleRepo.deleteById(orderNo);
     }
+
+    @Override
+    public void refundOrder(String orderNo) {
+        Sale sale = saleRepo.findById(orderNo).orElseThrow(() -> new RuntimeException("Order " + orderNo + " not found."));
+
+        // Update item quantities
+        for (SaleDetails saleDetail : sale.getSaleDetails()) {
+            Inventory inventory = inventoryRepo.findById(saleDetail.getItemCode()).get();
+            inventory.setQuantity(inventory.getQuantity() + saleDetail.getQuantity());
+            inventoryRepo.save(inventory);
+        }
+
+        // Delete sale details and sale
+        saleDetailsRepo.deleteByOrderNo(orderNo);
+        saleRepo.deleteById(orderNo);
+    }
 }
