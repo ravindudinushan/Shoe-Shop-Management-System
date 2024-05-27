@@ -449,6 +449,24 @@ $("#tblAddToCart").dblclick(function () {
 
 });
 
+$("#btnRefund").click(function () {
+    var orderId = $("#orderId").val();
+    $.ajax({
+        type: "post",
+        url: "http://localhost:8080/app/api/v1/sale/refund?orderNo=" + orderId, // Corrected URL
+        success: function () {
+            updateAlert("Order Refund Successfully");
+            fetchOrders();
+            fetchOrderDetails();
+            loadItem();
+            loadCustomers();
+        },
+        error: function (error) {
+            unSuccessUpdateAlert("Order Refund UnSuccessfully");
+        }
+    });
+});
+
 async function fetchOrders() {
     try {
         const response = await fetch('http://localhost:8080/app/api/v1/sale/LoadOrders');
