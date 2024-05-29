@@ -4,9 +4,11 @@ import jakarta.annotation.PostConstruct;
 import lk.ijse.helloShoe.dto.CustomDTO;
 import lk.ijse.helloShoe.dto.SaleDTO;
 import lk.ijse.helloShoe.dto.SaleDetailsDTO;
+import lk.ijse.helloShoe.entity.Customer;
 import lk.ijse.helloShoe.entity.Inventory;
 import lk.ijse.helloShoe.entity.Sale;
 import lk.ijse.helloShoe.entity.SaleDetails;
+import lk.ijse.helloShoe.repo.CustomerRepo;
 import lk.ijse.helloShoe.repo.InventoryRepo;
 import lk.ijse.helloShoe.repo.SaleDetailsRepo;
 import lk.ijse.helloShoe.repo.SaleRepo;
@@ -29,6 +31,9 @@ public class SaleServiceImpl implements SaleService {
 
     @Autowired
     private SaleRepo saleRepo;
+
+    @Autowired
+    private CustomerRepo customerRepo;
 
     @Autowired
     private SaleDetailsRepo saleDetailsRepo;
@@ -54,16 +59,22 @@ public class SaleServiceImpl implements SaleService {
     public void placeOrder(SaleDTO dto) {
         Sale sale = mapper.map(dto, Sale.class);
         if (saleRepo.existsById(sale.getOrderNo())) {
-            throw new RuntimeException("Order" + sale.getOrderNo() + " Already added.!");
+            throw new RuntimeException("Order " + sale.getOrderNo() + " already added.!");
         }
         saleRepo.save(sale);
 
-        //Update Item Qty
+        // Update item quantities
         for (SaleDetails od : sale.getSaleDetails()) {
             Inventory inventory = inventoryRepo.findById(od.getItemCode()).get();
             inventory.setQuantity(inventory.getQuantity() - od.getQuantity());
             inventoryRepo.save(inventory);
         }
+
+        // Update customer points
+        Customer customer = customerRepo.findById(sale.getCustomerCode().getCustomerCode()).orElseThrow(() ->
+                new RuntimeException("Customer not found."));
+        customer.setPoints(customer.getPoints() + (int) sale.getAddPoints());
+        customerRepo.save(customer);
     }
 
     private SaleDTO convertToDTO(Sale sale) {
