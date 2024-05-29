@@ -147,8 +147,16 @@ public class SaleServiceImpl implements SaleService {
             inventoryRepo.save(inventory);
         }
 
+        // Update customer points
+        Customer customer = sale.getCustomerCode();
+        int pointsToDeduct = (int) sale.getAddPoints();
+        int updatedPoints = customer.getPoints() - pointsToDeduct;
+        customer.setPoints(Math.max(updatedPoints, 0)); // Ensure points do not go below zero
+        customerRepo.save(customer);
+
         // Delete sale details and sale
         saleDetailsRepo.deleteByOrderNo(orderNo);
         saleRepo.deleteById(orderNo);
     }
+
 }
