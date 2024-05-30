@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User Dashboard</title>
-    <link href="../assets/icon/logo.jpg" rel="icon">
+    <link href="../../assets/icon/logo.jpg" rel="icon">
 
     <meta content="Shoe Pvt Ltd" name="keywords">
     <meta content="This is Shoe Pvt Ltd Web Project." name="description">
@@ -19,16 +19,16 @@
           rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="../assets/vendor/bootstrap-5.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/bootstrap-5.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
 
     <!-- Template Dashboard CSS File -->
-    <link href="../assets/css/dashboardStyle.css" rel="stylesheet">
+    <link href="../../assets/css/dashboardStyle.css" rel="stylesheet">
 
 </head>
 <body>
@@ -54,7 +54,7 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="../assets/img/testimonials/testimonials-4.jpg" alt="Profile" class="rounded-circle">
+                    <img src="../../assets/img/testimonials/testimonials-4.jpg" alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">L.K San</span>
                 </a><!-- End Profile Iamge Icon -->
 
@@ -98,7 +98,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="login.html">
+                        <a class="dropdown-item d-flex align-items-center" href="../login.html">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
                         </a>
@@ -129,7 +129,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" id="customerDashboard" href="user_CustDashboard.html">
                 <i class="bi bi-kanban"></i>
-                <span>Customer Dashboard</span>
+                <span>Customer Service</span>
             </a>
         </li>
         <!-- End Details Nav -->
@@ -142,10 +142,15 @@
         </li>
         <!-- End Rent Nav -->
 
-        <!-- End Rent Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" id="saleSection" href="UserSaleServicePage.html">
+                <i class="bi bi-car-front"></i>
+                <span>Sale Service</span>
+            </a>
+        </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="login.html">
+            <a class="nav-link collapsed" href="../login.html">
                 <i class="bi bi-box-arrow-in-right"></i>
                 <span>LogOut</span>
             </a>
@@ -279,23 +284,23 @@
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-<script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="../assets/vendor/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/vendor/jQuery/jquery-3.6.1.min.js "></script>
-<script rel="script" src="../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.js"></script>
+<script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="../../assets/vendor/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/vendor/jQuery/jquery-3.6.1.min.js "></script>
+<script rel="script" src="../../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.js"></script>
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
 <!-- Template Dashboard Main JS File -->
-<script src="../assets/js/dashboardMain.js"></script>
+<script src="../../assets/js/dashboardMain.js"></script>
 
 <!-- Controller JS File -->
 <script src="../controller/regUserDashboardController.js"></script>
 
 <!-- Util JS File -->
-<script src="../util/alert.js" rel="script"></script>
-<script src="../util/validation.js" rel="script"></script>
+<script src="../../util/alert.js" rel="script"></script>
+<script src="../../util/validation.js" rel="script"></script>
 
 <script>
     $(document).ready(function () {

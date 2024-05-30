@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+    <link href="../../assets/icon/logo.jpg" rel="icon">
+
+    <meta content="Shoe Shop , Hello , Hello Shoe, Shoes" name="keywords">
+    <meta content="This is Hello Shoe Web Project." name="description">
+    <meta content="Ravindu Dinushan" name="author">
+    <meta content="Ravindu Dinushan" name="owner">
+    <meta content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" name="viewport">
+    <meta content="green" name="theme-color">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../../assets/vendor/bootstrap-5.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- Template Dashboard CSS File -->
+    <link href="../../assets/css/dashboardStyle.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="../adminDashboard.html" class="logo d-flex align-items-center">
+            <span class="d-none d-lg-block">Shoe sale</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge bg-primary badge-number">4</span>
+                </a><!-- End Notification Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                    <li class="dropdown-header">
+                        You have 4 new notifications
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-exclamation-circle text-warning"></i>
+                        <div>
+                            <h4>Lorem Ipsum</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>30 min. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-x-circle text-danger"></i>
+                        <div>
+                            <h4>Atque rerum nesciunt</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>1 hr. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-check-circle text-success"></i>
+                        <div>
+                            <h4>Sit rerum fuga</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>2 hrs. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-info-circle text-primary"></i>
+                        <div>
+                            <h4>Dicta reprehenderit</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>4 hrs. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li class="dropdown-footer">
+                        <a href="#">Show all notifications</a>
+                    </li>
+
+                </ul><!-- End Notification Dropdown Items -->
+
+            </li><!-- End Notification Nav -->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-chat-left-text"></i>
+                    <span class="badge bg-success badge-number">3</span>
+                </a><!-- End Messages Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                    <li class="dropdown-header">
+                        You have 3 new messages
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="../../assets/img/testimonials/testimonials-3.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Maria Hudson</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="../../assets/img/testimonials/testimonials-1.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Anna Nelson</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>6 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="../../assets/img/testimonials/testimonials-3.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>David Muldon</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>8 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="dropdown-footer">
+                        <a href="#">Show all messages</a>
+                    </li>
+
+                </ul><!-- End Messages Dropdown Items -->
+
+            </li><!-- End Messages Nav -->
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="../../assets/img/testimonials/testimonials-4.jpg" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">L.K San</span>
+                </a><!-- End Profile Iamge Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>L.KSan</h6>
+                        <span>Manager</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                            <i class="bi bi-person"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                            <i class="bi bi-gear"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Need Help?</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="../login.html">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header>
+<!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link" id="userDashboard" href="userDashboard.html">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" id="customerDashboard" href="user_CustDashboard.html">
+                <i class="bi bi-kanban"></i>
+                <span>Customer Service</span>
+            </a>
+        </li>
+        <!-- End Details Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" id="myDetailsSection" href="user_ProfileDashboard.html">
+                <i class="bi bi-car-front"></i>
+                <span>User Profile Details</span>
+            </a>
+        </li>
+        <!-- End Rent Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" id="saleSection" href="UserSaleServicePage.html">
+                <i class="bi bi-car-front"></i>
+                <span>Sale Service</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="../login.html">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>LogOut</span>
+            </a>
+        </li>
+        <!-- End Login Page Nav -->
+
+    </ul>
+
+</aside>
+<!-- End Sidebar-->
+
+<!-- ======= Main ======= -->
+<main id="main" class="main">
+
+    <!-- ======= Customer Manage ======= -->
+    <div class="pageTitle" id="pagetwo">
+        <h1>Manage</h1>
+
+        <section class="container-fluid mt-3" id="manageCustomer">
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../adminDashboard.html">Home</a></li>
+                    <li class="breadcrumb-item active">Manage / Employee</li>
+                </ol>
+            </nav>
+
+            <div class="row mt-3">
+                <div class="card info-card">
+                    <div class="search-bar mt-4">
+                        <div class="search-form d-flex align-items-center">
+                            <input type="search" name="employeeSearch" id="searchEmployee" placeholder="Search" title="Enter search keyword">
+                            <button type="button" title="Search"><i class="bi bi-search"></i></button>
+                        </div>
+                    </div>
+                    <!-- End Search Bar -->
+                    <div class="col-12 m-3 p-1">
+                        <form class="row" id="customerForm">
+                            <section id="sec1Customer" class="col-md-4 mt-3">
+                                <div class="mb-sm-0">
+                                    <label class="form-label" for="employeeCode">Employee Code</label>
+                                    <input type="text" name="employeeCode" class="form-control" readonly id="employeeCode"
+                                           placeholder="E00-001">
+                                    <span class="control-error"></span>
+                                </div>
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="employeeName">Employee Name</label>
+                                    <input type="text" name="employeeName" class="form-control" id="employeeName"
+                                           placeholder="Employee Name">
+                                    <span class="control-error"></span>
+                                </div>
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="status">Employee Status</label>
+                                    <input type="text" name="status" class="form-control" id="status"
+                                           placeholder="Status">
+                                    <span class="control-error"></span>
+                                </div>
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="contact">Contact Number</label>
+                                    <input type="text" name="contact" class="form-control" id="contact"
+                                           placeholder="Contact Number">
+                                    <span class="control-error"></span>
+                                </div>
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="dob"> Employee DOB</label>
+                                    <input class="form-control border-dark" name="dob" id="dob" type="date">
+                                    <span class="control-error"></span>
+                                </div>
+
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="designation">Designation</label>
+                                    <input type="text" name="designation" class="form-control" id="designation"
+                                           placeholder="Designation">
+                                    <span class="control-error"></span>
+                                </div>
+
+                                <div class="mb-sm-0">
+                                    <label class="form-label" for="branch">Attached Branch</label>
+                                    <input type="text" name="branch" class="form-control" id="branch"
+                                           placeholder="Attached Branch">
+                                    <span class="control-error"></span>
+                                </div>
+
+                            </section>
+
+                            <section id="sec2Customer" class="col-md-4 mt-3">
+                                <div class="mb-sm-0 mt-3">
+                                    <label for="role" class="form-label">Access Role type</label>
+                                    <select class="form-control" id="role" name="role">
+                                        <option value="ADMIN">ADMIN</option>
+                                        <option value="USER">USER</option>
+                                    </select>
+                                    <span class="control-error"></span>
+                                </div>
+
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="email">Employee Email</label>
+                                    <input type="text" name="email" class="form-control" id="email"
+                                           placeholder="Email address">
+                                    <span class="control-error"></span>
+                                </div>
+
+                                <div class="mb-sm-0 mt-3">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select class="form-control" id="gender" name="gender">
+                                        <option value="MALE">MALE</option>
+                                        <option value="FEMALE">FEMALE</option>
+                                    </select>
+                                    <span class="control-error"></span>
+                                </div>
+
+
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="emergencyPerson">Emergency Person</label>
+                                    <input type="text" name="emergencyPerson" class="form-control" id="emergencyPerson"
+                                           placeholder="Guardian Name">
+                                    <span class="control-error"></span>
+                                </div>
+
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="dateOfJoin"> Employee Joining Dates</label>
+                                    <input class="form-control border-dark" name="dateOfJoin" id="dateOfJoin" type="date">
+                                    <span class="control-error"></span>
+                                </div>
+
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="emergencyContact">Emergency Contact</label>
+                                    <input type="text" name="emergencyContact" class="form-control" id="emergencyContact"
+                                           placeholder="Emergency Contact">
+                                    <span class="control-error"></span>
+                                </div>
+
+                            </section>
+
+                            <section id="sec3" class="col-md-4 mt-3">
+
+
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="address1"> Employee Address</label>
+                                    <input type="text" name="address1" class="form-control" id="address1"
+                                           placeholder="Name">
+                                    <input type="text" name="address2" class="form-control" id="address2"
+                                           placeholder="Lane">
+                                    <input type="text" name="address3" class="form-control" id="address3"
+                                           placeholder="City">
+                                    <input type="text" name="address4" class="form-control" id="address4"
+                                           placeholder="State">
+                                    <input type="text" name="address5" class="form-control" id="address5"
+                                           placeholder="Code">
+
+                                    <span class="control-error"></span>
+                                </div>
+
+                                <div class="mb-sm-0 mt-3">
+                                    <label class="form-label" for="profilePic">Profile Pictures</label>
+                                    <input class="form-control" id="profilePic" type="file" name="profilePic">
+                                    <img src="" id="capturedImage" class="web" width="200"  style="display:block;">
+                                    <span class="control-error"></span>
+                                </div>
+
+                                <div class="mt-4 mb-3 d-grid gap-2 d-sm-flex justify-content-md-center">
+
+                                    <button class="btn btn-warning me-md-1" id="btnUpdateEmployee" type="button">
+                                        Update
+                                    </button>
+                                </div>
+                            </section>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="card info-card">
+                    <!-- View Customer Details Table Start -->
+                    <div class="row mt-1 mt-md-2 mt-lg-4 mm-2 p-2 justify-content-around" style="height: 350px;">
+                        <div class="col-11 justify-content-around sectionBorder"
+                             style="height: 290px; background: white">
+                            <div class="table-responsive customerTableDiv overflow-auto " style="height: 300px;">
+                                <table class="table table-light table-striped table-bordered table-hover">
+                                    <thead class="text-dark table-danger text-center  table-bordered sticky-top">
+                                    <tr>
+                                        <th scope="col">Employee Code</th>
+                                        <th scope="col">Employee Name</th>
+                                        <th scope="col">Employee Profile Picture</th>
+                                        <th scope="col">Gender</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Designation</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">DOB</th>
+                                        <th scope="col">Date Of Join</th>
+                                        <th scope="col">Branch</th>
+                                        <th scope="col">Address 1</th>
+                                        <th scope="col">Address 2</th>
+                                        <th scope="col">Address 3</th>
+                                        <th scope="col">Address 4</th>
+                                        <th scope="col">Address 5</th>
+                                        <th scope="col">Contact Number</th>
+                                        <th scope="col">email</th>
+                                        <th scope="col">Emergency Contact</th>
+                                        <th scope="col">Emergency Person</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="employeeTable"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- View Customer Details Table End -->
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- End Customer Manage -->
+
+</main>
+<!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>Shoe pvt ltd</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        Designed by <a href="">Ravindu Dinushan</a>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="../../assets/vendor/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/vendor/jQuery/jquery-3.6.1.min.js "></script>
+<script rel="script" src="../../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.js"></script>
+
+<!-- Template Dashboard Main JS File -->
+<script src="../../assets/js/dashboardMain.js"></script>
+
+<!-- Controller JS File -->
+<script src="../../controllers/EmployeeController.js"></script>
+<script src="../../controllers/AdminDashbordController.js"></script>
+
+
+<!-- Util JS File -->
+<script src="../../util/alert.js" rel="script"></script>
+<script src="../../util/validation.js" rel="script"></script>
+</body>
+</html>

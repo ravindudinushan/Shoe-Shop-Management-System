@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>User Sale Service</title>
+  <link href="../../assets/icon/logo.jpg" rel="icon">
+
+  <meta content="Shoe Shop , Hello , Hello Shoe, Shoes" name="keywords">
+  <meta content="This is Hello Shoe Web Project." name="description">
+  <meta content="Ravindu Dinushan" name="author">
+  <meta content="Ravindu Dinushan" name="owner">
+  <meta content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" name="viewport">
+  <meta content="green" name="theme-color">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../../assets/vendor/bootstrap-5.2.1-dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.css" rel="stylesheet">
+
+  <!-- Template Dashboard CSS File -->
+  <link href="../../assets/css/dashboardStyle.css" rel="stylesheet">
+
+</head>
+<body>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="../adminDashboard.html" class="logo d-flex align-items-center">
+      <span class="d-none d-lg-block">Shoe sale</span>
+    </a>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+  </div><!-- End Logo -->
+
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li><!-- End Search Icon-->
+
+      <li class="nav-item dropdown">
+
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-bell"></i>
+          <span class="badge bg-primary badge-number">4</span>
+        </a><!-- End Notification Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <li class="dropdown-header">
+            You have 4 new notifications
+            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-exclamation-circle text-warning"></i>
+            <div>
+              <h4>Lorem Ipsum</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>30 min. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-x-circle text-danger"></i>
+            <div>
+              <h4>Atque rerum nesciunt</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>1 hr. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-check-circle text-success"></i>
+            <div>
+              <h4>Sit rerum fuga</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>2 hrs. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-info-circle text-primary"></i>
+            <div>
+              <h4>Dicta reprehenderit</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>4 hrs. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li class="dropdown-footer">
+            <a href="#">Show all notifications</a>
+          </li>
+
+        </ul><!-- End Notification Dropdown Items -->
+
+      </li><!-- End Notification Nav -->
+
+      <li class="nav-item dropdown">
+
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-chat-left-text"></i>
+          <span class="badge bg-success badge-number">3</span>
+        </a><!-- End Messages Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+          <li class="dropdown-header">
+            You have 3 new messages
+            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="message-item">
+            <a href="#">
+              <img src="../../assets/img/massage/messages-1.jpg" alt="" class="rounded-circle">
+              <div>
+                <h4>Maria Hudson</h4>
+                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                <p>4 hrs. ago</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="message-item">
+            <a href="#">
+              <img src="../../assets/img/massage/messages-2.jpg" alt="" class="rounded-circle">
+              <div>
+                <h4>Anna Nelson</h4>
+                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                <p>6 hrs. ago</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="message-item">
+            <a href="#">
+              <img src="../../assets/img/massage/messages-3.jpg" alt="" class="rounded-circle">
+              <div>
+                <h4>David Muldon</h4>
+                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                <p>8 hrs. ago</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="dropdown-footer">
+            <a href="#">Show all messages</a>
+          </li>
+
+        </ul><!-- End Messages Dropdown Items -->
+
+      </li><!-- End Messages Nav -->
+
+      <li class="nav-item dropdown pe-3">
+
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src="../../assets/img/testimonials/testimonials-4.jpg" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">L.KSan</span>
+        </a><!-- End Profile Iamge Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6>L.KSan</h6>
+            <span>Manager</span>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="">
+              <i class="bi bi-person"></i>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="">
+              <i class="bi bi-gear"></i>
+              <span>Account Settings</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="">
+              <i class="bi bi-question-circle"></i>
+              <span>Need Help?</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="../login.html">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Sign Out</span>
+            </a>
+          </li>
+
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
+
+    </ul>
+  </nav><!-- End Icons Navigation -->
+
+</header>
+<!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link" id="userDashboard" href="userDashboard.html">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <!-- End Dashboard Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" id="customerDashboard" href="user_CustDashboard.html">
+        <i class="bi bi-kanban"></i>
+        <span>Customer Service</span>
+      </a>
+    </li>
+    <!-- End Details Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" id="myDetailsSection" href="user_ProfileDashboard.html">
+        <i class="bi bi-car-front"></i>
+        <span>User Profile Details</span>
+      </a>
+    </li>
+    <!-- End Rent Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" id="saleSection" href="UserSaleServicePage.html">
+        <i class="bi bi-car-front"></i>
+        <span>Sale Service</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="../login.html">
+        <i class="bi bi-box-arrow-in-right"></i>
+        <span>LogOut</span>
+      </a>
+    </li>
+    <!-- End Login Page Nav -->
+
+  </ul>
+
+</aside>
+<!-- End Sidebar-->
+
+<!-- ======= Main ======= -->
+<main id="main" class="main">
+
+  <!-- ======= Customer Manage ======= -->
+  <div class="pageTitle" id="pagetwo">
+    <h1>Manage</h1>
+
+    <section class="container-fluid mt-3" id="manageCustomer">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../adminDashboard.html">Home</a></li>
+          <li class="breadcrumb-item active">Manage / Sale Service</li>
+        </ol>
+      </nav>
+
+      <div class="row mt-3">
+        <div class="card info-card">
+
+          <section id="order-page">
+            <div class="row justify-content-around" style="height: min-content; margin: 20px; position: relative; bottom: -50px">
+
+              <!-- Order Invoice Details Section Start -->
+              <div class="col-10 col-md-5 col-lg-4 p-3 mt-3 rounded-3 sectionBorder" style="background-color: white">
+                <h5 class="text-center p-2 text-light rounded-3" style="background: #a1a1a1">Invoice Details</h5>
+                <div class="row mt-1">
+                  <!--                    <div class="col-12 col-md-6 col-lg-6">-->
+                  <!--                        <label class="fw-bold" for="orderNo">Order No :</label>-->
+                  <!--                        <input class="form-control border-dark" disabled id="orderNo" type="text" >-->
+                  <!--                    </div>-->
+                  <div class="row mt-1">
+                    <div class="col-12 col-md-6 col-lg-6">
+                      <label class="fw-bold" for="orderId">Order No</label>
+                      <input class="form-control border-dark"  id="orderId" type="text" value="ODI-001" placeholder="ODI-001">
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-6">
+                      <label class="fw-bold" for="orderDate">Order Date</label>
+                      <input class="form-control border-dark" id="orderDate" type="date">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="cmbCustomerId">Customer ID</label>
+                    <select aria-label="Default select example" class="form-select border-dark" id="cmbCustomerId"
+                            value="Customer ID">
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="txtCustomerName">CustomerName</label>
+                    <input class="form-control border-dark" disabled id="txtCustomerName" type="text">
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="cashierName">Cashier Name</label>
+                    <input class="form-control border-dark"  id="cashierName" type="text">
+
+                  </div>
+                </div>
+              </div>
+              <!-- Order Invoice Details Section End the section-->
+
+              <!-- Order Item Details Section Start -->
+              <div class="col-10 col-md-5 col-lg-4 p-3 mt-3 rounded-3 sectionBorder" style="background-color: white">
+                <h5 class="text-center p-2 text-light rounded-3" style="background: #a1a1a1">Item Details</h5>
+                <div class="row mt-1">
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="cmbItemCode">Item Code</label>
+                    <select aria-label="Default select example" class="form-select border-dark" id="cmbItemCode"
+                            value="Item Code">
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="txtItemDesc">Item Desc</label>
+                    <input class="form-control border-dark" disabled id="txtItemDesc" type="text">
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="itemSize">Shoe  Size</label>
+                    <input class="form-control border-dark" disabled id="itemSize" type="text">
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="qtyOnHand">Qty On Hand</label>
+                    <input class="form-control border-dark" disabled id="qtyOnHand" type="text">
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="price">Unit Price-Sale</label>
+                    <input class="form-control border-dark" disabled id="price" type="text">
+                    <strong class="control-error" id="CheckPrice"></strong>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="buyPrice">Unit Price-Sale</label>
+                    <input class="form-control border-dark" disabled id="buyPrice" type="text">
+                    <strong class="control-error" id="lblCheckPrice"></strong>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="buyQty">Buy Qty</label>
+                    <input class="form-control border-dark" id="buyQty" type="text">
+                    <strong class="control-error" id="lblCheckQty"></strong>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-6 mt-4 ">
+                    <button class="btn btn-primary rounded-2" id="btnAddToCart" type="button">Add To Cart</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Order Item Details Section End -->
+
+              <!-- Order Details Section Start -->
+              <div class="col-10 col-md-5 col-lg-3 p-3 mt-3 rounded-3 sectionBorder" style="background-color: white">
+                <h5 class="text-center bg-danger p-2 text-light rounded-3">Payment Details</h5>
+                <div class="row mt-1">
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="txtPoint">Add Point</label>
+                    <input class="form-control border-dark"  id="txtPoint" type="text">
+                  </div>
+
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <label class="fw-bold" for="txtTotal">Total</label>
+                    <input class="form-control border-dark" disabled id="txtTotal" type="number">
+                  </div>
+                </div>
+                <div class="mb-sm-0">
+                  <label for="cmbMethod" class="fw-bold">Pay Methods</label>
+                  <select class="form-control" id="cmbMethod" name="paymentMethod">
+                    <option value="CARD">CARD</option>
+                    <option value="CASH">CASH</option>
+                  </select>
+                  <span class="control-error"></span>
+                </div>
+
+                <div class="row mt-1">
+                  <div class="col-12 col-md-6 col-lg-6 mt-4">
+                    <button class="btn btn-success rounded-2" id="btnPurchase" type="submit">Purchase</button>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-6 mt-4">
+                    <button class="btn btn-danger rounded-2" id="btnRefund" type="button">Refund</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Order Details Section End -->
+
+              <!--clear All Button Section Start-->
+              <div class="d-grid col-12 col-md-2 mt-4">
+                <button class="btn btn-danger rounded-2 bold sectionBorder" id="btnClearAll" type="button">Clear All</button>
+              </div>
+              <!--clear All Button Section end-->
+
+              <!-- View Cart Details Table Start -->
+              <div class="row mt-1 mt-md-2 mt-lg-3 justify-content-around" style="height: 315px;">
+                <div class="col-11 justify-content-around sectionBorder" style="height: 285px; background: white">
+                  <div class="PlaceOrderTableDiv overflow-auto" style="height: 265px;">
+                    <table class="table table-success table-striped table-bordered table-hover">
+                      <thead class="text-light table-dark text-center  table-bordered sticky-top">
+                      <tr>
+                        <!--                                <th>Order No</th>-->
+                        <!--                                <th>Customer Name</th>-->
+                        <!--                                <th>Purchase Date</th>-->
+                        <!--                                <th>Cashier Name</th>-->
+                        <th>Item Code</th>
+                        <th>Item Desc</th>
+                        <th>Shoe Size</th>
+                        <th>Unit Price-Buy</th>
+                        <th>Unit Price-Sale</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                        <!--                                <th>Pay Methods</th>-->
+
+                      </tr>
+                      </thead>
+                      <tbody id="tblAddToCart"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- View Cart Details Table End -->
+              <section
+                      class="d-flex flex-column h-100 col-10 col-xl-11 shadow-lg rounded-3 align-items-center pt-3 mt-2 mb-4 sectionBorder "
+                      style="background: white">
+                <h4 class="text-center p-2 text-light rounded-5 col-12 ubFt" style="background: #011149">Sales</h4>
+                <!-- View Orders Table Start -->
+                <div class="col-11 justify-content-around " style="height: 250px;">
+                  <div class="PlaceOrderTableDiv overflow-auto" style="height: 230px;">
+                    <table class="table table-success table-striped table-bordered table-hover">
+                      <thead class="text-light table-dark text-center  table-bordered sticky-top">
+                      <tr>
+                        <th>Order No</th>
+                        <th>Points</th>
+                        <th>Cashier Name</th>
+                        <th>Pay Method</th>
+                        <th>Order Date</th>
+                        <th>Total Price</th>
+                        <th>Customer Id</th>
+                      </tr>
+                      </thead>
+                      <tbody id="tblOrder"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+              <section
+                      class="d-flex flex-column h-100 col-10 col-xl-11 shadow-lg rounded-3 align-items-center pt-3 sectionBorder "
+                      style="background: white">
+                <h4 class="text-center  p-2 text-light rounded-5 col-12 " style="background: #011149">Sale
+                  Details</h4>
+                <!-- View Order Details Table Start -->
+                <div class="col-11 justify-content-around " style="height: 250px;">
+                  <div class="PlaceOrderTableDiv overflow-auto" style="height: 230px;">
+                    <table class="table table-success table-striped table-bordered table-hover">
+                      <thead class="text-light table-dark text-center  table-bordered sticky-top">
+                      <tr>
+                        <th>Item Code</th>
+                        <th>Order No</th>
+                        <th>Quantity</th>
+                        <th>Unit Price-Buy</th>
+                        <th>Unit Price-Sale</th>
+                      </tr>
+                      </thead>
+                      <tbody id="tblOrderDetails"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<!-- Vendor JS Files -->
+<script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="../../assets/vendor/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../assets/vendor/jQuery/jquery-3.6.1.min.js "></script>
+<script rel="script" src="../../assets/vendor/sweetalert2-11.6.16/sweetalert2.min.js"></script>
+
+<!-- Template Dashboard Main JS File -->
+<script src="../../assets/js/dashboardMain.js"></script>
+
+<!-- Controller JS File -->
+<script src="../../controllers/SaleController.js"></script>
+<script src="../../controllers/DashBoardController.js"></script>
+
+
+<!-- Util JS File -->
+<script src="../../util/alert.js" rel="script"></script>
+<script src="../../util/validation.js" rel="script"></script>
+
+</body>
+</html>
