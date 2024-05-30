@@ -1,11 +1,11 @@
-let userLoginURI = 'http://localhost:8080/app/api/v1/auth'
+let userSigninURI = 'http://localhost:8080/app/api/v1/user'
 
 $('#btnSignin').click(function(){
     const userData = getAllUserDataFromField();
     if (!validateForm(userData)) return;
 
     $.ajax({
-        url: (userLoginURI + '/' + 'signup'),
+        url: (userSigninURI + '/' + 'signup'),
         method: 'POST',
         data: JSON.stringify(userData),
         contentType: 'application/json',
