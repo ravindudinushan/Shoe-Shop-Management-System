@@ -132,117 +132,163 @@
 // Ensure this script is linked correctly in your HTML
 
 // Function to handle login
+// $(document).ready(function() {
+//     $('#btnLogin').on('click', function() {
+//         const role = $('#role_Type').val();
+//         const email = $('#user_Name').val();
+//         const password = $('#password').val();
+//
+//         const userData = getAllUserDataFromField();
+//     if (!validateForm(userData)) return;
+//
+//         if (!email || !password || role === "RoleType") {
+//             alert("Please fill in all fields");
+//             return;
+//         }
+//
+//         const loginData = JSON.stringify({
+//             email: email,
+//             password: password,
+//             role: role
+//         });
+//
+//         $.ajax({
+//             url: 'http://localhost:8080/app/api/v1/auth/signin',
+//             type: 'POST',
+//             contentType: 'application/json',
+//             data: loginData,
+//             success: function(response) {
+//                 // Store the token in localStorage
+//                 localStorage.setItem('token', response.token);
+//                 // Store the role in localStorage
+//                 localStorage.setItem('role', role);
+//
+//                 // Redirect based on the role
+//                 if (role === 'ADMIN') {
+//                     window.location.href = 'adminDashboard.html';
+//                 } else if (role === 'USER') {
+//                     window.location.href = 'adminPages/userDashboard.html';
+//                 }
+//             },
+//             error: function() {
+//                 alert('Invalid credentials or role');
+//             }
+//         });
+//     });
+// });
+//
+// function getAllUserDataFromField(){
+//     return {
+//         email: $('#user_Name').val(),
+//         password: $('#password').val(),
+//         role: $('#role_Type').find('option:selected').text(),
+//     }
+// }
+//
+// function validateForm(userData) {
+//     let isValid = true;
+//
+//     if (!userData.email) {
+//         $('#user_Name').css('border', '1.5px solid red');
+//         isValid = false;
+//     } else if (!validateEmail(userData.email)) {
+//         $('#user_Name').css('border', '1.5px solid red');
+//         isValid = false;
+//     } else {
+//         $('#user_Name').css('border', '1.5px solid green');
+//     }
+//
+//     if (!userData.password) {
+//         $('#password').css('border', '1.5px solid red');
+//         isValid = false;
+//     } else {
+//         $('#password').css('border', '1.5px solid green');
+//     }
+//
+//     if (userData.role === 'Choose Role') {
+//         $('#role_Type').css('border', '1.5px solid red');
+//         isValid = false;
+//     } else {
+//         $('#role_Type').css('border', '1.5px solid green');
+//     }
+//
+//     return isValid;
+// }
+//
+// function validateEmail(email) {
+//     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     return emailPattern.test(email);
+// }
+//
+// $('#user_Name').on('input', function() {
+//     const email = $(this).val();
+//     if (!email || !validateEmail(email)) {
+//         $(this).css('border', '1.5px solid red');
+//     } else {
+//         $(this).css('border', '1.5px solid green');
+//     }
+// });
+//
+// $('#password').on('input', function() {
+//     const password = $(this).val();
+//     if (!password) {
+//         $(this).css('border', '1.5px solid red');
+//     } else {
+//         $(this).css('border', '1.5px solid green');
+//     }
+// });
+//
+// $('#role_Type').on('change', function() {
+//     const role = $(this).find('option:selected').text();
+//     if (role === 'Choose Role') {
+//         $(this).css('border', '1.5px solid red');
+//     } else {
+//         $(this).css('border', '1.5px solid green');
+//     }
+// });
+
 $(document).ready(function() {
-    $('#btnLogin').on('click', function() {
-        const role = $('#role_Type').val();
-        const email = $('#user_Name').val();
-        const password = $('#password').val();
+    $('#btnLogin').click(function() {
+        var role = $('#role_Type').val();
+        var email = $('#user_Name').val();
+        var password = $('#password').val();
 
-        const userData = getAllUserDataFromField();
-    if (!validateForm(userData)) return;
-
-        if (!email || !password || role === "RoleType") {
-            alert("Please fill in all fields");
+        if (role === "RoleType" || !email || !password) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Please fill all the fields!',
+            });
             return;
         }
 
-        const loginData = JSON.stringify({
+        var signInRequest = {
             email: email,
             password: password,
             role: role
-        });
+        };
 
         $.ajax({
-            url: 'http://localhost:8080/app/api/v1/auth/signin',
             type: 'POST',
+            url: 'http://localhost:8080/app/api/v1/auth/signin',
             contentType: 'application/json',
-            data: loginData,
+            data: JSON.stringify(signInRequest),
             success: function(response) {
-                // Store the token in localStorage
                 localStorage.setItem('token', response.token);
-                // Store the role in localStorage
-                localStorage.setItem('role', role);
 
-                // Redirect based on the role
-                if (role === 'ADMIN') {
+                if (role === "ADMIN") {
                     window.location.href = 'adminDashboard.html';
-                } else if (role === 'USER') {
-                    window.location.href = 'userDashboard.html';
+                } else if (role === "USER") {
+                    window.location.href = 'adminPages/userDashboard.html';
                 }
             },
-            error: function() {
-                alert('Invalid credentials or role');
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: xhr.responseJSON ? xhr.responseJSON.message : 'Something went wrong!',
+                });
             }
         });
     });
-});
-
-function getAllUserDataFromField(){
-    return {
-        email: $('#user_Name').val(),
-        password: $('#password').val(),
-        role: $('#role_Type').find('option:selected').text(),
-    }
-}
-
-function validateForm(userData) {
-    let isValid = true;
-
-    if (!userData.email) {
-        $('#user_Name').css('border', '1.5px solid red');
-        isValid = false;
-    } else if (!validateEmail(userData.email)) {
-        $('#user_Name').css('border', '1.5px solid red');
-        isValid = false;
-    } else {
-        $('#user_Name').css('border', '1.5px solid green');
-    }
-
-    if (!userData.password) {
-        $('#password').css('border', '1.5px solid red');
-        isValid = false;
-    } else {
-        $('#password').css('border', '1.5px solid green');
-    }
-
-    if (userData.role === 'Choose Role') {
-        $('#role_Type').css('border', '1.5px solid red');
-        isValid = false;
-    } else {
-        $('#role_Type').css('border', '1.5px solid green');
-    }
-
-    return isValid;
-}
-
-function validateEmail(email) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-}
-
-$('#user_Name').on('input', function() {
-    const email = $(this).val();
-    if (!email || !validateEmail(email)) {
-        $(this).css('border', '1.5px solid red');
-    } else {
-        $(this).css('border', '1.5px solid green');
-    }
-});
-
-$('#password').on('input', function() {
-    const password = $(this).val();
-    if (!password) {
-        $(this).css('border', '1.5px solid red');
-    } else {
-        $(this).css('border', '1.5px solid green');
-    }
-});
-
-$('#role_Type').on('change', function() {
-    const role = $(this).find('option:selected').text();
-    if (role === 'Choose Role') {
-        $(this).css('border', '1.5px solid red');
-    } else {
-        $(this).css('border', '1.5px solid green');
-    }
 });
