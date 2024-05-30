@@ -1,27 +1,3 @@
-let userSigninURI = 'http://localhost:8080/app/api/v1/user'
-
-$('#btnSignin').click(function(){
-    const userData = getAllUserDataFromField();
-    if (!validateForm(userData)) return;
-
-    $.ajax({
-        url: (userSigninURI + '/' + 'signup'),
-        method: 'POST',
-        data: JSON.stringify(userData),
-        contentType: 'application/json',
-        headers: {
-            'Authorization': 'Bearer ' + bearerToken
-        },
-        success: function(resp){
-            showAlert("success", "Success", "Registered Successfully.");
-            clearAllUserField();
-        },
-        error: function(resp){
-            showAlert("error", "Error", "Registration Failed. Please try again.");
-        }
-    });
-});
-
 function getAllUserDataFromField(){
     return{
         email: $('#userName').val(),
@@ -30,11 +6,58 @@ function getAllUserDataFromField(){
     }
 }
 
-function clearAllUserField(){
-    $('#userName').val('');
-    $('#password').val('');
-    $('#roleType').prop('selectedIndex', 0).focus();
-}
+$(document).ready(function() {
+    $('#btnSignin').click(function(event) {
+        const userData = getAllUserDataFromField();
+        if (!validateForm(userData)) return;
+        event.preventDefault();
+        let roleType = $('#roleType').val();
+        let userName = $('#userName').val();
+        let password = $('#password').val();
+
+        // Validate input fields
+        if (roleType === 'RoleType' || !userName || !password) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill all the fields!',
+            });
+            return;
+        }
+
+        // Prepare the sign-up request data
+        let signUpRequest = {
+            email: userName,
+            password: password,
+            role: roleType
+        };
+
+        $.ajax({
+            url: 'http://localhost:8080/app/api/v1/auth/signup',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(signUpRequest),
+            success: function(response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Sign up successful!',
+                }).then(function() {
+                    window.location.href = '../pages/login.html';
+                });
+            },
+            error: function(error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to sign up. Please try again.',
+                });
+                console.log('Error:', error);
+            }
+        });
+    });
+});
+
 
 function validateForm(userData) {
     let isValid = true;
