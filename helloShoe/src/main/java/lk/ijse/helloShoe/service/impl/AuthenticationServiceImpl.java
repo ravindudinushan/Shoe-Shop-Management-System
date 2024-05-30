@@ -49,19 +49,4 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String generatedToken = jwtService.generateToken(savedUser);
         return JWTAuthResponse.builder().token(generatedToken).build();
     }
-
-    @Override
-    public JWTAuthResponse updateaccount(SignUpRequest signUpRequest) {
-        if(!employeeRepository.existsByEmployeeCode(signUpRequest.getEmail())){
-            throw new NotFoundException("User"+ signUpRequest.getEmail() + "Not Found...");
-        }
-        UserDTO userDTO = UserDTO.builder()
-                .email(signUpRequest.getEmail())
-                .password(passwordEncoder.encode(signUpRequest.getPassword()))
-                .role(signUpRequest.getRole())
-                .build();
-        User savedUser = securityRepository.save(mapper.map(userDTO, User.class));
-        String generatedToken = jwtService.generateToken(savedUser);
-        return JWTAuthResponse.builder().token(generatedToken).build();
-    }
 }
