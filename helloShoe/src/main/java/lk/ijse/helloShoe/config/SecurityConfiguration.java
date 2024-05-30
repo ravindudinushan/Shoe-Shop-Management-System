@@ -27,7 +27,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable) // disable CSRF protection
-                .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/api/v0/auth/**").permitAll() // authorize requests to "/api/v1/auth/**" without authentication
+                .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/api/v1/auth/**").permitAll() // authorize requests to "/api/v1/auth/**" without authentication
                         .anyRequest().authenticated()) // authorize any other request with authentication
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // if there is no need to create sessions, you can use SessionCreationPolicy.STATELESS
                 .authenticationProvider(authenticationProvider())

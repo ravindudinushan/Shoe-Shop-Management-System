@@ -49,7 +49,7 @@ public class JwtConfigurationFilter extends OncePerRequestFilter{
 
                         if(request.getMethod().equals("GET")){
                             System.out.println("Getting...");
-                        }else if(request.getMethod().equals("POST") & request.getRequestURI().equals("/app/api/v0/sales")){
+                        }else if(request.getMethod().equals("POST") & request.getRequestURI().equals("/app/api/v1/sale")){
                             System.out.println("Processing...");
                         }else{
                             /*response.setStatus(HttpServletResponse.SC_FORBIDDEN);
