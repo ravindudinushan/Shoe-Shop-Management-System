@@ -1,3 +1,4 @@
+const accessToken = localStorage.getItem('token');
 // $("#btnPurchase").attr('disabled', true);
 $("#btnAddToCart").attr('disabled', true);
 
@@ -12,6 +13,9 @@ function generateOrderID() {
         method: "GET",
         contentType: "application/json",
         dataType: "json",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (resp) {
             let orderId = resp.value;
             let tempId = parseInt(orderId.split("-")[1]);
@@ -65,6 +69,9 @@ function loadCustomers() {
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/app/api/v1/customer",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (data) {
             setDates()
             generateOrderID();
@@ -126,6 +133,9 @@ function loadItem() {
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/app/api/v1/inventory",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (data) {
             items = data; // Store customers data in the global variable
             loadItemIntoComboBox(items);
@@ -374,6 +384,9 @@ $("#btnPurchase").click(function () {
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(orderOb),
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (res) {
             updateAlert("Order Successfully Purchased.!");
             generateOrderID();
@@ -454,6 +467,9 @@ $("#btnRefund").click(function () {
     $.ajax({
         type: "post",
         url: "http://localhost:8080/app/api/v1/sale/refund?orderNo=" + orderId, // Corrected URL
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function () {
             updateAlert("Order Refund Successfully");
             fetchOrders();
@@ -468,15 +484,25 @@ $("#btnRefund").click(function () {
 });
 
 async function fetchOrders() {
+    const bearerToken = 'YOUR_BEARER_TOKEN_HERE'; // Replace with your actual bearer token
+
     try {
-        const response = await fetch('http://localhost:8080/app/api/v1/sale/LoadOrders');
+        const response = await fetch('http://localhost:8080/app/api/v1/sale/LoadOrders', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+
         const text = await response.text();
         const orders = text ? JSON.parse(text) : [];
         const tblOrder = document.getElementById('tblOrder');
         tblOrder.innerHTML = ''; // Clear any existing rows
+
         orders.forEach(order => {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -496,15 +522,25 @@ async function fetchOrders() {
 }
 
 async function fetchOrderDetails() {
+    const bearerToken = 'YOUR_BEARER_TOKEN_HERE'; // Replace with your actual bearer token
+
     try {
-        const response = await fetch('http://localhost:8080/app/api/v1/sale/LoadOrderDetails');
+        const response = await fetch('http://localhost:8080/app/api/v1/sale/LoadOrderDetails', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+
         const text = await response.text();
         const orderDetails = text ? JSON.parse(text) : [];
         const tblOrderDetails = document.getElementById('tblOrderDetails');
         tblOrderDetails.innerHTML = ''; // Clear any existing rows
+
         orderDetails.forEach(detail => {
             const row = document.createElement('tr');
             row.innerHTML = `

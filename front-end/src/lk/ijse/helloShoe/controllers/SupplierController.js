@@ -1,3 +1,4 @@
+const accessToken = localStorage.getItem('token');
 loadSuppliers();
 /**
  * Supplier ID
@@ -9,6 +10,9 @@ function generateSupplierID() {
         method: "GET",
         contentType: "application/json",
         dataType: "json",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (resp) {
             let id = resp.value;
             console.log("id" +id);
@@ -43,6 +47,9 @@ $("#btnSaveSupplier").click(function () {
             type: "POST",
             url: "http://localhost:8080/app/api/v1/supplier",
             data: formData,
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function () {
                 updateAlert("Supplier Saved Successfully");
                 loadSuppliers();
@@ -85,6 +92,9 @@ function loadSuppliers() {
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/app/api/v1/supplier",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (data) {
             displaySuppliers(data);
             blindClickEvents();
@@ -200,6 +210,9 @@ $("#btnUpdateSupplier").click(function () {
             url: "http://localhost:8080/app/api/v1/supplier",
             contentType: "application/json",
             data: JSON.stringify(formData),
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function () {
                 updateAlert("Supplier updated successfully!");
                 loadSuppliers();
@@ -223,6 +236,9 @@ $("#btnDeleteSupplier").click(function () {
     $.ajax({
         type: "DELETE",
         url: "http://localhost:8080/app/api/v1/supplier?supplierCode=" + supId, // Corrected URL
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function () {
             updateAlert("Supplier Delete Successfully");
             loadSuppliers();
@@ -241,6 +257,9 @@ $("#searchSupCode").on("input", function () {
             type: "GET",
             url: "http://localhost:8080/app/api/v1/supplier/searchSupplier",
             data: { supplierCode: supId },
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function (supplier) {
                 displaySuppliers([supplier]);
                 blindClickEvents();

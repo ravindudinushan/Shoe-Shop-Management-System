@@ -1,3 +1,4 @@
+const accessToken = localStorage.getItem('token');
 getAllInventory();
 /**
  * load all items Method
@@ -8,6 +9,9 @@ function getAllInventory() {
         type: "GET",
         url: "http://localhost:8080/app/api/v1/inventory",
         contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (response) {
             displayInventory(response);
             blindClickEvents();
@@ -83,6 +87,9 @@ function loadSuppliers() {
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/app/api/v1/supplier",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (data) {
             suppliers = data; // Storing suppliers data in the variable
             loadSuppliersIntoComboBox(data);
@@ -127,6 +134,9 @@ $("#btnSaveItem").click(function() {
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(formData),
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function (response) {
                 updateAlert("Item Saved Successfully");
                 getAllInventory();
@@ -172,6 +182,9 @@ $("#btnUpdateItem").click(function() {
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(formData),
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function (response) {
                 updateAlert("Item Updated Successfully");
                 getAllInventory();
@@ -191,6 +204,9 @@ $("#btnDeleteItem").click(function () {
         type: "DELETE",
         url: `http://localhost:8080/app/api/v1/inventory?itemCode=${itemCode}`,
         contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function () {
             updateAlert("Item Delete Successfully");
             getAllInventory();
@@ -208,6 +224,9 @@ $("#btnSearchItem").click(function () {
         type: "GET",
         url: `http://localhost:8080/app/api/v1/inventory/searchInventory?itemCode=${itemCode}`,
         contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (response) {
             if (response) {
                 displayInventory([response]);
