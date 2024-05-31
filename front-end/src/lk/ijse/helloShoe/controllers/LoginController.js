@@ -161,9 +161,11 @@ $(document).ready(function() {
                 // Store the token in localStorage
                 localStorage.setItem('token', response.token);
                 // Store the role in localStorage
+                console.log("kjhg")
                 localStorage.setItem('role', role);
-
+                    console.log(response.token)
                 // Redirect based on the role
+                console.log("kjhg")
                 if (role === 'ADMIN') {
                     window.location.href = 'adminDashboard.html';
                 } else if (role === 'USER') {

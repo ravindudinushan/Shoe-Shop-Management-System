@@ -1,3 +1,4 @@
+const accessToken = localStorage.getItem('token');
 getAllEmployees();
 
 function generateEmployeeID() {
@@ -7,6 +8,9 @@ function generateEmployeeID() {
         method: "GET",
         contentType: "application/json",
         dataType: "json",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (resp) {
             let id = resp.value;
             console.log("id" +id);
@@ -35,6 +39,9 @@ function getAllEmployees() {
         type: "GET",
         url: "http://localhost:8080/app/api/v1/employee",
         contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (response) {
             displayEmployees(response);
             generateEmployeeID();
@@ -117,6 +124,9 @@ $("#btnSaveEmployee").click(function() {
             method: "POST",
             contentType: "application/json",
             data: JSON.stringify(formData),
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function (response) {
                 updateAlert("Employee Saved Successfully");
                 getAllEmployees();
@@ -168,6 +178,9 @@ $("#btnUpdateEmployee").click(function() {
             method: "PUT",
             contentType: "application/json",
             data: JSON.stringify(formData),
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function (response) {
                 updateAlert("Employee Updated Successfully");
                 getAllEmployees();
@@ -187,6 +200,9 @@ $("#btnDeleteEmployee").click(function () {
         type: "DELETE",
         url: `http://localhost:8080/app/api/v1/employee?employeeCode=${employeeCode}`,
         contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function () {
             updateAlert("Employee Delete Successfully");
             getAllEmployees();
@@ -204,6 +220,9 @@ $("#btnSearch").click(function () {
         type: "GET",
         url: `http://localhost:8080/app/api/v1/inventory/searchEmployee?employeeCode=${employeeCode}`,
         contentType: "application/json",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (response) {
             if (response) {
                 displayEmployees([response]);

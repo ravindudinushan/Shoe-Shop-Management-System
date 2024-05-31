@@ -1,4 +1,5 @@
 let baseUrl = "http://localhost:8080/app/api/v1/";
+const accessToken = localStorage.getItem('token');
 loadCustomers();
 
 /**
@@ -6,14 +7,19 @@ loadCustomers();
  * */
 function generateCustomerID() {
     $("#txtCusId").val("C00-001");
+
     $.ajax({
         url: baseUrl + "customer/customerIdGenerate",
         method: "GET",
         contentType: "application/json",
         dataType: "json",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (resp) {
+            console.log(resp);
             let id = resp.value;
-            console.log("id" +id);
+            console.log("id" + id);
             let tempId = parseInt(id.split("-")[1]);
             tempId = tempId + 1;
             if (tempId <= 9) {
@@ -25,7 +31,7 @@ function generateCustomerID() {
             }
         },
         error: function (ob, statusText, error) {
-
+            console.error("Error: ", statusText, error);
         }
     });
 }
@@ -44,6 +50,9 @@ $("#btnSaveCustomer").click(function () {
             type: "POST",
             url: baseUrl + "customer",
             data: formData,
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function () {
                 updateAlert("Customer Saved Successfully");
                 loadCustomers();
@@ -84,9 +93,14 @@ function setTextFieldValues(customerCode, customerName, gender, contact, email, 
  * load all customers Method
  * */
 function loadCustomers() {
+    const accessToken = localStorage.getItem('token');
+    console.log(accessToken);
     $.ajax({
         type: "GET",
         url: baseUrl + "customer",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (data) {
             displayCustomers(data);
             blindClickEvents();
@@ -198,11 +212,14 @@ $("#btnUpdateCustomer").click(function () {
             },
             points: $("#txtPoints").val()
         };
-
+        console.log(accessToken);
         $.ajax({
             type: "PUT",
             url: baseUrl + "customer",
             contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             data: JSON.stringify(formData),
             success: function () {
                 updateAlert("Customer updated successfully!");
@@ -227,6 +244,9 @@ $("#btnDeleteCustomer").click(function () {
     $.ajax({
         type: "DELETE",
         url: baseUrl + "customer?customerCode=" + customerId, // Corrected URL
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function () {
             updateAlert("Customer Delete Successfully");
             loadCustomers();
@@ -245,6 +265,9 @@ $("#btnDeleteCustomer").click(function () {
                 type: "GET",
                 url: baseUrl + "customer/searchCustomer",
                 data: { customerCode: customerId },
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
                 success: function (customer) {
                     displayCustomers([customer]);
                     blindClickEvents();
