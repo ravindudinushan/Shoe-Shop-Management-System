@@ -127,7 +127,7 @@ function displayImage(base64Image) {
     emailjs.init("vbAt5YOa5Jv1IkD1r");
 })();
 
-sendEmail('hasinipiyumika617@gmail.com','sgs');
+sendEmail('onlinebusiness9966@gmail.com','sgs');
 
 function sendEmail(to_email, name) {
     var templateParams = {
