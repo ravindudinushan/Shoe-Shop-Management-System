@@ -33,7 +33,7 @@ function displayInventory(items) {
                 <tr>
                     <td>${item.itemCode}</td>
                     <td>${item.itemDesc}</td>
-                    <td><img src="data:image/png;base64,${item.itemPic}" alt="Item Image" style="width: 50px; height: 50px;"></td>
+                    <td><img src="${item.itemPic}" alt="" style="width: 60px"></td>
                     <td>${item.category}</td>
                     <td>${item.size}</td>
                     <td>${item.supplierCode}</td>

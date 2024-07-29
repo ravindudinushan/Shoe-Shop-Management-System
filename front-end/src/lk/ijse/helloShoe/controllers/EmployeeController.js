@@ -64,7 +64,7 @@ function displayEmployees(employees) {
                 <tr>
                     <td>${employee.employeeCode}</td>
                     <td>${employee.employeeName}</td>
-                    <td><img src="data:image/png;base64,${employee.profilePic}" alt="Employee Image" style="width: 50px; height: 50px;"></td>
+                    <td><img src="${employee.profilePic}" alt="" style="width: 60px"></td>
                     <td>${employee.gender}</td>
                     <td>${employee.status}</td>
                     <td>${employee.designation}</td>
