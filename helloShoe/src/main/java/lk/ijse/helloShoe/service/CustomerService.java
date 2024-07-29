@@ -13,4 +13,5 @@ public interface CustomerService {
     List<CustomerDTO> getAllCustomer();
     CustomDTO customerIdGenerate();
     Customer searchCustomerCode(String customerCode);
+    List<String> sendWishes();
 }

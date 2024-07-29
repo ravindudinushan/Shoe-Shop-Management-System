@@ -6,11 +6,14 @@ import lk.ijse.helloShoe.entity.Customer;
 import lk.ijse.helloShoe.repo.CustomerRepo;
 import lk.ijse.helloShoe.service.CustomerService;
 import lk.ijse.helloShoe.service.exception.NotFoundException;
+import lk.ijse.helloShoe.service.util.EmailUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -67,4 +70,27 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return mapper.map(repo.findById(customerCode).get(), Customer.class);
     }
+
+    @Override
+    public List<String> sendWishes() {
+            List<String> custStringList = new ArrayList<>();
+
+            List<Customer> customersByBirthdayToday = repo.findCustomersByBirthdayToday();
+            customersByBirthdayToday.forEach(customer -> {
+                try {
+                    EmailUtil.sendEmail(customer.getEmail(), "Hello Shoe pvt.ltd", "Happy Birthday " + customer.getCustomerName() + "! "  + "Enjoy your Special day..!");
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
+                }finally {
+                    String custCode = customer.getCustomerCode();
+                    String name = customer.getCustomerName();
+                    String together = custCode + " - " + name;
+                    custStringList.add(together);
+
+                }
+            });
+            return custStringList;
+    }
+
+
 }

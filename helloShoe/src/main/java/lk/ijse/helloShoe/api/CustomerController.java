@@ -56,4 +56,9 @@ public class CustomerController {
     public Customer searchCustomerCode(String customerCode) {
         return customerService.searchCustomerCode(customerCode);
     }
+
+    @GetMapping("/sendWishes")
+    public List<String> sendWishes(){
+        return customerService.sendWishes();
+    }
 }
