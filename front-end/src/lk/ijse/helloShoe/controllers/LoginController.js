@@ -1,7 +1,3 @@
-
-
-// Ensure this script is linked correctly in your HTML
-
 // Function to handle login
 
 const accessToken = localStorage.getItem('token');
