@@ -15,7 +15,6 @@ $.ajax({
     success: function (resp) {
         let num = resp;
         $("#itemQty").text(num);
-
     },
     error: function (ob, statusText, error) {
 
@@ -122,28 +121,28 @@ function displayImage(base64Image) {
     imgDiv.style.backgroundPosition = 'center';
 }
 
-(function() {
-
-    emailjs.init("vbAt5YOa5Jv1IkD1r");
-})();
-
-sendEmail('onlinebusiness9966@gmail.com','sgs');
-
-function sendEmail(to_email, name) {
-    var templateParams = {
-        to: to_email,
-        from_name: 'HelloShoe',
-        to_name: name,
-        email_id: 'helloshoe79@gmail.com',
-        message: 'Happy Birthday '+name
-    };
-
-    emailjs.send("service_ej3sp8l", "template_vxgj0mt", templateParams)
-        .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            alert('Email sent successfully!');
-        }, function(error) {
-            console.log('FAILED...', error);
-            alert('Failed to send email. Please try again later.');
-        });
-}
+// (function() {
+//
+//     emailjs.init("vbAt5YOa5Jv1IkD1r");
+// })();
+//
+// sendEmail('onlinebusiness9966@gmail.com','sgs');
+//
+// function sendEmail(to_email, name) {
+//     var templateParams = {
+//         to: to_email,
+//         from_name: 'HelloShoe',
+//         to_name: name,
+//         email_id: 'helloshoe79@gmail.com',
+//         message: 'Happy Birthday '+name
+//     };
+//
+//     emailjs.send("service_ej3sp8l", "template_vxgj0mt", templateParams)
+//         .then(function(response) {
+//             console.log('SUCCESS!', response.status, response.text);
+//             alert('Email sent successfully!');
+//         }, function(error) {
+//             console.log('FAILED...', error);
+//             alert('Failed to send email. Please try again later.');
+//         });
+// }
