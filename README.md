@@ -3,14 +3,14 @@
 <img width="1394" alt="Screenshot 2024-03-04 at 18 59 14" src="assets/MyPortfolio/Screenshot 2024-09-01 223427.png">
 
 # 👨🏻‍💻 Technology & Frameworks
-    Front-End TeTechnology
     <ul>
-        <li>HTML, CSS, JS, jQuery, Ajax, Bootstrap</li>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JS</li>
+        <li>jQuery</li>
+        <li>Ajax</li>
+        <li>Bootstrap</li>
     </ul>
-
-# Deployment
-
-GitHub Pages : https://ravindudinushan.github.io/MyPortfolio/
 
 # Preview
 Home
