@@ -1,6 +1,6 @@
 
 # Hello Shoe
-<img width="1394" alt="Screenshot 2024-03-04 at 18 59 14" src="assets/MyPortfolio/Screenshot 2024-09-01 223427.png">
+<img width="1394" alt="Screenshot 2024-03-04 at 18 59 14" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224123.png">
 
 # 👨🏻‍💻 Technology & Frameworks
 <ul>
@@ -20,7 +20,7 @@
 
 # Preview
 Home
-<img width="1394" alt="Screenshot 2024-03-04 at 18 59 14" src="assets/MyPortfolio/Screenshot 2024-09-01 223427.png">
+<img width="1394" alt="Screenshot 2024-03-04 at 18 59 14" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224123.png">
 
 About Me
 <img width="1394" alt="Screenshot 2024-03-04 at 19 12 07" src="assets/MyPortfolio/Screenshot 2024-09-01 223444.png">
