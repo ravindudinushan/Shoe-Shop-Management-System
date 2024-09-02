@@ -9,7 +9,13 @@
         <li>JS</li>
         <li>jQuery</li>
         <li>Ajax</li>
-        <li>Bootstrap</li>
+        <li>JSON</li>
+        <li>Java</li>
+        <li>Spring Boot</li>
+        <li>Spring Data JPA</li>
+        <li>Spring Security</li>
+        <li>JWT Tokens</li>
+        <li>MySQL</li>
 </ul>
 
 # Preview
