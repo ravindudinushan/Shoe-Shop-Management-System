@@ -3,14 +3,14 @@
 <img width="1394" alt="Screenshot 2024-03-04 at 18 59 14" src="assets/MyPortfolio/Screenshot 2024-09-01 223427.png">
 
 # 👨🏻‍💻 Technology & Frameworks
-    <ul>
+<ul>
         <li>HTML</li>
         <li>CSS</li>
         <li>JS</li>
         <li>jQuery</li>
         <li>Ajax</li>
         <li>Bootstrap</li>
-    </ul>
+</ul>
 
 # Preview
 Home
