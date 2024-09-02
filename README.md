@@ -25,8 +25,9 @@ Home
 About Us
 <img width="1394" alt="Screenshot 2024-03-04 at 19 12 07" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224143.png">
 
-My Services
-<img width="1394" alt="Screenshot 2024-03-04 at 19 12 18" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/">
+Contact Us
+<img width="1394" alt="Screenshot 2024-03-04 at 19 12 18" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224205.png">
+<img width="1394" alt="Screenshot 2024-03-04 at 19 12 18" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224205.png">
 
 My Skills
 <img width="1394" alt="Screenshot 2024-03-04 at 19 12 29" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/">
