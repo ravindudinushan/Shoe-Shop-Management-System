@@ -41,11 +41,21 @@ Admin Dashboard
 Customer Manage Form
 <img width="1394" alt="Screenshot 2024-03-04 at 19 12 49" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224604.png">
 
-My Assignments
-<img width="1394" alt="Screenshot 2024-03-04 at 19 12 58" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/">
+Supplier Service Form
+<img width="1394" alt="Screenshot 2024-03-04 at 19 12 58" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224626.png">
 
-Contact Me
+Employees Manage Form
+<img width="1394" alt="Screenshot 2024-03-04 at 19 14 10" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224641.png">
 <img width="1394" alt="Screenshot 2024-03-04 at 19 14 10" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/">
+
+Employees Manage Form
+<img width="1394" alt="Screenshot 2024-03-04 at 19 14 10" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224641.png">
+
+Employees Manage Form
+<img width="1394" alt="Screenshot 2024-03-04 at 19 14 10" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224641.png">
+
+Employees Manage Form
+<img width="1394" alt="Screenshot 2024-03-04 at 19 14 10" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224641.png">
 
 
 
