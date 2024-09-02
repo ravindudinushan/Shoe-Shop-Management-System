@@ -27,10 +27,13 @@ About Us
 
 Contact Us
 <img width="1394" alt="Screenshot 2024-03-04 at 19 12 18" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224205.png">
-<img width="1394" alt="Screenshot 2024-03-04 at 19 12 18" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224205.png">
+<img width="1394" alt="Screenshot 2024-03-04 at 19 12 18" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224237.png">
 
-My Skills
-<img width="1394" alt="Screenshot 2024-03-04 at 19 12 29" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/">
+Footer
+<img width="1394" alt="Screenshot 2024-03-04 at 19 14 10" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224246.png">
+
+SignUp & Login
+<img width="1394" alt="Screenshot 2024-03-04 at 19 12 29" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/Screenshot 2024-09-01 224300.png">
 
 My Certificates
 <img width="1394" alt="Screenshot 2024-03-04 at 19 12 39" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/">
@@ -44,8 +47,5 @@ My Assignments
 Contact Me
 <img width="1394" alt="Screenshot 2024-03-04 at 19 14 10" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/">
 
-Footer
-<img width="1394" alt="Screenshot 2024-03-04 at 19 14 10" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/">
-<img width="1394" alt="Screenshot 2024-03-04 at 19 14 10" src="front-end/src/lk/ijse/helloShoe/assets/HelloShoe/">
 
 
